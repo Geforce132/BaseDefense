@@ -28,7 +28,14 @@ public class CommonProxy {
 	 * Registers all modification blocks.
 	 */
 	public void registerBlocks () {
-		GameRegistry.registerBlock (DefenseBlock.TURBINE, "turbine");
+		GameRegistry.registerBlock (DefenseBlock.TURBINE, "blockTurbine");
+	}
+
+	/**
+	 * Registers all modification items.
+	 */
+	public void registerItems () {
+		GameRegistry.registerItem (DefenseItem.TRAP_TURBINE, "turbine");
 	}
 
 	/**

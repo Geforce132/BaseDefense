@@ -24,4 +24,6 @@ public class Strings {
 	public static final String BLOCK_TRAP_TURBINE = "defense.trap.turbine";
 
 	public static final String CREATIVE_TAB_TRAP = "defense.trap";
+
+	public static final String ITEM_TRAP_TURBINE = "defense.trap.turbine";
 }

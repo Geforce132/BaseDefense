@@ -41,9 +41,6 @@ public class TurbineBlock extends Block implements ITileEntityProvider {
 		this.setHardness (0.5f);
 		this.setStepSound (Block.soundTypeMetal);
 		this.setBlockBounds (0.0f, 0.0f, 0.0f, 1f, 2f, 1f);
-
-		// set creative properties
-		this.setCreativeTab (DefenseCreativeTabs.TRAP);
 	}
 
 	/**

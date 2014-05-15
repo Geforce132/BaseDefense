@@ -50,6 +50,7 @@ public class DefenseMod {
 	@Mod.EventHandler
 	public void initialize (FMLInitializationEvent event) {
 		proxy.registerBlocks ();
+		proxy.registerItems ();
 		proxy.registerTileEntities ();
 		proxy.registerRenderers ();
 	}

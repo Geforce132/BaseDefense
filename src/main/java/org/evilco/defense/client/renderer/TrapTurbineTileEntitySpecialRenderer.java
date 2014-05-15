@@ -41,7 +41,8 @@ public class TrapTurbineTileEntitySpecialRenderer extends TileEntitySpecialRende
 		GL11.glTranslatef (0.5f, 1.5f, 0.5f);
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 
-		// TODO: Block rotation
+		int direction = var1.getBlockMetadata ();
+		GL11.glRotated ((direction * -90.0f) - 90.0f, 0f, 1f, 0f);
 
 		GL11.glPushMatrix ();
 		this.bindTexture (new ResourceLocation ("defense", "textures/models/trap-turbine.png"));
