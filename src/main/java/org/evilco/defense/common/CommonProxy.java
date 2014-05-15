@@ -17,6 +17,7 @@ package org.evilco.defense.common;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import org.evilco.defense.common.tile.TrapTurbineTileEntity;
+import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -29,6 +30,8 @@ public class CommonProxy {
 	 */
 	public void registerBlocks () {
 		GameRegistry.registerBlock (DefenseBlock.TURBINE, "blockTurbine");
+
+		GameRegistry.registerBlock (DefenseBlock.SURVEILLANCE_CAMERA, "surveillance_camera");
 	}
 
 	/**
@@ -48,5 +51,7 @@ public class CommonProxy {
 	 */
 	public void registerTileEntities () {
 		GameRegistry.registerTileEntity (TrapTurbineTileEntity.class, "defenseTrapTurbine");
+
+		GameRegistry.registerTileEntity (SurveillanceCameraTileEntity.class, "defenseSurveillanceCamera");
 	}
 }
