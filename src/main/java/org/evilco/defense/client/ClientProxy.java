@@ -17,9 +17,11 @@ package org.evilco.defense.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import org.evilco.defense.client.renderer.TrapTurbineTileEntitySpecialRenderer;
+import org.evilco.defense.client.renderer.generic.DefenseStationTileEntitySpecialRenderer;
 import org.evilco.defense.client.renderer.surveillance.SurveillanceCameraTileEntitySpecialRenderer;
 import org.evilco.defense.common.CommonProxy;
 import org.evilco.defense.common.tile.TrapTurbineTileEntity;
+import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 
 /**
@@ -34,6 +36,8 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderers () {
 		super.registerRenderers ();
+
+		ClientRegistry.bindTileEntitySpecialRenderer (DefenseStationTileEntity.class, new DefenseStationTileEntitySpecialRenderer ());
 
 		ClientRegistry.bindTileEntitySpecialRenderer (TrapTurbineTileEntity.class, new TrapTurbineTileEntitySpecialRenderer ());
 
