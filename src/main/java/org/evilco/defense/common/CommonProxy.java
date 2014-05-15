@@ -16,6 +16,7 @@
 package org.evilco.defense.common;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import org.evilco.defense.common.tile.TrapTurbineTileEntity;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -34,4 +35,11 @@ public class CommonProxy {
 	 * Registers all renderers.
 	 */
 	public void registerRenderers () { }
+
+	/**
+	 * Registers all tile entities.
+	 */
+	public void registerTileEntities () {
+		GameRegistry.registerTileEntity (TrapTurbineTileEntity.class, "defenseTrapTurbine");
+	}
 }
