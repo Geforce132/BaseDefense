@@ -17,6 +17,7 @@ package org.evilco.defense.common;
 
 import net.minecraft.block.Block;
 import org.evilco.defense.common.block.TurbineBlock;
+import org.evilco.defense.common.block.surveillance.SurveillanceCameraBlock;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -26,4 +27,7 @@ public class DefenseBlock {
 
 	// Trap blocks
 	public static final Block TURBINE = new TurbineBlock ();
+
+	// Surveillance blocks
+	public static final Block SURVEILLANCE_CAMERA = new SurveillanceCameraBlock ();
 }
