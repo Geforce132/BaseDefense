@@ -13,18 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.evilco.defense.common;
+package org.evilco.defense.common.creative;
 
 import net.minecraft.creativetab.CreativeTabs;
-import org.evilco.defense.common.creative.SurveillanceCreativeTab;
-import org.evilco.defense.common.creative.TrapCreativeTab;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import org.evilco.defense.common.DefenseBlock;
+import org.evilco.defense.common.Strings;
 
-/**
- * @author 		Johannes Donath <johannesd@evil-co.com>
- * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
- */
-public class DefenseCreativeTabs {
+public class SurveillanceCreativeTab extends CreativeTabs {
 
-	public static final CreativeTabs TRAP = new TrapCreativeTab ();
-	public static final CreativeTabs SURVEILLANCE = new SurveillanceCreativeTab ();
+	/**
+	 * Constructs a new SurveillanceCreativeTab.
+	 */
+	public SurveillanceCreativeTab () {
+		super (Strings.CREATIVE_TAB_SURVEILLANCE);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Item getTabIconItem () {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ItemStack getIconItemStack () {
+		return (new ItemStack (DefenseBlock.SURVEILLANCE_CAMERA, 1));
+	}
 }
