@@ -38,13 +38,14 @@ public class TrapTurbineTileEntitySpecialRenderer extends TileEntitySpecialRende
 		GL11.glPushMatrix ();
 
 		GL11.glTranslatef (((float) var2), ((float) var4), ((float) var6));
+		GL11.glTranslatef (0.5f, 1.5f, 0.5f);
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 
 		// TODO: Block rotation
 
 		GL11.glPushMatrix ();
-		this.bindTexture (new ResourceLocation ("defense:models/trap-turbine.png"));
-		model.render (null, (var8 * 15.0f));
+		this.bindTexture (new ResourceLocation ("defense", "textures/models/trap-turbine.png"));
+		model.render (null, (var8 * 100000000f));
 		GL11.glPopMatrix ();
 
 		GL11.glPopMatrix ();
