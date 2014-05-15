@@ -39,6 +39,7 @@ public class SurveillanceCameraBlock extends Block implements ITileEntityProvide
 
 		this.setHardness (0.5f);
 		this.setStepSound (Block.soundTypeMetal);
+		this.setBlockBounds (0.10f, 0.05f, 0.10f, 0.90f, 0.65f, 0.90f);
 		this.setCreativeTab (DefenseCreativeTabs.SURVEILLANCE);
 	}
 
