@@ -21,6 +21,7 @@ package org.evilco.defense.common;
  */
 public class Strings {
 
+	public static final String BLOCK_GENERIC_DEFENSE_STATION = "defense.generic.defenseStation";
 	public static final String BLOCK_TRAP_TURBINE = "defense.trap.turbine";
 	public static final String BLOCK_SURVEILLANCE_CAMERA = "defense.surveillance.camera";
 

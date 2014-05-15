@@ -23,5 +23,5 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class DefenseStationTileEntity extends TileEntity {
 
-	
+
 }
