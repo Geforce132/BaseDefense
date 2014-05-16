@@ -17,6 +17,7 @@ package org.evilco.defense.common;
 
 import net.minecraft.item.Item;
 import org.evilco.defense.common.item.generic.WirelessTunerItem;
+import org.evilco.defense.common.item.surveillance.SurveillanceCameraItem;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -25,4 +26,6 @@ import org.evilco.defense.common.item.generic.WirelessTunerItem;
 public class DefenseItem {
 
 	public static final Item GENERIC_WIRELESS_TUNER = new WirelessTunerItem ();
+
+	public static final Item SURVEILLANCE_CAMERA = new SurveillanceCameraItem ();
 }
