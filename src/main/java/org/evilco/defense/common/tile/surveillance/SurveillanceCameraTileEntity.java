@@ -18,6 +18,7 @@ package org.evilco.defense.common.tile.surveillance;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -201,6 +202,14 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void onDataPacket (NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		this.readFromNBT (pkt.func_148857_g ());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void writeToNBT (NBTTagCompound p_145841_1_) {
 		super.writeToNBT (p_145841_1_);
 
@@ -227,9 +236,6 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 
 		// get camera state
 		this.isActive = p_145839_1_.getBoolean ("active");
-
-		System.out.println (p_145839_1_.hasKey ("active"));
-		System.out.println (p_145839_1_.hasKey ("hubLocation"));
 
 		// get controller location
 		if (p_145839_1_.hasKey ("hubLocation")) {
