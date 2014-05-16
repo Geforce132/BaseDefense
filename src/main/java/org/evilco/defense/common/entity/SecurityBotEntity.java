@@ -26,10 +26,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import org.evilco.defense.common.entity.ai.EntityAISecurityBot;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkPacket;
-import org.evilco.defense.common.tile.network.SurveillanceEntityConnectionException;
+import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
 
 import java.util.UUID;
@@ -212,7 +209,16 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	 */
 	@Override
 	public void receiveMessage (ISurveillanceNetworkPacket packet) {
+		if (packet instanceof DefenseOrderPacket && this.getAttackTarget () == null) {
+			// cast packet
+			DefenseOrderPacket defenseOrderPacket = ((DefenseOrderPacket) packet);
 
+			// set navigator target
+			this.getNavigator ().tryMoveToXYZ (defenseOrderPacket.getLocation ().xCoord, defenseOrderPacket.getLocation ().yCoord, defenseOrderPacket.getLocation ().zCoord, MOVEMENT_SPEED);
+
+			// stop execution
+			return;
+		}
 	}
 
 	@Override
