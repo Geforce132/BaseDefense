@@ -17,7 +17,6 @@ package org.evilco.defense.common;
 
 import net.minecraft.creativetab.CreativeTabs;
 import org.evilco.defense.common.creative.SurveillanceCreativeTab;
-import org.evilco.defense.common.creative.TrapCreativeTab;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -25,6 +24,5 @@ import org.evilco.defense.common.creative.TrapCreativeTab;
  */
 public class DefenseCreativeTabs {
 
-	public static final CreativeTabs TRAP = new TrapCreativeTab ();
 	public static final CreativeTabs SURVEILLANCE = new SurveillanceCreativeTab ();
 }
