@@ -87,7 +87,8 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 				this.isActive = false;
 
 				// update block
-				this.worldObj.notifyBlockChange (this.xCoord, this.yCoord, this.zCoord, this.blockType);
+				this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+				this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
 
 				// stop here
 				return;
@@ -96,6 +97,10 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 			// store entity
 			this.hub = ((ISurveillanceNetworkHub) tileEntity);
 			this.isActive = true;
+
+			// update block
+			this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+			this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
 		}
 	}
 
@@ -118,7 +123,8 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 		this.isActive = true;
 
 		// update block
-		this.worldObj.notifyBlockChange (this.xCoord, this.yCoord, this.zCoord, this.blockType);
+		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
 	}
 
 	/**
@@ -134,7 +140,8 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 		this.hub = null;
 
 		// update block
-		this.worldObj.notifyBlockChange (this.xCoord, this.yCoord, this.zCoord, this.blockType);
+		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
 	}
 
 	/**
@@ -220,6 +227,9 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 
 		// get camera state
 		this.isActive = p_145839_1_.getBoolean ("active");
+
+		System.out.println (p_145839_1_.hasKey ("active"));
+		System.out.println (p_145839_1_.hasKey ("hubLocation"));
 
 		// get controller location
 		if (p_145839_1_.hasKey ("hubLocation")) {
