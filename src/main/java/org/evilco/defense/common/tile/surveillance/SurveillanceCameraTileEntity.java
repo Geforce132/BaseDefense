@@ -19,7 +19,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Vec3;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkPacket;

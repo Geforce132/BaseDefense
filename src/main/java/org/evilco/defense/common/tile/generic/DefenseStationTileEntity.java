@@ -15,16 +15,12 @@
  */
 package org.evilco.defense.common.tile.generic;
 
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import org.evilco.defense.common.tile.network.*;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkPacket;
+import org.evilco.defense.common.tile.network.SurveillanceEntityConnectionException;
 import org.evilco.defense.util.Location;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
