@@ -1,5 +1,5 @@
-Base Defend Mod [![Build Status](http://assets.evil-co.com/build/MCBD-MASTER.png)](http://www.evil-co.com/ci/browse/MCBD-MASTER)
-===============
+Base Defense Mod [![Build Status](http://assets.evil-co.com/build/MCBD-MASTER.png)](http://www.evil-co.com/ci/browse/MCBD-MASTER)
+================
 
 Bug Reporting
 -------------
