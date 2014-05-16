@@ -15,12 +15,13 @@
  */
 package org.evilco.defense.common.tile.generic;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkPacket;
-import org.evilco.defense.common.tile.network.SurveillanceEntityConnectionException;
+import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -34,18 +35,25 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	protected boolean isActive = true;
 
 	/**
+	 * Stores all currently connected clients.
+	 */
+	protected List<ISurveillanceNetworkClient> connectedClients = new ArrayList<ISurveillanceNetworkClient> ();
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void connectEntity (ISurveillanceNetworkClient entity) throws SurveillanceEntityConnectionException {
-		// TODO validate owners
+		if (!this.connectedClients.contains (entity)) this.connectedClients.add (entity);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void disconnectEntity (ISurveillanceNetworkClient entity) { }
+	public void disconnectEntity (ISurveillanceNetworkClient entity) {
+		this.connectedClients.remove (entity);
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -68,7 +76,13 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 */
 	@Override
 	public void receiveMessage (ISurveillanceNetworkPacket packet) {
+		if (packet instanceof CameraDetectionPacket) {
+			// cast packet
+			CameraDetectionPacket detectionPacket = ((CameraDetectionPacket) packet);
 
+			// create alert packet
+
+		}
 	}
 
 	/**
