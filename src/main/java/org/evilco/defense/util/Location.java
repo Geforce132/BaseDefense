@@ -16,6 +16,7 @@
 package org.evilco.defense.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -68,5 +69,33 @@ public class Location {
 	 */
 	public TileEntity getTileEntity (World world) {
 		return world.getTileEntity ((int) this.xCoord, (int) this.yCoord, (int) this.zCoord);
+	}
+
+	/**
+	 * Reads a location from NBT.
+	 * @param compound The nbt tag.
+	 * @return The location.
+	 */
+	public static Location readFromNBT (NBTTagCompound compound) {
+		// verify data structure
+		if (!compound.hasKey ("x") || !compound.hasKey ("y") || !compound.hasKey ("z")) return null;
+
+		// get coordinates
+		double x = compound.getDouble ("x");
+		double y = compound.getDouble ("y");
+		double z = compound.getDouble ("z");
+
+		// construct location
+		return (new Location (x, y, z));
+	}
+
+	/**
+	 * Writes a location to NBT.
+	 * @param compound The nbt tag.
+	 */
+	public void writeToNBT (NBTTagCompound compound) {
+		compound.setDouble ("x", this.xCoord);
+		compound.setDouble ("y", this.yCoord);
+		compound.setDouble ("z", this.zCoord);
 	}
 }
