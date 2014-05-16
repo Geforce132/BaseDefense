@@ -18,6 +18,8 @@ package org.evilco.defense.common.tile.surveillance;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
@@ -112,6 +114,9 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 		// notify hub
 		hub.connectEntity (this);
 
+		// activate block
+		this.isActive = true;
+
 		// update block
 		this.worldObj.notifyBlockChange (this.xCoord, this.yCoord, this.zCoord, this.blockType);
 	}
@@ -154,6 +159,19 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 
 		// return finished angle
 		return this.angle;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Packet getDescriptionPacket () {
+		// serialize tile entity
+		NBTTagCompound nbtTagCompound = new NBTTagCompound ();
+		this.writeToNBT (nbtTagCompound);
+
+		// construct packet
+		return (new S35PacketUpdateTileEntity (this.xCoord, this.yCoord, this.zCoord, 1, nbtTagCompound));
 	}
 
 	/**
@@ -206,7 +224,7 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 		// get controller location
 		if (p_145839_1_.hasKey ("hubLocation")) {
 			// get tag compound
-			NBTTagCompound location = p_145839_1_.getCompoundTag ("location");
+			NBTTagCompound location = p_145839_1_.getCompoundTag ("hubLocation");
 
 			// get location
 			this.hubLocation = new Location (location.getDouble ("x"), location.getDouble ("y"), location.getDouble ("z"));
