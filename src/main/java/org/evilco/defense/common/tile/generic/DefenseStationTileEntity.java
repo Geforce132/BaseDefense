@@ -19,7 +19,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
 import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
 
@@ -156,5 +160,57 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 
 		// disable hub
 		this.isActive = false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void readFromNBT (NBTTagCompound p_145839_1_) {
+		super.readFromNBT (p_145839_1_);
+
+		// get a string list of known users
+		if (p_145839_1_.hasKey ("knownUsers")) {
+			NBTTagList knownUsers = p_145839_1_.getTagList ("knownUsers", Constants.NBT.TAG_STRING);
+
+			// create empty list
+			this.knownUsers = new ArrayList<UUID> ();
+
+			// iterate over list items
+			for (int i = 0; i < knownUsers.tagCount (); i++) {
+				this.knownUsers.add (UUID.fromString (knownUsers.getStringTagAt (i)));
+			}
+		}
+
+		// get owner
+		if (p_145839_1_.hasKey ("owner"))
+			this.owner = UUID.fromString (p_145839_1_.getString ("owner"));
+		else
+			this.owner = null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void writeToNBT (NBTTagCompound p_145841_1_) {
+		super.writeToNBT (p_145841_1_);
+
+		// write list of known users
+		if (this.knownUsers != null) {
+			// create new tag
+			NBTTagList tagList = new NBTTagList ();
+
+			// append all known users
+			for (UUID user : this.knownUsers) {
+				tagList.appendTag (new NBTTagString (user.toString ()));
+			}
+
+			// append tag
+			p_145841_1_.setTag ("knownUsers", tagList);
+		}
+
+		// write owner
+		if (this.owner != null) p_145841_1_.setString ("owner", this.owner.toString ());
 	}
 }
