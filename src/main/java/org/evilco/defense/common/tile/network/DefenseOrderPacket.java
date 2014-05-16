@@ -18,6 +18,7 @@ package org.evilco.defense.common.tile.network;
 import org.evilco.defense.util.Location;
 
 /**
+ * Allows to order defense entities to a specific alarm location.
  * @author 		Johannes Donath <johannesd@evil-co.com>
  * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
