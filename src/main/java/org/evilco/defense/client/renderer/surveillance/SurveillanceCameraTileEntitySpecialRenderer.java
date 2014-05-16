@@ -44,22 +44,7 @@ public class SurveillanceCameraTileEntitySpecialRenderer extends TileEntitySpeci
 		GL11.glTranslatef (0.5f, 1.5f, 0.5f);
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 
-		int direction = var1.getBlockMetadata ();
-		float rotation = 0.0f;
-
-		switch (direction) {
-			case 0:
-				rotation = 180.0f;
-				break;
-			case 1: break;
-			case 2:
-				rotation = 90.0f;
-				break;
-			case 3:
-				rotation = -90.0f;
-		}
-
-		GL11.glRotated (rotation, 0f, 1f, 0f);
+		GL11.glRotated (((SurveillanceCameraTileEntity) var1).getRotationAngle (), 0f, 1f, 0f);
 
 		GL11.glPushMatrix ();
 		this.bindTexture (new ResourceLocation ("defense", "textures/models/surveillance/camera.png"));

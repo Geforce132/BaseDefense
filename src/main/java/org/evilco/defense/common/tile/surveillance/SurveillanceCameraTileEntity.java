@@ -17,22 +17,39 @@ package org.evilco.defense.common.tile.surveillance;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkPacket;
-import org.evilco.defense.common.tile.network.SurveillanceEntityConnectionException;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Vec3;
+import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
+
+import java.util.List;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
  * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
 public class SurveillanceCameraTileEntity extends TileEntity implements ISurveillanceNetworkClient {
+
+	/**
+	 * Defines the camera detection radius.
+	 */
+	public static final float CAMERA_RANGE = 10.0f;
+
+	/**
+	 * Defines the cone aperture.
+	 */
+	public static final double CONE_HALF_APERTURE = (1.2 / 2.0);
 
 	/**
 	 * Defines the maximum camera angle.
@@ -54,6 +71,11 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	 * Indicates whether the camera is currently active.
 	 */
 	protected boolean isActive = false;
+
+	/**
+	 * Indicates whether the camera is scanning for mobs.
+	 */
+	protected boolean isScanningMobs = false;
 
 	/**
 	 * Stores the parent hub instance.
@@ -103,6 +125,15 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 			this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
 			this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
 		}
+
+		// execute surveillance features
+		if (this.hub != null && this.isActive) {
+			// find entities in detection radius
+			List<Entity> entityList = worldObj.getEntitiesWithinAABB ((this.isScanningMobs ? EntityCreature.class : EntityPlayer.class), this.getCameraDetectionBounds ());
+
+			// notify hub
+			this.hub.receiveMessage (new CameraDetectionPacket (this, entityList));
+		}
 	}
 
 	/**
@@ -146,6 +177,20 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	}
 
 	/**
+	 * Returns the camera rotation angle (in 90 degree steps).
+	 * @return The rotation.
+	 */
+	public float getRotationAngle () {
+		switch (this.getBlockMetadata ()) {
+			case 0: return 180.0f;
+			case 1: return 0.0f;
+			case 2: return 90.0f;
+			case 3: return -90.0f;
+			default: return -45.0f; // confuse some people doing it wrong
+		}
+	}
+
+	/**
 	 * Returns the current camera angle.
 	 * @param partialTicks The ticks that passed between renders.
 	 * @return The current camera angle.
@@ -167,6 +212,20 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 
 		// return finished angle
 		return this.angle;
+	}
+
+	/**
+	 * Returns the camera detection radius.
+	 * @return The detection radius.
+	 */
+	public AxisAlignedBB getCameraDetectionBounds () {
+		switch (this.getBlockMetadata ()) {
+			case 3: return AxisAlignedBB.getBoundingBox (this.xCoord, (this.yCoord - CAMERA_RANGE), (this.zCoord - CAMERA_RANGE), (this.xCoord + CAMERA_RANGE), this.yCoord, (this.zCoord + CAMERA_RANGE));
+			case 1: return AxisAlignedBB.getBoundingBox ((this.xCoord - CAMERA_RANGE), (this.yCoord - CAMERA_RANGE), this.zCoord, (this.xCoord + CAMERA_RANGE), this.yCoord, (this.zCoord + CAMERA_RANGE));
+			case 2: return AxisAlignedBB.getBoundingBox ((this.xCoord - CAMERA_RANGE), (this.yCoord - CAMERA_RANGE), (this.zCoord - CAMERA_RANGE), this.xCoord, this.yCoord, (this.zCoord + CAMERA_RANGE));
+			case 0: return AxisAlignedBB.getBoundingBox ((this.xCoord - CAMERA_RANGE), (this.yCoord - CAMERA_RANGE), (this.zCoord - CAMERA_RANGE), (this.xCoord + CAMERA_RANGE), this.yCoord, this.zCoord);
+			default: return null; // Let's cause some NPEs
+		}
 	}
 
 	/**
@@ -196,6 +255,17 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	@Override
 	public boolean isActive () {
 		return this.isActive;
+	}
+
+	/**
+	 * Checks whether an entity lies within the scanning range.
+	 * @param coneAxis
+	 * @param origin
+	 * @param halfAperture
+	 * @return
+	 */
+	public boolean isWithinCameraBounds (Vec3 coneAxis, Vec3 origin, double halfAperture) { // Do some crazy maths. Google it ... srsly
+		return ((origin.dotProduct (coneAxis) / origin.lengthVector () / coneAxis.lengthVector ()) > Math.cos (halfAperture));
 	}
 
 	/**
