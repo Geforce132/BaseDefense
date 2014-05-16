@@ -22,6 +22,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import org.evilco.defense.common.tile.network.*;
@@ -71,6 +74,17 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	@Override
 	public void disconnectEntity (ISurveillanceNetworkClient entity) {
 		this.connectedClients.remove (entity);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Packet getDescriptionPacket () {
+		NBTTagCompound nbtTagCompound = new NBTTagCompound ();
+		this.writeToNBT (nbtTagCompound);
+
+		return (new S35PacketUpdateTileEntity (this.xCoord, this.yCoord, this.zCoord, 1, nbtTagCompound));
 	}
 
 	/**
@@ -160,6 +174,14 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 
 		// disable hub
 		this.isActive = false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onDataPacket (NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		this.readFromNBT (pkt.func_148857_g ());
 	}
 
 	/**
