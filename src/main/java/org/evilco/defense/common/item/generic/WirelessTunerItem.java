@@ -56,6 +56,13 @@ public class WirelessTunerItem extends Item {
 		this.setTextureName ("defense:generic/wirelessTuner");
 	}
 
+	/**
+	 * Connects two entities.
+	 * @param player The player.
+	 * @param entity1 The first entity.
+	 * @param entity2 The second entity.
+	 * @return True if the connection was established successfully.
+	 */
 	public boolean connectEntities (EntityPlayer player, ISurveillanceNetworkEntity entity1, ISurveillanceNetworkEntity entity2) {
 		// connect entities
 		if (entity2 instanceof ISurveillanceNetworkHub) {
@@ -65,7 +72,7 @@ public class WirelessTunerItem extends Item {
 			// disallow connection between two hubs
 			if (entity1 instanceof ISurveillanceNetworkHub) {
 				// notify player
-				player.addChatMessage (new ChatComponentText ("Hey! You cannot connect two hubs!"));
+				player.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.hubConnectionUnsupported"));
 
 				// forbid item use
 				return false;
@@ -76,13 +83,13 @@ public class WirelessTunerItem extends Item {
 				((ISurveillanceNetworkClient) entity1).connectHub (hubEntity);
 
 				// notify user
-				player.addChatMessage (new ChatComponentText ("The entities have been paired."));
+				player.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.connectionSuccessful"));
 
 				// use up some damage value
 				return true;
 			} catch (SurveillanceEntityConnectionException ex) {
 				// notify user
-				player.addChatMessage (new ChatComponentText ("Hey! Something went wrong! " + ex.getMessage ()));
+				player.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.unknownConnectionError", ex.getMessage ()));
 
 				// forbid item use
 				return false;
@@ -92,7 +99,7 @@ public class WirelessTunerItem extends Item {
 		// verify pairing of two entities
 		if (entity1 instanceof ISurveillanceNetworkClient) {
 			// notify player
-			player.addChatMessage (new ChatComponentText ("Hey! The previous entity is not a hub!"));
+			player.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.entityConnectionUnsupported"));
 
 			// forbid item use
 			return false;
@@ -106,13 +113,13 @@ public class WirelessTunerItem extends Item {
 			((ISurveillanceNetworkClient) entity2).connectHub (hubEntity);
 
 			// notify user
-			player.addChatMessage (new ChatComponentText ("The entities have been paired."));
+			player.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.connectionSuccessful"));
 
 			// use up some damage value
 			return true;
 		} catch (SurveillanceEntityConnectionException ex) {
 			// notify user
-			player.addChatMessage (new ChatComponentText ("Hey! Something went wrong! " + ex.getMessage ()));
+			player.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.unknownConnectionError", ex.getMessage ()));
 
 			// forbid item use
 			return false;
@@ -127,7 +134,7 @@ public class WirelessTunerItem extends Item {
 	 */
 	public ISurveillanceNetworkEntity getSurveillanceEntity (World world, ItemStack par1ItemStack) {
 		// check for NBT
-		if (par1ItemStack.getTagCompound () == null || (!par1ItemStack.getTagCompound ().hasKey ("entity") && !par1ItemStack.getTagCompound ().hasKey ("entityID"))) return null;
+		if (!this.hasSurveillanceEntity (par1ItemStack)) return null;
 
 		// find TileEntity
 		if (par1ItemStack.getTagCompound ().hasKey ("entity")) {
@@ -239,9 +246,13 @@ public class WirelessTunerItem extends Item {
 
 			// confirm use
 			return true;
-		} else
+		} else {
+			// reset NBT
+			par1ItemStack.setTagCompound (null);
+
 			// abort use
 			return false;
+		}
 	}
 
 	/**
@@ -304,8 +315,12 @@ public class WirelessTunerItem extends Item {
 
 			// confirm use
 			return true;
-		} else
+		} else {
+			// reset NBT
+			par1ItemStack.setTagCompound (null);
+
 			// abort use
 			return false;
+		}
 	}
 }
