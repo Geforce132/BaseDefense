@@ -16,9 +16,13 @@
 package org.evilco.defense.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraft.client.renderer.entity.RenderBiped;
+import org.evilco.defense.client.renderer.entity.SecurityBotRenderer;
 import org.evilco.defense.client.renderer.generic.DefenseStationTileEntitySpecialRenderer;
 import org.evilco.defense.client.renderer.surveillance.SurveillanceCameraTileEntitySpecialRenderer;
 import org.evilco.defense.common.CommonProxy;
+import org.evilco.defense.common.entity.SecurityBotEntity;
 import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 
@@ -35,8 +39,11 @@ public class ClientProxy extends CommonProxy {
 	public void registerRenderers () {
 		super.registerRenderers ();
 
+		// register TE renderers
 		ClientRegistry.bindTileEntitySpecialRenderer (DefenseStationTileEntity.class, new DefenseStationTileEntitySpecialRenderer ());
-
 		ClientRegistry.bindTileEntitySpecialRenderer (SurveillanceCameraTileEntity.class, new SurveillanceCameraTileEntitySpecialRenderer ());
+
+		// register entity renderers
+		RenderingRegistry.registerEntityRenderingHandler (SecurityBotEntity.class, new SecurityBotRenderer ());
 	}
 }

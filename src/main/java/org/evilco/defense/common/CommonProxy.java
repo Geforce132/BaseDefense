@@ -15,7 +15,11 @@
  */
 package org.evilco.defense.common;
 
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.EntityList;
+import org.evilco.defense.DefenseMod;
+import org.evilco.defense.common.entity.SecurityBotEntity;
 import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 
@@ -25,6 +29,7 @@ import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
  */
 public class CommonProxy {
 
+
 	/**
 	 * Registers all modification blocks.
 	 */
@@ -32,6 +37,19 @@ public class CommonProxy {
 		GameRegistry.registerBlock (DefenseBlock.DEFENSE_STATION, "defense_station");
 
 		GameRegistry.registerBlock (DefenseBlock.SURVEILLANCE_CAMERA, "surveillance_camera_block");
+	}
+
+	/**
+	 * Registers all modification entities.
+	 */
+	public void registerEntities () {
+		// get unique identifiers
+		int securityBotID = EntityRegistry.findGlobalUniqueEntityId (); // TODO: This will probably get removed in future versions of MC
+
+		// register security bot
+		EntityRegistry.registerGlobalEntityID (SecurityBotEntity.class, "securityBot", securityBotID);
+		EntityRegistry.registerModEntity (SecurityBotEntity.class, "securityBot", securityBotID, DefenseMod.instance, 64, 1, true);
+		EntityList.entityEggs.put (securityBotID, new EntityList.EntityEggInfo (securityBotID, 16777215, 16711680));
 	}
 
 	/**

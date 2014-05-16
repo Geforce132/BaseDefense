@@ -38,6 +38,12 @@ public class DefenseMod {
 	public static final String VERSION = "1.0.0";
 
 	/**
+	 * Stores an instance of this mod.
+	 */
+	@Mod.Instance (MOD_ID)
+	public static DefenseMod instance;
+
+	/**
 	 * Stores the proxy implementation.
 	 */
 	@SidedProxy (clientSide = "org.evilco.defense.client.ClientProxy", serverSide = "org.evilco.defense.common.CommonProxy")
@@ -51,6 +57,7 @@ public class DefenseMod {
 	public void initialize (FMLInitializationEvent event) {
 		proxy.registerBlocks ();
 		proxy.registerItems ();
+		proxy.registerEntities ();
 		proxy.registerTileEntities ();
 		proxy.registerRenderers ();
 	}
