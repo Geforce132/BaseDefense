@@ -20,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.defense.common.Strings;
@@ -54,8 +55,6 @@ public class WirelessTunerItem extends Item {
 	 */
 	@Override
 	public boolean onItemUse (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
-		if (par7 != 1) return false;
-
 		// check whether players may edit the block
 		if (!par2EntityPlayer.canPlayerEdit (par4, par5, par6, par7, par1ItemStack)) return false;
 
@@ -66,13 +65,17 @@ public class WirelessTunerItem extends Item {
 		if (currentEntity == null || !(currentEntity instanceof ISurveillanceNetworkEntity)) {
 			// notify player
 			// TODO!!
+			par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! there's no surveillance entity where you clicked!"));
 
 			// forbid item use
 			return false;
 		}
 
 		// store entity
-		if (!par1ItemStack.getTagCompound ().hasKey ("entity")) {
+		if (par1ItemStack.getTagCompound () == null || !par1ItemStack.getTagCompound ().hasKey ("entity")) {
+			// create new tag compound
+			par1ItemStack.setTagCompound (new NBTTagCompound ());
+
 			// create location
 			NBTTagCompound location = new NBTTagCompound ();
 
@@ -84,6 +87,9 @@ public class WirelessTunerItem extends Item {
 			// store location
 			par1ItemStack.getTagCompound ().setTag ("entity", location);
 
+			// notify user
+			par2EntityPlayer.addChatMessage (new ChatComponentText ("The first entity has been stored. Click another one!"));
+
 			// use up some damage value
 			return true;
 		} else {
@@ -94,7 +100,7 @@ public class WirelessTunerItem extends Item {
 			// verify entities
 			if (previousEntity == null || !(previousEntity instanceof ISurveillanceNetworkEntity)) {
 				// notify player
-				// TODO!!
+				par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! There's no previous entity. You brokez it!"));
 
 				// forbid item use
 				return false;
@@ -108,7 +114,7 @@ public class WirelessTunerItem extends Item {
 				// disallow connection between two hubs
 				if (previousEntity instanceof ISurveillanceNetworkHub) {
 					// notify player
-					// TODO!!
+					par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! You cannot connect two hubs!"));
 
 					// forbid item use
 					return false;
@@ -118,11 +124,17 @@ public class WirelessTunerItem extends Item {
 				try {
 					((ISurveillanceNetworkClient) previousEntity).connectHub (hubEntity);
 
+					// notify user
+					par2EntityPlayer.addChatMessage (new ChatComponentText ("The entities have been paired."));
+
+					// delete NBT
+					par1ItemStack.setTagCompound (null);
+
 					// use up some damage value
 					return true;
 				} catch (SurveillanceEntityConnectionException ex) {
 					// notify user
-					// TODO!!
+					par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! Something went wrong! " + ex.getMessage ()));
 
 					// forbid item use
 					return false;
@@ -132,7 +144,7 @@ public class WirelessTunerItem extends Item {
 			// verify pairing of two entities
 			if (previousEntity instanceof ISurveillanceNetworkClient) {
 				// notify player
-				// TODO!!
+				par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! The previous entity is not a hub!"));
 
 				// forbid item use
 				return false;
@@ -145,11 +157,17 @@ public class WirelessTunerItem extends Item {
 			try {
 				((ISurveillanceNetworkClient) currentEntity).connectHub (hubEntity);
 
+				// notify user
+				par2EntityPlayer.addChatMessage (new ChatComponentText ("The entities have been paired."));
+
+				// delete NBT
+				par1ItemStack.setTagCompound (null);
+
 				// use up some damage value
 				return true;
 			} catch (SurveillanceEntityConnectionException ex) {
 				// notify user
-				// TODO!!
+				par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! Something went wrong! " + ex.getMessage ()));
 
 				// forbid item use
 				return false;
