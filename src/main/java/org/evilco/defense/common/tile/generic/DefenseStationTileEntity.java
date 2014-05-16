@@ -16,6 +16,8 @@
 package org.evilco.defense.common.tile.generic;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import org.evilco.defense.common.tile.network.*;
@@ -104,11 +106,44 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 */
 	@Override
 	public void receiveMessage (ISurveillanceNetworkPacket packet) {
+		// parse camera packets
 		if (packet instanceof CameraDetectionPacket) {
 			// cast packet
 			CameraDetectionPacket detectionPacket = ((CameraDetectionPacket) packet);
 
 			// create alert packet
+			Entity entity = detectionPacket.getDetectedEntities ().get (0);
+			DefenseOrderPacket defenseOrderPacket = new DefenseOrderPacket (this, new Location (entity.posX, entity.posY, entity.posZ));
+
+			// notify all connected entities
+			for (ISurveillanceNetworkClient client : this.connectedClients) {
+				client.receiveMessage (defenseOrderPacket);
+			}
+		}
+
+		// parse attack orders
+		if (packet instanceof  AttackOrderRequestPacket) {
+			// cast packet
+			AttackOrderRequestPacket attackOrderPacket = ((AttackOrderRequestPacket) packet);
+
+			// iterate over all possible targets
+			for (EntityLivingBase entityLiving : attackOrderPacket.getPossibleTargets ()) {
+				// check for player
+				if (entityLiving instanceof EntityPlayer) {
+					// cast to player
+					EntityPlayer entityPlayer = ((EntityPlayer) entityLiving);
+
+					// verify UUID against this known users
+					if (this.knownUsers.contains (entityPlayer.getPersistentID ())) continue;
+				}
+
+				// skip passive mods
+				if (entityLiving instanceof EntityAnimal) continue;
+
+				// send attack order
+				AttackOrderPacket attackPacket = new AttackOrderPacket (this, entityLiving);
+				attackOrderPacket.getSource ().receiveMessage (attackPacket);
+			}
 		}
 	}
 
@@ -121,12 +156,5 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 
 		// disable hub
 		this.isActive = false;
-	}
-
-	@Override
-	public void updateEntity () {
-		super.updateEntity ();
-
-
 	}
 }
