@@ -100,10 +100,21 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	protected UUID owner = null;
 
 	/**
+	 * Defines an amount of ticks to the next report.
+	 */
+	protected int reportTicks = 0;
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void updateEntity () {
+		// fix ticks
+		this.reportTicks = Math.max ((this.reportTicks - 1), 0);
+
+		// skip reporting on this iteration
+		if (this.reportTicks > 0) return;
+
 		// initialize hub
 		if (this.hub == null && this.hubLocation != null) {
 			// find entity
@@ -138,7 +149,10 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 			List<Entity> entityList = worldObj.getEntitiesWithinAABB ((this.isScanningMobs ? EntityCreature.class : EntityPlayer.class), this.getCameraDetectionBounds ());
 
 			// notify hub
-			this.hub.receiveMessage (new CameraDetectionPacket (this, entityList));
+			if (entityList.size () > 0) this.hub.receiveMessage (new CameraDetectionPacket (this, entityList));
+
+			// reset report period
+			this.reportTicks = 600;
 		}
 	}
 
