@@ -20,14 +20,60 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import org.evilco.defense.common.entity.ai.EntityAISecurityBot;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkPacket;
+import org.evilco.defense.common.tile.network.SurveillanceEntityConnectionException;
+import org.evilco.defense.util.Location;
+
+import java.util.UUID;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
  * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
-public class SecurityBotEntity extends EntityCreature {
+public class SecurityBotEntity extends EntityCreature implements ISurveillanceNetworkClient {
+
+	/**
+	 * Defines the maximum gun distance.
+	 */
+	public static final float MAXIMUM_GUN_DISTANCE = 15.0f;
+
+	/**
+	 * Defines the entity movement speed.
+	 */
+	public static final double MOVEMENT_SPEED = 1.2d;
+
+	/**
+	 * Stores the security bot AI.
+	 */
+	protected EntityAISecurityBot securityBotAI = null;
+
+	/**
+	 * Stores the hub location (if connected).
+	 */
+	protected Location hubLocation = null;
+
+	/**
+	 * Defines whether the entity is connected.
+	 */
+	protected boolean isConnected = false;
+
+	/**
+	 * Stores the hub (if connected).
+	 */
+	protected ISurveillanceNetworkHub hub = null;
+
+	/**
+	 * Stores the entity owner.
+	 */
+	protected UUID owner = null;
 
 	/**
 	 * Constructs a new SecurityBotEntity.
@@ -36,7 +82,11 @@ public class SecurityBotEntity extends EntityCreature {
 	public SecurityBotEntity (World par1World) {
 		super (par1World);
 
-		this.tasks.addTask (1, new EntityAIAttackOnCollide (this, EntityPlayer.class, 1.2d, false));
+		// create task
+		this.securityBotAI = new EntityAISecurityBot (this);
+
+		// add tasks
+		this.tasks.addTask (1, this.securityBotAI);
 	}
 
 	/**
@@ -56,8 +106,73 @@ public class SecurityBotEntity extends EntityCreature {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void connectHub (ISurveillanceNetworkHub hub) throws SurveillanceEntityConnectionException {
+		// disconnect from previous hub
+		if (this.hub != null) this.hub.disconnectEntity (this);
+
+		// store new hub
+		this.hub = hub;
+		this.hubLocation = hub.getLocation ();
+
+		// fire connect event
+		this.hub.connectEntity (this);
+
+		this.isConnected = true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void disconnectHub () {
+		// disconnect from previous hub
+		if (this.hub != null) this.hub.disconnectEntity (this);
+
+		// delete data
+		this.hub = null;
+		this.hubLocation = null;
+
+		this.isConnected = false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AxisAlignedBB getBoundingBox () {
+		return AxisAlignedBB.getBoundingBox (0.05f, 0.05f, 0.05f, 0.95f, 0.95f, 0.95f);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Location getLocation () {
+		return (new Location (this.posX, this.posY, this.posZ));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UUID getOwner () {
+		return this.owner;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	protected boolean isAIEnabled () {
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isActive () {
+		return (this.isEntityAlive ());
 	}
 
 	/**
@@ -68,5 +183,78 @@ public class SecurityBotEntity extends EntityCreature {
 		super.onDeath (par1DamageSource);
 
 		// TODO: Drop bot as item.
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void readEntityFromNBT (NBTTagCompound par1NBTTagCompound) {
+		super.readEntityFromNBT (par1NBTTagCompound);
+
+		// read connection state
+		this.isConnected = par1NBTTagCompound.getBoolean ("connected");
+
+		if (par1NBTTagCompound.hasKey ("owner"))
+			this.owner = UUID.fromString (par1NBTTagCompound.getString ("owner"));
+		else
+			this.owner = null;
+
+		// read hub location
+		if (par1NBTTagCompound.hasKey ("hub"))
+			this.hubLocation = Location.readFromNBT (par1NBTTagCompound.getCompoundTag ("hub"));
+		else
+			this.hubLocation = null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void receiveMessage (ISurveillanceNetworkPacket packet) {
+
+	}
+
+	@Override
+	public void onUpdate () {
+		super.onUpdate ();
+
+		// try connecting to the
+		if (this.hub == null && this.hubLocation != null) {
+			// try to find the hub entity
+			TileEntity tileEntity = this.hubLocation.getTileEntity (this.worldObj);
+
+			// verify entity type
+			if (!(tileEntity instanceof ISurveillanceNetworkHub)) {
+				// disconnect from hub
+				this.disconnectHub ();
+
+				// stop execution
+				return;
+			}
+
+			// store hub
+			this.hub = ((ISurveillanceNetworkHub) tileEntity);
+			this.isConnected = true;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void writeEntityToNBT (NBTTagCompound par1NBTTagCompound) {
+		super.writeEntityToNBT (par1NBTTagCompound);
+
+		// write connection state
+		par1NBTTagCompound.setBoolean ("connected", this.isConnected);
+		if (this.owner != null) par1NBTTagCompound.setString ("owner", this.owner.toString ());
+
+		// write hub location to NBT
+		if (this.hubLocation != null) {
+			NBTTagCompound compound = new NBTTagCompound ();
+			this.hubLocation.writeToNBT (compound);
+			par1NBTTagCompound.setTag ("hub", compound);
+		}
 	}
 }
