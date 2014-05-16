@@ -16,12 +16,14 @@
 package org.evilco.defense.common.tile.generic;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -33,6 +35,16 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 * Indicates whether the entity is active.
 	 */
 	protected boolean isActive = true;
+
+	/**
+	 * Stores a list of user identifiers which may pass through protected zones.
+	 */
+	protected List<UUID> knownUsers = new ArrayList<UUID> ();
+
+	/**
+	 * Stores the owner's UUID.
+	 */
+	protected UUID owner = null;
 
 	/**
 	 * Stores all currently connected clients.
@@ -67,6 +79,14 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 * {@inheritDoc}
 	 */
 	@Override
+	public UUID getOwner () {
+		return this.owner;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public boolean isActive () {
 		return this.isActive;
 	}
@@ -81,7 +101,6 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 			CameraDetectionPacket detectionPacket = ((CameraDetectionPacket) packet);
 
 			// create alert packet
-
 		}
 	}
 

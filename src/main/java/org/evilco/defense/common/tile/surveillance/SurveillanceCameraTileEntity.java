@@ -34,6 +34,7 @@ import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -92,6 +93,11 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	 */
 	@SideOnly (Side.CLIENT)
 	protected boolean isMotionReversed = false;
+
+	/**
+	 * Stores the entity owner.
+	 */
+	protected UUID owner = null;
 
 	/**
 	 * {@inheritDoc}
@@ -247,6 +253,14 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	@Override
 	public Location getLocation () {
 		return (new Location (this.xCoord, this.yCoord, this.zCoord));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UUID getOwner () {
+		return this.owner;
 	}
 
 	/**

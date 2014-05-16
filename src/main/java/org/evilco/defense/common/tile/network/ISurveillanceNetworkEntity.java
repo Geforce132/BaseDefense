@@ -17,6 +17,8 @@ package org.evilco.defense.common.tile.network;
 
 import org.evilco.defense.util.Location;
 
+import java.util.UUID;
+
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
  * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
@@ -28,6 +30,12 @@ public interface ISurveillanceNetworkEntity {
 	 * @return The location.
 	 */
 	public Location getLocation ();
+
+	/**
+	 * Returns the entity owner.
+	 * @return The owner UUID.
+	 */
+	public UUID getOwner ();
 
 	/**
 	 * Checks whether the hub is available.
