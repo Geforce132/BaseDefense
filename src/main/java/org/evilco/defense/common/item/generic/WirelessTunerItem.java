@@ -17,12 +17,15 @@ package org.evilco.defense.common.item.generic;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.defense.common.Strings;
@@ -30,6 +33,7 @@ import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkEntity;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
 import org.evilco.defense.common.tile.network.SurveillanceEntityConnectionException;
+import org.evilco.defense.util.Location;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -52,6 +56,113 @@ public class WirelessTunerItem extends Item {
 		this.setTextureName ("defense:generic/wirelessTuner");
 	}
 
+	public boolean connectEntities (EntityPlayer player, ISurveillanceNetworkEntity entity1, ISurveillanceNetworkEntity entity2) {
+		// connect entities
+		if (entity2 instanceof ISurveillanceNetworkHub) {
+			// get hub instance
+			ISurveillanceNetworkHub hubEntity = ((ISurveillanceNetworkHub) entity2);
+
+			// disallow connection between two hubs
+			if (entity1 instanceof ISurveillanceNetworkHub) {
+				// notify player
+				player.addChatMessage (new ChatComponentText ("Hey! You cannot connect two hubs!"));
+
+				// forbid item use
+				return false;
+			}
+
+			// connect entity
+			try {
+				((ISurveillanceNetworkClient) entity1).connectHub (hubEntity);
+
+				// notify user
+				player.addChatMessage (new ChatComponentText ("The entities have been paired."));
+
+				// use up some damage value
+				return true;
+			} catch (SurveillanceEntityConnectionException ex) {
+				// notify user
+				player.addChatMessage (new ChatComponentText ("Hey! Something went wrong! " + ex.getMessage ()));
+
+				// forbid item use
+				return false;
+			}
+		}
+
+		// verify pairing of two entities
+		if (entity1 instanceof ISurveillanceNetworkClient) {
+			// notify player
+			player.addChatMessage (new ChatComponentText ("Hey! The previous entity is not a hub!"));
+
+			// forbid item use
+			return false;
+		}
+
+		// get hub instance
+		ISurveillanceNetworkHub hubEntity = ((ISurveillanceNetworkHub) entity1);
+
+		// connect entity
+		try {
+			((ISurveillanceNetworkClient) entity2).connectHub (hubEntity);
+
+			// notify user
+			player.addChatMessage (new ChatComponentText ("The entities have been paired."));
+
+			// use up some damage value
+			return true;
+		} catch (SurveillanceEntityConnectionException ex) {
+			// notify user
+			player.addChatMessage (new ChatComponentText ("Hey! Something went wrong! " + ex.getMessage ()));
+
+			// forbid item use
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the surveillance entity of the specified item stack.
+	 * @param world The world the player is in.
+	 * @param par1ItemStack The item stack.
+	 * @return The surveillance entity.
+	 */
+	public ISurveillanceNetworkEntity getSurveillanceEntity (World world, ItemStack par1ItemStack) {
+		// check for NBT
+		if (par1ItemStack.getTagCompound () == null || (!par1ItemStack.getTagCompound ().hasKey ("entity") && !par1ItemStack.getTagCompound ().hasKey ("entityID"))) return null;
+
+		// find TileEntity
+		if (par1ItemStack.getTagCompound ().hasKey ("entity")) {
+			// get location
+			Location location = Location.readFromNBT (par1ItemStack.getTagCompound ().getCompoundTag ("entity"));
+
+			// get entity
+			TileEntity tileEntity = location.getTileEntity (world);
+
+			// verify entity
+			if (tileEntity == null || !(tileEntity instanceof ISurveillanceNetworkEntity)) return null;
+
+			// return finished entity
+			return ((ISurveillanceNetworkEntity) tileEntity);
+		}
+
+		// find Entity
+		Entity entity = world.getEntityByID (par1ItemStack.getTagCompound ().getInteger ("entityID"));
+
+		// verify entity
+		if (entity == null || !(entity instanceof ISurveillanceNetworkEntity)) return null;
+
+		// return finished entity
+		return ((ISurveillanceNetworkEntity) entity);
+	}
+
+	/**
+	 * Checks whether the supplied item stack does have an entity stored.
+	 * @param par1ItemStack The item stack.
+	 * @return True if there is an entity attached.
+	 */
+	public boolean hasSurveillanceEntity (ItemStack par1ItemStack) {
+		return (par1ItemStack.getTagCompound () != null && (par1ItemStack.getTagCompound ().hasKey ("entity") || par1ItemStack.getTagCompound ().hasKey ("entityID")));
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -61,122 +172,140 @@ public class WirelessTunerItem extends Item {
 		if (FMLCommonHandler.instance ().getEffectiveSide () == Side.CLIENT) return false;
 
 		// check whether players may edit the block
-		if (!par2EntityPlayer.canPlayerEdit (par4, par5, par6, par7, par1ItemStack)) return false;
-
-		// search tile entity
-		TileEntity currentEntity = par3World.getTileEntity (par4, par5, par6);
-
-		// verify entity
-		if (currentEntity == null || !(currentEntity instanceof ISurveillanceNetworkEntity)) {
+		if (!par2EntityPlayer.canPlayerEdit (par4, par5, par6, par7, par1ItemStack)) {
 			// notify player
-			// TODO!!
-			par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! there's no surveillance entity where you clicked!"));
+			par2EntityPlayer.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.permissionDenied"));
 
-			// forbid item use
+			// abort use
 			return false;
 		}
 
-		// store entity
-		if (par1ItemStack.getTagCompound () == null || !par1ItemStack.getTagCompound ().hasKey ("entity")) {
-			// create new tag compound
-			par1ItemStack.setTagCompound (new NBTTagCompound ());
+		// get location
+		Location location = new Location (par4, par5, par6);
 
-			// create location
-			NBTTagCompound location = new NBTTagCompound ();
+		// verify entity
+		if (location.getTileEntity (par3World) == null || !(location.getTileEntity (par3World) instanceof ISurveillanceNetworkEntity)) {
+			// notify player
+			par2EntityPlayer.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.notAnEntity"));
 
-			// add location
-			location.setInteger ("x", par4);
-			location.setInteger ("y", par5);
-			location.setInteger ("z", par6);
-
-			// store location
-			par1ItemStack.getTagCompound ().setTag ("entity", location);
-
-			// notify user
-			par2EntityPlayer.addChatMessage (new ChatComponentText ("The first entity has been stored. Click another one!"));
-
-			// use up some damage value
-			return true;
-		} else {
-			// get entity
-			NBTTagCompound location = par1ItemStack.getTagCompound ().getCompoundTag ("entity");
-			TileEntity previousEntity = par3World.getTileEntity (location.getInteger ("x"), location.getInteger ("y"), location.getInteger ("z"));
-
-			// verify entities
-			if (previousEntity == null || !(previousEntity instanceof ISurveillanceNetworkEntity)) {
-				// notify player
-				par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! There's no previous entity. You brokez it!"));
-
-				// forbid item use
-				return false;
-			}
-
-			// connect entities
-			if (currentEntity instanceof ISurveillanceNetworkHub) {
-				// get hub instance
-				ISurveillanceNetworkHub hubEntity = ((ISurveillanceNetworkHub) currentEntity);
-
-				// disallow connection between two hubs
-				if (previousEntity instanceof ISurveillanceNetworkHub) {
-					// notify player
-					par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! You cannot connect two hubs!"));
-
-					// forbid item use
-					return false;
-				}
-
-				// connect entity
-				try {
-					((ISurveillanceNetworkClient) previousEntity).connectHub (hubEntity);
-
-					// notify user
-					par2EntityPlayer.addChatMessage (new ChatComponentText ("The entities have been paired."));
-
-					// delete NBT
-					par1ItemStack.setTagCompound (null);
-
-					// use up some damage value
-					return true;
-				} catch (SurveillanceEntityConnectionException ex) {
-					// notify user
-					par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! Something went wrong! " + ex.getMessage ()));
-
-					// forbid item use
-					return false;
-				}
-			}
-
-			// verify pairing of two entities
-			if (previousEntity instanceof ISurveillanceNetworkClient) {
-				// notify player
-				par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! The previous entity is not a hub!"));
-
-				// forbid item use
-				return false;
-			}
-
-			// get hub instance
-			ISurveillanceNetworkHub hubEntity = ((ISurveillanceNetworkHub) previousEntity);
-
-			// connect entity
-			try {
-				((ISurveillanceNetworkClient) currentEntity).connectHub (hubEntity);
-
-				// notify user
-				par2EntityPlayer.addChatMessage (new ChatComponentText ("The entities have been paired."));
-
-				// delete NBT
-				par1ItemStack.setTagCompound (null);
-
-				// use up some damage value
-				return true;
-			} catch (SurveillanceEntityConnectionException ex) {
-				// notify user
-				par2EntityPlayer.addChatMessage (new ChatComponentText ("Hey! Something went wrong! " + ex.getMessage ()));
-
-				// forbid item use
-				return false;
-			}
+			// abort use
+			return false;
 		}
+
+		// check current state
+		if (!this.hasSurveillanceEntity (par1ItemStack)) {
+			// create new NBT tag
+			NBTTagCompound itemTagCompound = new NBTTagCompound ();
+
+			// create location NBT
+			NBTTagCompound entityTag = new NBTTagCompound ();
+			location.writeToNBT (entityTag);
+
+			// append tag
+			itemTagCompound.setTag ("entity",entityTag);
+
+			// set tag
+			par1ItemStack.setTagCompound (itemTagCompound);
+
+			// notify player
+			par2EntityPlayer.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.storedEntity"));
+
+			// use
+			return true;
+		}
+
+		// get previous entity
+		ISurveillanceNetworkEntity previousEntity = this.getSurveillanceEntity (par3World, par1ItemStack);
+
+		// verify entity
+		if (previousEntity == null) {
+			// notify player
+			par2EntityPlayer.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.brokenEntity"));
+
+			// reset NBT
+			par1ItemStack.setTagCompound (null);
+
+			// abort use
+			return false;
+		}
+
+		// connect entities
+		if (this.connectEntities (par2EntityPlayer, previousEntity, ((ISurveillanceNetworkEntity) location.getTileEntity (par3World)))) {
+			// damage item
+			par1ItemStack.damageItem (1, par2EntityPlayer);
+
+			// reset NBT
+			par1ItemStack.setTagCompound (null);
+
+			// confirm use
+			return true;
+		} else
+			// abort use
+			return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean itemInteractionForEntity (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase currentEntity) {
+		// skip client version
+		if (FMLCommonHandler.instance ().getEffectiveSide () == Side.CLIENT) return false;
+
+		// verify entity
+		if (!(currentEntity instanceof ISurveillanceNetworkEntity)) {
+			// notify player
+			par2EntityPlayer.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.notAnEntity"));
+
+			// abort use
+			return false;
+		}
+
+		// check current state
+		if (!this.hasSurveillanceEntity (par1ItemStack)) {
+			// create new NBT tag
+			NBTTagCompound itemTagCompound = new NBTTagCompound ();
+
+			// append tag
+			itemTagCompound.setInteger ("entityID", currentEntity.getEntityId ());
+
+			// set tag
+			par1ItemStack.setTagCompound (itemTagCompound);
+
+			// notify player
+			par2EntityPlayer.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.storedEntity"));
+
+			// use
+			return true;
+		}
+
+		// get previous entity
+		ISurveillanceNetworkEntity previousEntity = this.getSurveillanceEntity (par2EntityPlayer.getEntityWorld (), par1ItemStack);
+
+		// verify entity
+		if (previousEntity == null) {
+			// notify player
+			par2EntityPlayer.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.brokenEntity"));
+
+			// reset NBT
+			par1ItemStack.setTagCompound (null);
+
+			// abort use
+			return false;
+		}
+
+		// connect entities
+		if (this.connectEntities (par2EntityPlayer, previousEntity, ((ISurveillanceNetworkEntity) currentEntity))) {
+			// damage item
+			par1ItemStack.damageItem (1, par2EntityPlayer);
+
+			// reset NBT
+			par1ItemStack.setTagCompound (null);
+
+			// confirm use
+			return true;
+		} else
+			// abort use
+			return false;
 	}
 }
