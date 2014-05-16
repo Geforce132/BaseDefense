@@ -15,13 +15,81 @@
  */
 package org.evilco.defense.common.tile.generic;
 
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import org.evilco.defense.common.tile.network.*;
+import org.evilco.defense.util.Location;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
  * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
-public class DefenseStationTileEntity extends TileEntity {
+public class DefenseStationTileEntity extends TileEntity implements ISurveillanceNetworkHub {
+
+	/**
+	 * Indicates whether the entity is active.
+	 */
+	protected boolean isActive = true;
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void connectEntity (ISurveillanceNetworkClient entity) throws SurveillanceEntityConnectionException {
+		// TODO validate owners
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void disconnectEntity (ISurveillanceNetworkClient entity) { }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Location getLocation () {
+		return (new Location (this.xCoord, this.yCoord, this.zCoord));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isActive () {
+		return this.isActive;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void receiveMessage (ISurveillanceNetworkPacket packet) {
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onChunkUnload () {
+		super.onChunkUnload ();
+
+		// disable hub
+		this.isActive = false;
+	}
+
+	@Override
+	public void updateEntity () {
+		super.updateEntity ();
 
 
+	}
 }

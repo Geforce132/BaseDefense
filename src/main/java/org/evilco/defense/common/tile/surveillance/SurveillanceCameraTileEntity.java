@@ -20,13 +20,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkHub;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkPacket;
+import org.evilco.defense.common.tile.network.SurveillanceEntityConnectionException;
 import org.evilco.defense.util.Location;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
  * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
-public class SurveillanceCameraTileEntity extends TileEntity {
+public class SurveillanceCameraTileEntity extends TileEntity implements ISurveillanceNetworkClient {
 
 	/**
 	 * Defines the maximum camera angle.
@@ -50,9 +54,14 @@ public class SurveillanceCameraTileEntity extends TileEntity {
 	protected boolean isActive = false;
 
 	/**
-	 * Stores the camera controller location.
+	 * Stores the parent hub instance.
 	 */
-	protected Location controlLocation = null;
+	protected ISurveillanceNetworkHub hub = null;
+
+	/**
+	 * Sotres the parent hub location.
+	 */
+	protected Location hubLocation = null;
 
 	/**
 	 * Indicates whether the motion is reversed.
@@ -65,7 +74,63 @@ public class SurveillanceCameraTileEntity extends TileEntity {
 	 */
 	@Override
 	public void updateEntity () {
+		// initialize hub
+		if (this.hub == null && this.hubLocation != null) {
+			// find entity
+			TileEntity tileEntity = this.hubLocation.getTileEntity (this.worldObj);
 
+			// verify entity
+			if (!(tileEntity instanceof ISurveillanceNetworkHub)) {
+				// something went terribly wrong here!
+				this.hubLocation = null;
+				this.isActive = false;
+
+				// update block
+				this.worldObj.notifyBlockChange (this.xCoord, this.yCoord, this.zCoord, this.blockType);
+
+				// stop here
+				return;
+			}
+
+			// store entity
+			this.hub = ((ISurveillanceNetworkHub) tileEntity);
+			this.isActive = true;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void connectHub (ISurveillanceNetworkHub hub) throws SurveillanceEntityConnectionException {
+		// notify old hub
+		if (this.hub != null) this.hub.disconnectEntity (this);
+
+		// store position
+		this.hub = hub;
+		this.hubLocation = hub.getLocation ();
+
+		// notify hub
+		hub.connectEntity (this);
+
+		// update block
+		this.worldObj.notifyBlockChange (this.xCoord, this.yCoord, this.zCoord, this.blockType);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void disconnectHub () {
+		// notify hub
+		if (this.hub != null) this.hub.disconnectEntity (this);
+
+		// store new data
+		this.hubLocation = null;
+		this.hub = null;
+
+		// update block
+		this.worldObj.notifyBlockChange (this.xCoord, this.yCoord, this.zCoord, this.blockType);
 	}
 
 	/**
@@ -96,6 +161,22 @@ public class SurveillanceCameraTileEntity extends TileEntity {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Location getLocation () {
+		return (new Location (this.xCoord, this.yCoord, this.zCoord));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isActive () {
+		return this.isActive;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void writeToNBT (NBTTagCompound p_145841_1_) {
 		super.writeToNBT (p_145841_1_);
 
@@ -103,13 +184,13 @@ public class SurveillanceCameraTileEntity extends TileEntity {
 		p_145841_1_.setBoolean ("active", this.isActive);
 
 		// store camera controller location
-		if (this.controlLocation != null) {
+		if (this.hubLocation != null) {
 			NBTTagCompound location = new NBTTagCompound ();
-			location.setDouble ("x", this.controlLocation.xCoord);
-			location.setDouble ("y", this.controlLocation.yCoord);
-			location.setDouble ("z", this.controlLocation.zCoord);
+			location.setDouble ("x", this.hubLocation.xCoord);
+			location.setDouble ("y", this.hubLocation.yCoord);
+			location.setDouble ("z", this.hubLocation.zCoord);
 
-			p_145841_1_.setTag ("controller", location);
+			p_145841_1_.setTag ("hubLocation", location);
 		}
 	}
 
@@ -124,13 +205,29 @@ public class SurveillanceCameraTileEntity extends TileEntity {
 		this.isActive = p_145839_1_.getBoolean ("active");
 
 		// get controller location
-		if (p_145839_1_.hasKey ("controller")) {
+		if (p_145839_1_.hasKey ("hubLocation")) {
 			// get tag compound
 			NBTTagCompound location = p_145839_1_.getCompoundTag ("location");
 
 			// get location
-			this.controlLocation = new Location (location.getDouble ("x"), location.getDouble ("y"), location.getDouble ("z"));
+			this.hubLocation = new Location (location.getDouble ("x"), location.getDouble ("y"), location.getDouble ("z"));
 		} else
-			this.controlLocation = null;
+			this.hubLocation = null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void receiveMessage (ISurveillanceNetworkPacket packet) {
+		// TODO: Enable/Disable
+	}
+
+	@Override
+	public void onChunkUnload () {
+		super.onChunkUnload ();
+
+		// disable camera
+		this.isActive = false;
 	}
 }
