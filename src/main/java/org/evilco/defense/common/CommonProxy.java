@@ -16,7 +16,6 @@
 package org.evilco.defense.common;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import org.evilco.defense.common.tile.TrapTurbineTileEntity;
 import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 
@@ -32,8 +31,6 @@ public class CommonProxy {
 	public void registerBlocks () {
 		GameRegistry.registerBlock (DefenseBlock.DEFENSE_STATION, "defense_station");
 
-		GameRegistry.registerBlock (DefenseBlock.TURBINE, "blockTurbine");
-
 		GameRegistry.registerBlock (DefenseBlock.SURVEILLANCE_CAMERA, "surveillance_camera");
 	}
 
@@ -41,7 +38,7 @@ public class CommonProxy {
 	 * Registers all modification items.
 	 */
 	public void registerItems () {
-		GameRegistry.registerItem (DefenseItem.TRAP_TURBINE, "turbine");
+		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, "wireless_tuner");
 	}
 
 	/**
@@ -54,8 +51,6 @@ public class CommonProxy {
 	 */
 	public void registerTileEntities () {
 		GameRegistry.registerTileEntity (DefenseStationTileEntity.class, "defenseGenericDefenseStation");
-
-		GameRegistry.registerTileEntity (TrapTurbineTileEntity.class, "defenseTrapTurbine");
 
 		GameRegistry.registerTileEntity (SurveillanceCameraTileEntity.class, "defenseSurveillanceCamera");
 	}

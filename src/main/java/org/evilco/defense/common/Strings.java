@@ -28,5 +28,6 @@ public class Strings {
 	public static final String CREATIVE_TAB_TRAP = "defense.trap";
 	public static final String CREATIVE_TAB_SURVEILLANCE = "defense.surveillance";
 
+	public static final String ITEM_GENERIC_WIRELESS_TUNER = "defense.generic.tuner";
 	public static final String ITEM_TRAP_TURBINE = "defense.trap.turbine";
 }

@@ -16,7 +16,7 @@
 package org.evilco.defense.common;
 
 import net.minecraft.item.Item;
-import org.evilco.defense.common.item.TrapTurbineItem;
+import org.evilco.defense.common.item.generic.WirelessTunerItem;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -24,5 +24,5 @@ import org.evilco.defense.common.item.TrapTurbineItem;
  */
 public class DefenseItem {
 
-	public static final Item TRAP_TURBINE = new TrapTurbineItem ();
+	public static final Item GENERIC_WIRELESS_TUNER = new WirelessTunerItem ();
 }
