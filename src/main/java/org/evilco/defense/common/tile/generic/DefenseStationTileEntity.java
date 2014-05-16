@@ -68,6 +68,14 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	}
 
 	/**
+	 * Returns a list of known users.
+	 * @return The list.
+	 */
+	public List<UUID> getKnownUsers () {
+		return this.knownUsers;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
