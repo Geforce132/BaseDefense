@@ -113,10 +113,9 @@ public class EntityAISecurityBot extends EntityAIBase {
 
 		// do attack stuffz
 		if (this.entity.getAttackTarget () != null) {
-			// verify whether the last entity died
-			if (!this.entity.getAttackTarget ().isEntityAlive ()) {
+			// verify whether the last entity died (or switched to creative)
+			if (!this.entity.getAttackTarget ().isEntityAlive () || (this.entity.getAttackTarget () instanceof EntityPlayer && ((EntityPlayer) this.entity.getAttackTarget ()).capabilities.isCreativeMode)) {
 				this.entity.setAttackTarget (null);
-
 				return;
 			}
 
@@ -139,7 +138,7 @@ public class EntityAISecurityBot extends EntityAIBase {
 			this.defendTimeout = Math.max ((this.defendTimeout - 1), 0);
 
 			// stop defending
-			if (this.defendTimeout == 0) {
+			if (this.defendTimeout == 0 && this.entity.getAttackTarget () == null) {
 				// set back to normal state
 				this.isDefending = false;
 
@@ -155,12 +154,6 @@ public class EntityAISecurityBot extends EntityAIBase {
 
 			// sort list
 			Collections.sort (entityList, new EntityComparator ());
-
-			// pop off security bots
-			for (int i = 0; i < entityList.size (); i++) {
-				// delete security bots from the list (sorry no bot fights)
-				if (entityList.get (i) instanceof SecurityBotEntity) entityList.remove (i);
-			}
 
 			// send a list of entities to hub to ask for more information
 			AttackOrderRequestPacket packet = new AttackOrderRequestPacket (this.entity, entityList);
