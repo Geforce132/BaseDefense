@@ -113,6 +113,14 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	}
 
 	/**
+	 * Returns the camera rotation angle (in 90 degree steps).
+	 * @return The rotation.
+	 */
+	public float getRotationAngle () {
+		return (this.getBlockMetadata () * 90.0f);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

@@ -20,6 +20,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseBlock;
 import org.evilco.defense.common.DefenseCreativeTabs;
@@ -62,8 +63,12 @@ public class DefenseStationItem extends Item {
 		// check for air blocks
 		if (!par3World.isAirBlock (par4, (par5 + 1), par6) || !par3World.isAirBlock (par4, (par5 + 2), par6)) return false;
 
+		// calculate rotation
+		float rotationYaw = par2EntityPlayer.rotationYaw;
+		int metadata = MathHelper.floor_double (((double) (par2EntityPlayer.rotationYaw * 4.0f) / 360f + 2.5D)) & 3;
+
 		// set block
-		par3World.setBlock (par4, (par5 + 1), par6, DefenseBlock.DEFENSE_STATION, (par7 - 2), 2);
+		par3World.setBlock (par4, (par5 + 1), par6, DefenseBlock.DEFENSE_STATION, metadata, 2);
 		par1ItemStack.stackSize--;
 
 		// update tile entity
