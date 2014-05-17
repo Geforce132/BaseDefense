@@ -28,6 +28,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
+import org.evilco.defense.common.entity.SecurityBotEntity;
 import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
 
@@ -138,15 +139,32 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 			// cast packet
 			CameraDetectionPacket detectionPacket = ((CameraDetectionPacket) packet);
 
-			// create alert packet
-			Entity entity = detectionPacket.getDetectedEntities ().get (0);
-			DefenseOrderPacket defenseOrderPacket = new DefenseOrderPacket (this, new Location (entity.posX, entity.posY, entity.posZ));
+			// iterate over entities
+			int knownEntities = 0;
+			EntityPlayer player = null;
 
-			// notify all connected entities
-			for (ISurveillanceNetworkClient client : this.connectedClients) {
-				client.receiveMessage (defenseOrderPacket);
+			for (Entity entity : detectionPacket.getDetectedEntities ()) {
+				// verify players
+				if (entity instanceof EntityPlayer) {
+					// cast player
+					player = ((EntityPlayer) entity);
+
+					// verify against known users
+					if (this.knownUsers.contains (player.getPersistentID ())) knownEntities++;
+				}
 			}
 
+			// create alert packet
+			if (detectionPacket.getDetectedEntities ().size () > 0 && (detectionPacket.getDetectedEntities ().size () > knownEntities)) {
+				Entity entity = detectionPacket.getDetectedEntities ().get (0);
+
+				DefenseOrderPacket defenseOrderPacket = new DefenseOrderPacket (this, new Location (entity.posX, entity.posY, entity.posZ));
+
+				// notify all connected entities
+				for (ISurveillanceNetworkClient client : this.connectedClients) {
+					client.receiveMessage (defenseOrderPacket);
+				}
+			}
 			return;
 		}
 
@@ -172,6 +190,9 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 				// send attack order
 				AttackOrderPacket attackPacket = new AttackOrderPacket (this, entityLiving);
 				attackOrderPacket.getSource ().receiveMessage (attackPacket);
+
+				// only attack one at a time
+				break;
 			}
 
 			return;
