@@ -109,12 +109,6 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	 */
 	@Override
 	public void updateEntity () {
-		// fix ticks
-		this.reportTicks = Math.max ((this.reportTicks - 1), 0);
-
-		// skip reporting on this iteration
-		if (this.reportTicks > 0) return;
-
 		// initialize hub
 		if (this.hub == null && this.hubLocation != null) {
 			// find entity
@@ -145,14 +139,19 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 
 		// execute surveillance features
 		if (this.hub != null && this.isActive) {
-			// find entities in detection radius
-			List<Entity> entityList = worldObj.getEntitiesWithinAABB ((this.isScanningMobs ? EntityCreature.class : EntityPlayer.class), this.getCameraDetectionBounds ());
+			this.reportTicks = Math.max ((this.reportTicks - 1), 0);
 
-			// notify hub
-			if (entityList.size () > 0) this.hub.receiveMessage (new CameraDetectionPacket (this, entityList));
+			// only execute if reporting is available again.
+			if (this.reportTicks == 0) {
+				// find entities in detection radius
+				List<Entity> entityList = worldObj.getEntitiesWithinAABB ((this.isScanningMobs ? EntityCreature.class : EntityPlayer.class), this.getCameraDetectionBounds ());
 
-			// reset report period
-			this.reportTicks = 600;
+				// notify hub
+				if (entityList.size () > 0) this.hub.receiveMessage (new CameraDetectionPacket (this, entityList));
+
+				// reset report period
+				this.reportTicks = 300;
+			}
 		}
 
 		// invalidate hub object if it goes down
