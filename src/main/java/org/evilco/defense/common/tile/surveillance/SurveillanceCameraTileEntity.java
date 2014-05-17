@@ -154,6 +154,12 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 			// reset report period
 			this.reportTicks = 600;
 		}
+
+		// invalidate hub object if it goes down
+		if (this.hub != null && !this.hub.isActive ()) {
+			this.hub = null;
+			this.isActive = false;
+		}
 	}
 
 	/**
