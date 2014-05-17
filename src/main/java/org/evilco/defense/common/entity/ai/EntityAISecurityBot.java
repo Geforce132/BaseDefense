@@ -24,6 +24,7 @@ import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import org.evilco.defense.common.entity.SecurityBotEntity;
+import org.evilco.defense.common.tile.network.AttackOrderRequestPacket;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -53,7 +54,7 @@ public class EntityAISecurityBot extends EntityAIBase {
 	/**
 	 * Indicates whether the bot is waiting for response.
 	 */
-	protected boolean waitingForResponse = false;
+	public boolean waitingForResponse = false;
 
 	/**
 	 * Constructs a new EntityAISecurityBot.
@@ -132,7 +133,13 @@ public class EntityAISecurityBot extends EntityAIBase {
 			Collections.sort (entityList, new EntityComparator ());
 
 			// send a list of entities to hub to ask for more information
+			AttackOrderRequestPacket packet = new AttackOrderRequestPacket (this.entity, entityList);
 
+			// send packet
+			this.entity.sendPacket (packet);
+
+			// set waiting
+			this.waitingForResponse = true;
 		}
 	}
 
