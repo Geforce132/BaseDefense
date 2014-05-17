@@ -334,9 +334,6 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	public void writeToNBT (NBTTagCompound p_145841_1_) {
 		super.writeToNBT (p_145841_1_);
 
-		// store camera state
-		p_145841_1_.setBoolean ("active", this.isActive);
-
 		// store camera controller location
 		if (this.hubLocation != null) {
 			NBTTagCompound location = new NBTTagCompound ();
@@ -354,9 +351,6 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	@Override
 	public void readFromNBT (NBTTagCompound p_145839_1_) {
 		super.readFromNBT (p_145839_1_);
-
-		// get camera state
-		this.isActive = p_145839_1_.getBoolean ("active");
 
 		// get controller location
 		if (p_145839_1_.hasKey ("hubLocation")) {
