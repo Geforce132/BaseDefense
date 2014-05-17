@@ -161,6 +161,9 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	 */
 	@Override
 	public void connectHub (ISurveillanceNetworkHub hub) throws SurveillanceEntityConnectionException {
+		// verify hub
+		if (hub.getOwner () == null || !hub.getOwner ().equals (this.getOwner ())) throw new SurveillanceEntityConnectionException ("defense.surveillance.tuner.differentOwner");
+
 		// notify old hub
 		if (this.hub != null) this.hub.disconnectEntity (this);
 
