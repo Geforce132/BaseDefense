@@ -20,6 +20,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -166,10 +167,9 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns the bounding box for entity scanning.
 	 */
-	@Override
-	public AxisAlignedBB getBoundingBox () {
+	public AxisAlignedBB getEntityBoundingBox () {
 		return AxisAlignedBB.getBoundingBox ((this.posX - 0.5f), this.posY, (this.posZ - 0.5f), (this.posX + 1.0f), (this.posY + 1.0f), (this.posZ + 1.0f));
 	}
 

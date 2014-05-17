@@ -148,7 +148,7 @@ public class EntityAISecurityBot extends EntityAIBase {
 			}
 
 			// find entities around
-			List<EntityLivingBase> entityList = this.entity.worldObj.getEntitiesWithinAABB (EntityLivingBase.class, this.entity.getBoundingBox ().expand (SecurityBotEntity.MAXIMUM_GUN_DISTANCE, SecurityBotEntity.MAXIMUM_GUN_DISTANCE, SecurityBotEntity.MAXIMUM_GUN_DISTANCE));
+			List<EntityLivingBase> entityList = this.entity.worldObj.getEntitiesWithinAABB (EntityLivingBase.class, this.entity.getEntityBoundingBox ().expand (SecurityBotEntity.MAXIMUM_GUN_DISTANCE, SecurityBotEntity.MAXIMUM_GUN_DISTANCE, SecurityBotEntity.MAXIMUM_GUN_DISTANCE));
 
 			// skip empty results
 			if (entityList.size () == 0) return;
