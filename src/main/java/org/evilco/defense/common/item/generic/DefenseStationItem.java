@@ -45,6 +45,9 @@ public class DefenseStationItem extends Item {
 		this.setUnlocalizedName (Strings.ITEM_GENERIC_DEFENSE_STATION);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean onItemUse (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		// skip client version
@@ -66,7 +69,7 @@ public class DefenseStationItem extends Item {
 		// update tile entity
 		((ISurveillanceNetworkEntity) par3World.getTileEntity (par4, (par5 + 1), par6)).setOwner (par2EntityPlayer);
 
-		// confirm item use.
+		// confirm item use
 		return true;
 	}
 }
