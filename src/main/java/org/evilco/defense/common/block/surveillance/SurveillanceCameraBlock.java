@@ -21,7 +21,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.defense.common.Strings;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 

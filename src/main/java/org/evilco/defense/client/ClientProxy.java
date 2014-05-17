@@ -17,7 +17,6 @@ package org.evilco.defense.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import net.minecraft.client.renderer.entity.RenderBiped;
 import org.evilco.defense.client.renderer.entity.SecurityBotRenderer;
 import org.evilco.defense.client.renderer.generic.DefenseStationTileEntitySpecialRenderer;
 import org.evilco.defense.client.renderer.surveillance.SurveillanceCameraTileEntitySpecialRenderer;

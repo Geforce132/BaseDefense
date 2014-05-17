@@ -15,7 +15,6 @@
  */
 package org.evilco.defense.common.tile.network;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 
 /**

@@ -20,7 +20,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.evilco.defense.client.model.generic.DefenseStationModel;
 import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
-import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 import org.lwjgl.opengl.GL11;
 
 /**

@@ -16,11 +16,8 @@
 package org.evilco.defense.common.entity.ai;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import org.evilco.defense.common.entity.SecurityBotEntity;
