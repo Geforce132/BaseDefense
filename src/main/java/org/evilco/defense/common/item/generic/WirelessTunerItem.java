@@ -23,9 +23,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.defense.common.Strings;
@@ -274,8 +276,17 @@ public class WirelessTunerItem extends Item {
 
 		// verify shift - click
 		if (par2EntityPlayer.isSneaking ()) {
+			// verify permissions
+			if (((ISurveillanceNetworkEntity) currentEntity).getOwner () == null || !((ISurveillanceNetworkEntity) currentEntity).getOwner ().equals (par2EntityPlayer.getPersistentID ())) {
+				// notify user
+				par2EntityPlayer.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.permissionDenied"));
+
+				// abort use
+				return false;
+			}
+
 			// kill entity
-			currentEntity.setHealth (0.0f);
+			currentEntity.attackEntityFrom (DamageSource.magic, currentEntity.getMaxHealth ());
 
 			// damage item slightly
 			if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.damageItem (1, par2EntityPlayer);
