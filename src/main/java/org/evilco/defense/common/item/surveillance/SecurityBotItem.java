@@ -50,8 +50,6 @@ public class SecurityBotItem extends Item {
 		// skip client version
 		if (FMLCommonHandler.instance ().getEffectiveSide () == Side.CLIENT) return false;
 
-		System.out.println (par7);
-
 		// security bots may only be placed on the ground
 		if (par7 != 1) return false;
 
