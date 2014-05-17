@@ -250,7 +250,12 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 */
 	@Override
 	public void setOwner (UUID owner) {
+		// remove old owner
+		if (this.owner != null) this.connectedClients.remove (owner);
+
+		// set new owner
 		this.owner = owner;
+		this.knownUsers.add (owner);
 
 		// update tile entity
 		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
