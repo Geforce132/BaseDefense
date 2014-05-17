@@ -318,6 +318,33 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	}
 
 	/**
+	 * Sets a new original location.
+	 * @param location The location.
+	 */
+	public void setOriginalLocation (Location location) {
+		this.originalLocation = location;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setOwner (UUID owner) {
+		this.owner = owner;
+
+		// update entity
+		this.worldObj.updateEntity (this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setOwner (EntityPlayer player) {
+		this.setOwner (player.getPersistentID ());
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

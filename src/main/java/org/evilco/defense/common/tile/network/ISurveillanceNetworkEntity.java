@@ -15,6 +15,7 @@
  */
 package org.evilco.defense.common.tile.network;
 
+import net.minecraft.entity.player.EntityPlayer;
 import org.evilco.defense.util.Location;
 
 import java.util.UUID;
@@ -47,4 +48,16 @@ public interface ISurveillanceNetworkEntity {
 	 * Receives a surveillance message.
 	 */
 	public void receiveMessage (ISurveillanceNetworkPacket packet);
+
+	/**
+	 * Sets a new owner.
+	 * @param owner The owner.
+	 */
+	public void setOwner (UUID owner);
+
+	/**
+	 * Sets a new owner.
+	 * @param player The owner.
+	 */
+	public void setOwner (EntityPlayer player);
 }

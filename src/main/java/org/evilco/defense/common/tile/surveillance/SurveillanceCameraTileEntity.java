@@ -308,6 +308,26 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void setOwner (UUID owner) {
+		this.owner = owner;
+
+		// update tile entity
+		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setOwner (EntityPlayer player) {
+		this.setOwner (player.getPersistentID ());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void writeToNBT (NBTTagCompound p_145841_1_) {
 		super.writeToNBT (p_145841_1_);
 
