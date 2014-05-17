@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.defense.common.Strings;
 import org.evilco.defense.common.entity.SecurityBotEntity;
+import org.evilco.defense.util.Location;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -62,6 +63,7 @@ public class SecurityBotItem extends Item {
 		// spawn bot entity
 		SecurityBotEntity entity = new SecurityBotEntity (par3World);
 		entity.setLocationAndAngles (par4, (par5 + 1), par6, 0.0f, 0.0f);
+		entity.setOriginalLocation (new Location (par4, (par5 + 1), par6));
 		entity.setOwner (par2EntityPlayer);
 
 		par3World.spawnEntityInWorld (entity);
