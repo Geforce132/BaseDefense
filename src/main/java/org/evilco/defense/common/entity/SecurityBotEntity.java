@@ -15,10 +15,12 @@
  */
 package org.evilco.defense.common.entity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -69,6 +71,11 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	protected ISurveillanceNetworkHub hub = null;
 
 	/**
+	 * Stores the original bot location.
+	 */
+	protected Location originalLocation = null;
+
+	/**
 	 * Stores the entity owner.
 	 */
 	protected UUID owner = null;
@@ -85,6 +92,22 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 
 		// add tasks
 		this.tasks.addTask (1, this.securityBotAI);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean attackEntityAsMob (Entity par1Entity) {
+		// needs to be in sight and in range
+		if (!this.getEntitySenses ().canSee (par1Entity) && this.getDistanceSqToEntity (par1Entity) <= MAXIMUM_GUN_DISTANCE) return false;
+
+		// fire particles
+		this.worldObj.spawnParticle ("smoke", this.posX, this.posY, this.posZ, 0.0d, 0.0d, 0.0d);
+
+		// attack
+		par1Entity.attackEntityFrom (new DamageSource ("defense.surveillance.securityBot"), 1.5f);
+		return true;
 	}
 
 	/**
@@ -141,7 +164,15 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	 */
 	@Override
 	public AxisAlignedBB getBoundingBox () {
-		return AxisAlignedBB.getBoundingBox (-0.05f, 0.00f, -0.05f, 1.05f, 0.5f, 1.05f);
+		return AxisAlignedBB.getBoundingBox ((this.posX - 0.5f), this.posY, (this.posZ - 0.5f), (this.posX + 1.0f), (this.posY + 1.0f), (this.posZ + 1.0f));
+	}
+
+	/**
+	 * Returns the currently connected hub (if any).
+	 * @return The hub instance.
+	 */
+	public ISurveillanceNetworkEntity getHub () {
+		return this.hub;
 	}
 
 	/**
@@ -158,6 +189,14 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	@Override
 	public UUID getOwner () {
 		return this.owner;
+	}
+
+	/**
+	 * Returns the original entity location.
+	 * @return The location.
+	 */
+	public Location getOriginalLocation () {
+		return this.originalLocation;
 	}
 
 	/**
@@ -232,9 +271,6 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 
 			// set target
 			this.setAttackTarget (attackOrderPacket.getTarget ());
-
-			// notify ai
-			this.securityBotAI.waitingForResponse = false;
 		}
 	}
 

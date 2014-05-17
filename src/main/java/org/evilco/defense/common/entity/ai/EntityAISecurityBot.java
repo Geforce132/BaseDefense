@@ -47,14 +47,19 @@ public class EntityAISecurityBot extends EntityAIBase {
 	protected PathEntity currentPathEntity = null;
 
 	/**
+	 * Stores the ticks until the entity goes back to it's default state.
+	 */
+	protected int defendTimeout = 0;
+
+	/**
 	 * Stores the parent entity.
 	 */
 	protected SecurityBotEntity entity = null;
 
 	/**
-	 * Indicates whether the bot is waiting for response.
+	 * Indicates whether the bot is defending.
 	 */
-	public boolean waitingForResponse = false;
+	protected boolean isDefending = false;
 
 	/**
 	 * Constructs a new EntityAISecurityBot.
@@ -105,14 +110,21 @@ public class EntityAISecurityBot extends EntityAIBase {
 	 */
 	@Override
 	public void updateTask () {
+
 		// do attack stuffz
 		if (this.entity.getAttackTarget () != null) {
 			// verify whether the last entity died
-			if (!this.entity.getAttackTarget ().isEntityAlive ()) this.entity.setAttackTarget (null);
+			if (!this.entity.getAttackTarget ().isEntityAlive ()) {
+				this.entity.setAttackTarget (null);
+
+				return;
+			}
 
 			// check whether we need to move the entity to be able to attack it
-			if (this.entity.getEntitySenses().canSee(this.entity.getAttackTarget ()) && this.entity.getDistanceSqToEntity (this.entity.getAttackTarget ()) <= SecurityBotEntity.MAXIMUM_GUN_DISTANCE) {
+			if (this.entity.getEntitySenses().canSee (this.entity.getAttackTarget ()) && this.entity.getDistanceSqToEntity (this.entity.getAttackTarget ()) <= SecurityBotEntity.MAXIMUM_GUN_DISTANCE) {
 				// attack entity (whatever it is ... I don't really care but it must die!!!!
+
+				System.out.println ("Trying to attack entity " + this.entity.getAttackTarget ().getClass ().getName ());
 
 				// tick down until next attack
 				this.attackTick = Math.max(this.attackTick - 1, 0);
@@ -122,7 +134,19 @@ public class EntityAISecurityBot extends EntityAIBase {
 					this.entity.attackEntityAsMob (this.entity.getAttackTarget ());
 			} else
 				this.entity.getNavigator ().tryMoveToEntityLiving (this.entity.getAttackTarget (), SecurityBotEntity.MOVEMENT_SPEED);
-		} else if (!this.waitingForResponse) {
+		} else if (this.entity.getHub () != null && this.isDefending) {
+			// update ticks until stop to defend
+			this.defendTimeout = Math.max ((this.defendTimeout - 1), 0);
+
+			// stop defending
+			if (this.defendTimeout == 0) {
+				// set back to normal state
+				this.isDefending = false;
+
+				// try to move bot back to original location
+				if (this.entity.getOriginalLocation () != null) this.entity.getNavigator ().tryMoveToXYZ (this.entity.getOriginalLocation ().xCoord, this.entity.getOriginalLocation ().yCoord, this.entity.getOriginalLocation ().zCoord, SecurityBotEntity.MOVEMENT_SPEED);
+			}
+
 			// find entities around
 			List<EntityLivingBase> entityList = this.entity.worldObj.getEntitiesWithinAABB (EntityLivingBase.class, this.entity.getBoundingBox ().expand (SecurityBotEntity.MAXIMUM_GUN_DISTANCE, SecurityBotEntity.MAXIMUM_GUN_DISTANCE, SecurityBotEntity.MAXIMUM_GUN_DISTANCE));
 
@@ -132,15 +156,23 @@ public class EntityAISecurityBot extends EntityAIBase {
 			// sort list
 			Collections.sort (entityList, new EntityComparator ());
 
+			// pop off security bots
+			for (int i = 0; i < entityList.size (); i++) {
+				// delete security bots from the list (sorry no bot fights)
+				if (entityList.get (i) instanceof SecurityBotEntity) entityList.remove (i);
+			}
+
 			// send a list of entities to hub to ask for more information
 			AttackOrderRequestPacket packet = new AttackOrderRequestPacket (this.entity, entityList);
 
 			// send packet
 			this.entity.sendPacket (packet);
-
-			// set waiting
-			this.waitingForResponse = true;
 		}
+	}
+
+	public void defend () {
+		this.isDefending = true;
+		this.defendTimeout = 2400;
 	}
 
 	/**
