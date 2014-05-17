@@ -20,6 +20,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
@@ -276,6 +277,14 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 			// set target
 			this.setAttackTarget (attackOrderPacket.getTarget ());
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void dropFewItems (boolean par1, int par2) {
+		this.dropItem (this.getDropItem (), 1);
 	}
 
 	@Override
