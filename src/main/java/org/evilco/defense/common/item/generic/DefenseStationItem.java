@@ -65,5 +65,8 @@ public class DefenseStationItem extends Item {
 
 		// update tile entity
 		((ISurveillanceNetworkEntity) par3World.getTileEntity (par4, (par5 + 1), par6)).setOwner (par2EntityPlayer);
+
+		// confirm item use.
+		return true;
 	}
 }
