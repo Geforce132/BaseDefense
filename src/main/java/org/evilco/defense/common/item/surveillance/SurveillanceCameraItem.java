@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseBlock;
 import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.defense.common.Strings;
+import org.evilco.defense.common.tile.network.ISurveillanceNetworkEntity;
 import org.evilco.defense.util.Location;
 
 /**
@@ -81,6 +82,9 @@ public class SurveillanceCameraItem extends Item {
 		// set block
 		par3World.setBlock (((int) blockLocation.xCoord), ((int) blockLocation.yCoord), ((int) blockLocation.zCoord), DefenseBlock.SURVEILLANCE_CAMERA, (par7 - 2), 2);
 		par1ItemStack.stackSize--;
+
+		// update tile entity
+		((ISurveillanceNetworkEntity) par3World.getTileEntity (((int) blockLocation.xCoord), ((int) blockLocation.yCoord), ((int) blockLocation.zCoord))).setOwner (par2EntityPlayer);
 
 		return true;
 	}
