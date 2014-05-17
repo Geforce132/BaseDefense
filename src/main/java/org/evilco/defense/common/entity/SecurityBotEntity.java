@@ -19,6 +19,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -115,6 +116,9 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 		this.hub.connectEntity (this);
 
 		this.isConnected = true;
+
+		// notify about entity change
+		this.worldObj.updateEntity (this);
 	}
 
 	/**
@@ -137,7 +141,7 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	 */
 	@Override
 	public AxisAlignedBB getBoundingBox () {
-		return AxisAlignedBB.getBoundingBox (0.05f, 0.05f, 0.05f, 0.95f, 0.95f, 0.95f);
+		return AxisAlignedBB.getBoundingBox (-0.05f, 0.00f, -0.05f, 1.05f, 0.5f, 1.05f);
 	}
 
 	/**
@@ -209,7 +213,8 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	 */
 	@Override
 	public void receiveMessage (ISurveillanceNetworkPacket packet) {
-		if (packet instanceof DefenseOrderPacket && this.getAttackTarget () == null) {
+		// defense orders
+		if (packet instanceof DefenseOrderPacket && this.getAttackTarget () == null && this.getNavigator ().noPath ()) {
 			// cast packet
 			DefenseOrderPacket defenseOrderPacket = ((DefenseOrderPacket) packet);
 
@@ -218,6 +223,18 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 
 			// stop execution
 			return;
+		}
+
+		// attack orders
+		if (packet instanceof AttackOrderPacket) {
+			// cast packet
+			AttackOrderPacket attackOrderPacket = ((AttackOrderPacket) packet);
+
+			// set target
+			this.setAttackTarget (attackOrderPacket.getTarget ());
+
+			// notify ai
+			this.securityBotAI.waitingForResponse = false;
 		}
 	}
 
@@ -242,7 +259,26 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 			// store hub
 			this.hub = ((ISurveillanceNetworkHub) tileEntity);
 			this.isConnected = true;
+
+			// notify hub
+			try {
+				this.hub.connectEntity (this);
+			} catch (SurveillanceEntityConnectionException ex) {
+				// disconnect from hub
+				this.disconnectHub ();
+
+				// stop execution
+				return;
+			}
 		}
+	}
+
+	/**
+	 * Tries to send a packet to the hub.
+	 * @param packet The packet to send.
+	 */
+	public void sendPacket (ISurveillanceNetworkPacket packet) {
+		if (this.hub != null) this.hub.receiveMessage (packet);
 	}
 
 	/**
