@@ -265,6 +265,9 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 			// set navigator target
 			this.getNavigator ().tryMoveToXYZ (defenseOrderPacket.getLocation ().xCoord, defenseOrderPacket.getLocation ().yCoord, defenseOrderPacket.getLocation ().zCoord, MOVEMENT_SPEED);
 
+			// enable defending
+			this.securityBotAI.defend ();
+
 			// stop execution
 			return;
 		}
