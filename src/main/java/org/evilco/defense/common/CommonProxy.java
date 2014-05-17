@@ -59,6 +59,7 @@ public class CommonProxy {
 		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, "wireless_tuner");
 
 		GameRegistry.registerItem (DefenseItem.SURVEILLANCE_CAMERA, "surveillance_camera");
+		GameRegistry.registerItem (DefenseItem.SURVEILLANCE_SECURITY_BOT, "surveillance_security_bot");
 	}
 
 	/**
