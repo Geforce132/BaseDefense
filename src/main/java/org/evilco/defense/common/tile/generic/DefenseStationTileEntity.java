@@ -175,12 +175,16 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 
 			// iterate over all possible targets
 			for (EntityLivingBase entityLiving : attackOrderPacket.getPossibleTargets ()) {
+				// check for security bot
+				if (entityLiving instanceof SecurityBotEntity) continue;
+
 				// check for player
 				if (entityLiving instanceof EntityPlayer) {
 					// cast to player
 					EntityPlayer entityPlayer = ((EntityPlayer) entityLiving);
 
 					// verify UUID against this known users
+					if (entityPlayer.capabilities.isCreativeMode) continue;
 					if (this.knownUsers.contains (entityPlayer.getPersistentID ())) continue;
 				}
 
