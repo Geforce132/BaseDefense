@@ -128,6 +128,9 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	 */
 	@Override
 	public void connectHub (ISurveillanceNetworkHub hub) throws SurveillanceEntityConnectionException {
+		// verify owner
+		if (hub.getOwner () == null || !hub.getOwner ().equals (this.getOwner ())) throw new SurveillanceEntityConnectionException ("defense.surveillance.tuner.differentOwner");
+
 		// disconnect from previous hub
 		if (this.hub != null) this.hub.disconnectEntity (this);
 
