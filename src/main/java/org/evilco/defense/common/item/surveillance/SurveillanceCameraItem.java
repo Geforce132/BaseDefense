@@ -25,6 +25,7 @@ import org.evilco.defense.common.DefenseBlock;
 import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.defense.common.Strings;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkEntity;
+import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 import org.evilco.defense.util.Location;
 
 /**
@@ -83,8 +84,15 @@ public class SurveillanceCameraItem extends Item {
 		par1ItemStack.stackSize--;
 
 		// update tile entity
-		((ISurveillanceNetworkEntity) par3World.getTileEntity (((int) blockLocation.xCoord), ((int) blockLocation.yCoord), ((int) blockLocation.zCoord))).setOwner (par2EntityPlayer);
+		SurveillanceCameraTileEntity tileEntity = ((SurveillanceCameraTileEntity) par3World.getTileEntity (((int) blockLocation.xCoord), ((int) blockLocation.yCoord), ((int) blockLocation.zCoord)));
 
+		// set owner
+		tileEntity.setOwner (par2EntityPlayer);
+
+		// set camera tier
+		tileEntity.setScanningMobs ((par1ItemStack.getItemDamage () == 1));
+
+		// use item
 		return true;
 	}
 }

@@ -330,6 +330,14 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	}
 
 	/**
+	 * Sets whether mobs will be scanned or not.
+	 * @param value True to enable mob scanning.
+	 */
+	public void setScanningMobs (boolean value) {
+		this.isScanningMobs = value;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
