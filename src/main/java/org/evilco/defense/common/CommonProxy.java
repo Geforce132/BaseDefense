@@ -34,7 +34,7 @@ public class CommonProxy {
 	 * Registers all modification blocks.
 	 */
 	public void registerBlocks () {
-		GameRegistry.registerBlock (DefenseBlock.DEFENSE_STATION, "defense_station");
+		GameRegistry.registerBlock (DefenseBlock.DEFENSE_STATION, "defense_station_block");
 
 		GameRegistry.registerBlock (DefenseBlock.SURVEILLANCE_CAMERA, "surveillance_camera_block");
 	}
@@ -56,6 +56,7 @@ public class CommonProxy {
 	 * Registers all modification items.
 	 */
 	public void registerItems () {
+		GameRegistry.registerItem (DefenseItem.GENERIC_DEFENSE_STATION, "defense_station");
 		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, "wireless_tuner");
 
 		GameRegistry.registerItem (DefenseItem.SURVEILLANCE_CAMERA, "surveillance_camera");
