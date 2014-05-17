@@ -17,6 +17,7 @@ package org.evilco.defense.common.tile.generic;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -137,6 +138,8 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 			for (ISurveillanceNetworkClient client : this.connectedClients) {
 				client.receiveMessage (defenseOrderPacket);
 			}
+
+			return;
 		}
 
 		// parse attack orders
@@ -162,6 +165,8 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 				AttackOrderPacket attackPacket = new AttackOrderPacket (this, entityLiving);
 				attackOrderPacket.getSource ().receiveMessage (attackPacket);
 			}
+
+			return;
 		}
 	}
 
