@@ -23,11 +23,14 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import org.evilco.defense.common.DefenseItem;
 import org.evilco.defense.common.entity.ai.EntityAISecurityBot;
 import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
@@ -222,10 +225,8 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void onDeath (DamageSource par1DamageSource) {
-		super.onDeath (par1DamageSource);
-
-		// TODO: Drop bot as item.
+	protected Item getDropItem () {
+		return DefenseItem.SURVEILLANCE_SECURITY_BOT;
 	}
 
 	/**
