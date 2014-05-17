@@ -371,11 +371,17 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 		// TODO: Enable/Disable
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onChunkUnload () {
 		super.onChunkUnload ();
 
 		// disable camera
 		this.isActive = false;
+
+		// disconnect from hub
+		if (this.hub != null) this.hub.disconnectEntity (this);
 	}
 }
