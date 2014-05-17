@@ -41,7 +41,6 @@ public class DefenseStationBlock extends Block implements ITileEntityProvider {
 		this.setHardness (0.5f);
 		this.setStepSound (Block.soundTypeMetal);
 		this.setBlockBounds (0.05f, 0.0f, 0.05f, 0.95f, 2.0f, 0.95f);
-		this.setCreativeTab (DefenseCreativeTabs.SURVEILLANCE);
 	}
 
 	/**
