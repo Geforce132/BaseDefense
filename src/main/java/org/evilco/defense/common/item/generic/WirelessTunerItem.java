@@ -272,6 +272,18 @@ public class WirelessTunerItem extends Item {
 			return false;
 		}
 
+		// verify shift - click
+		if (par2EntityPlayer.isSneaking ()) {
+			// kill entity
+			currentEntity.setHealth (0.0f);
+
+			// damage item slightly
+			if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.damageItem (1, par2EntityPlayer);
+
+			// ok!
+			return true;
+		}
+
 		// check current state
 		if (!this.hasSurveillanceEntity (par1ItemStack)) {
 			// create new NBT tag
