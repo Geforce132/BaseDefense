@@ -17,6 +17,7 @@ package org.evilco.defense.common;
 
 import net.minecraft.item.Item;
 import org.evilco.defense.common.item.generic.DefenseStationItem;
+import org.evilco.defense.common.item.generic.GenericAiProcessor;
 import org.evilco.defense.common.item.generic.GenericLensItem;
 import org.evilco.defense.common.item.generic.WirelessTunerItem;
 import org.evilco.defense.common.item.surveillance.SecurityBotItem;
@@ -30,6 +31,7 @@ public class DefenseItem {
 
 	public static final Item GENERIC_DEFENSE_STATION = new DefenseStationItem ();
 	public static final Item GENERIC_LENS = new GenericLensItem ();
+	public static final Item GENERIC_AI_PROCESSOR = new GenericAiProcessor ();
 	public static final Item GENERIC_WIRELESS_TUNER = new WirelessTunerItem ();
 
 	public static final Item SURVEILLANCE_CAMERA = new SurveillanceCameraItem ();

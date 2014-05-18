@@ -60,6 +60,7 @@ public class CommonProxy {
 	 * Registers all modification items.
 	 */
 	public void registerItems () {
+		GameRegistry.registerItem (DefenseItem.GENERIC_AI_PROCESSOR, "ai_processor");
 		GameRegistry.registerItem (DefenseItem.GENERIC_DEFENSE_STATION, "defense_station");
 		GameRegistry.registerItem (DefenseItem.GENERIC_LENS, "lens");
 		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, "wireless_tuner");
@@ -117,13 +118,38 @@ public class CommonProxy {
 		);
 
 		// ai processor
-
+		GameRegistry.addShapedRecipe (
+			new ItemStack (DefenseItem.GENERIC_AI_PROCESSOR),
+			"ZXZ",
+			"XYX",
+			"ZXZ",
+			'X', Item.getItemById (265),
+			'Y', Item.getItemById (331),
+			'Z', Item.getItemById (280)
+		);
 
 		// security bot
-
+		GameRegistry.addShapedRecipe (
+			new ItemStack (DefenseItem.SURVEILLANCE_SECURITY_BOT),
+			"XWX",
+			"XYX",
+			"XZX",
+			'W', DefenseItem.GENERIC_WIRELESS_TUNER,
+			'X', Block.getBlockFromName ("iron_block"),
+			'Y', DefenseItem.GENERIC_AI_PROCESSOR,
+			'Z', Item.getItemById (328)
+		);
 
 		// defense station
-
+		GameRegistry.addShapedRecipe (
+			new ItemStack (DefenseItem.GENERIC_DEFENSE_STATION),
+			"XZX",
+			"XYX",
+			"XXX",
+			'X', Block.getBlockFromName ("iron_block"),
+			'Y', DefenseItem.GENERIC_AI_PROCESSOR,
+			'Z', DefenseItem.GENERIC_WIRELESS_TUNER
+		);
 	}
 
 	/**
