@@ -19,6 +19,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.evilco.defense.common.DefenseBlock;
+import org.evilco.defense.common.DefenseItem;
 import org.evilco.defense.common.Strings;
 
 /**
@@ -39,14 +40,6 @@ public class SurveillanceCreativeTab extends CreativeTabs {
 	 */
 	@Override
 	public Item getTabIconItem () {
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ItemStack getIconItemStack () {
-		return (new ItemStack (DefenseBlock.SURVEILLANCE_CAMERA, 1));
+		return DefenseItem.SURVEILLANCE_CAMERA;
 	}
 }

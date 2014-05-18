@@ -17,10 +17,12 @@ package org.evilco.defense.common.item.surveillance;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseBlock;
 import org.evilco.defense.common.DefenseCreativeTabs;
@@ -35,6 +37,11 @@ import java.util.List;
  * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
 public class SurveillanceCameraItem extends Item {
+
+	/**
+	 * Stores all item icons.
+	 */
+	protected IIcon[] icons = new IIcon[2];
 
 	/**
 	 * Constructs a new SurveillanceCameraItem.
@@ -64,6 +71,14 @@ public class SurveillanceCameraItem extends Item {
 	@Override
 	public boolean getHasSubtypes () {
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IIcon getIconFromDamage (int par1) {
+		return this.icons[par1];
 	}
 
 	/**
@@ -116,5 +131,16 @@ public class SurveillanceCameraItem extends Item {
 
 		// use item
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerIcons (IIconRegister par1IconRegister) {
+		super.registerIcons (par1IconRegister);
+
+		this.icons[0] = par1IconRegister.registerIcon ("defense:surveillance/surveillanceCamera");
+		this.icons[1] = par1IconRegister.registerIcon ("defense:surveillance/surveillanceCameraMob");
 	}
 }
