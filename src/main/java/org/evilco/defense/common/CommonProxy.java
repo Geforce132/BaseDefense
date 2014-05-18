@@ -17,7 +17,11 @@ package org.evilco.defense.common;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.versioning.ComparableVersion;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import org.evilco.defense.DefenseMod;
 import org.evilco.defense.common.entity.SecurityBotEntity;
 import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
@@ -57,10 +61,69 @@ public class CommonProxy {
 	 */
 	public void registerItems () {
 		GameRegistry.registerItem (DefenseItem.GENERIC_DEFENSE_STATION, "defense_station");
+		GameRegistry.registerItem (DefenseItem.GENERIC_LENS, "lens");
 		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, "wireless_tuner");
 
 		GameRegistry.registerItem (DefenseItem.SURVEILLANCE_CAMERA, "surveillance_camera");
 		GameRegistry.registerItem (DefenseItem.SURVEILLANCE_SECURITY_BOT, "surveillance_security_bot");
+	}
+
+	/**
+	 * Registers all recipes.
+	 */
+	public void registerRecipes () {
+		// lenses
+		GameRegistry.addShapedRecipe (
+			new ItemStack (DefenseItem.GENERIC_LENS, 3),
+			"X X",
+			" X ",
+			"   ",
+			'X', Block.getBlockFromName ("glass")
+		);
+
+		// camera
+		GameRegistry.addShapedRecipe (
+			new ItemStack (DefenseItem.SURVEILLANCE_CAMERA),
+			"XXX",
+			"XYZ",
+			"XXX",
+			'X', Block.getBlockFromName ("iron_block"),
+			'Y', Item.getItemById (368), // FIXME: Use item names here
+			'Z', DefenseItem.GENERIC_LENS
+		);
+
+		// camera (mob enabled)
+		GameRegistry.addShapelessRecipe (
+			new ItemStack (DefenseItem.SURVEILLANCE_CAMERA, 1, 1),
+			new ItemStack (DefenseItem.SURVEILLANCE_CAMERA, 1, 0),
+			new ItemStack (Item.getItemById (352))
+		);
+
+		// camera (normal)
+		GameRegistry.addShapelessRecipe (
+			new ItemStack (DefenseItem.SURVEILLANCE_CAMERA, 1, 0),
+			new ItemStack (DefenseItem.SURVEILLANCE_CAMERA, 1, 1)
+		);
+
+		// wireless tuner
+		GameRegistry.addShapedRecipe (
+			new ItemStack (DefenseItem.GENERIC_WIRELESS_TUNER),
+			" Y ",
+			"XZX",
+			"XXX",
+			'Y', Item.getItemById (280),
+			'X', Item.getItemById (265),
+			'Z', Item.getItemById (368)
+		);
+
+		// ai processor
+
+
+		// security bot
+
+
+		// defense station
+
 	}
 
 	/**

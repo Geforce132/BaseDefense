@@ -70,6 +70,8 @@ public class DefenseMod {
 		proxy.registerTileEntities ();
 		proxy.registerRenderers ();
 
+		proxy.registerRecipes ();
+
 		// register channels
 		this.channels = NetworkRegistry.INSTANCE.newChannel (DefenseChannelHandler.CHANNEL_NAME, new DefenseChannelHandler ());
 

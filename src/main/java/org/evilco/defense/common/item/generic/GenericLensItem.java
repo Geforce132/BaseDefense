@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.evilco.defense.common;
+package org.evilco.defense.common.item.generic;
 
 import net.minecraft.item.Item;
-import org.evilco.defense.common.item.generic.DefenseStationItem;
-import org.evilco.defense.common.item.generic.GenericLensItem;
-import org.evilco.defense.common.item.generic.WirelessTunerItem;
-import org.evilco.defense.common.item.surveillance.SecurityBotItem;
-import org.evilco.defense.common.item.surveillance.SurveillanceCameraItem;
+import org.evilco.defense.common.DefenseCreativeTabs;
+import org.evilco.defense.common.Strings;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
  * @copyright		Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
-public class DefenseItem {
+public class GenericLensItem extends Item {
 
-	public static final Item GENERIC_DEFENSE_STATION = new DefenseStationItem ();
-	public static final Item GENERIC_LENS = new GenericLensItem ();
-	public static final Item GENERIC_WIRELESS_TUNER = new WirelessTunerItem ();
+	public GenericLensItem () {
+		super ();
 
-	public static final Item SURVEILLANCE_CAMERA = new SurveillanceCameraItem ();
-	public static final Item SURVEILLANCE_SECURITY_BOT = new SecurityBotItem ();
+		this.setMaxStackSize (16);
+		this.setMaxDamage (0);
+
+		this.setCreativeTab (DefenseCreativeTabs.SURVEILLANCE);
+		this.setUnlocalizedName (Strings.ITEM_GENERIC_LENS);
+
+		this.setTextureName ("defense:generic/lens");
+	}
 }
