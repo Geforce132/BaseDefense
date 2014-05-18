@@ -18,7 +18,14 @@ package org.evilco.defense;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 import org.evilco.defense.common.CommonProxy;
+import org.evilco.defense.common.gui.DefenseGuiHandler;
+import org.evilco.defense.common.packet.DefenseChannelHandler;
+
+import java.util.EnumMap;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -43,6 +50,8 @@ public class DefenseMod {
 	@Mod.Instance (MOD_ID)
 	public static DefenseMod instance;
 
+	public EnumMap<Side, FMLEmbeddedChannel> channels = null;
+
 	/**
 	 * Stores the proxy implementation.
 	 */
@@ -60,5 +69,11 @@ public class DefenseMod {
 		proxy.registerEntities ();
 		proxy.registerTileEntities ();
 		proxy.registerRenderers ();
+
+		// register channels
+		this.channels = NetworkRegistry.INSTANCE.newChannel (DefenseChannelHandler.CHANNEL_NAME, new DefenseChannelHandler ());
+
+		// register GUI handler
+		NetworkRegistry.INSTANCE.registerGuiHandler (this, new DefenseGuiHandler ());
 	}
 }
