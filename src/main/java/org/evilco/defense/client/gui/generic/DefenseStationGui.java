@@ -17,24 +17,17 @@ package org.evilco.defense.client.gui.generic;
 
 import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.GuiChest;
-import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.evilco.defense.DefenseMod;
-import org.evilco.defense.common.CommonProxy;
 import org.evilco.defense.common.packet.DefenseStationRegisterUserPacket;
 import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 public class DefenseStationGui extends GuiScreen implements ReturnAwareGuiTextField.ReturnListener {

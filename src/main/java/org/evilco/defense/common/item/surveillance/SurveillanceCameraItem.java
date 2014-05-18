@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseBlock;
 import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.defense.common.Strings;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkEntity;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 import org.evilco.defense.util.Location;
 
