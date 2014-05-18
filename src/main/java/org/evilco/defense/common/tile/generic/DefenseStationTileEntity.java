@@ -15,6 +15,9 @@
  */
 package org.evilco.defense.common.tile.generic;
 
+import com.mojang.authlib.GameProfile;
+import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -30,10 +33,9 @@ import net.minecraftforge.common.util.Constants;
 import org.evilco.defense.common.entity.SecurityBotEntity;
 import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -49,7 +51,7 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	/**
 	 * Stores a list of user identifiers which may pass through protected zones.
 	 */
-	protected List<UUID> knownUsers = new ArrayList<UUID> ();
+	protected Map<UUID, String> knownUsers = new HashMap<UUID, String> ();
 
 	/**
 	 * Stores the owner's UUID.
@@ -92,7 +94,7 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 * Returns a list of known users.
 	 * @return The list.
 	 */
-	public List<UUID> getKnownUsers () {
+	public Map<UUID, String> getKnownUsers () {
 		return this.knownUsers;
 	}
 
@@ -149,7 +151,7 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 					player = ((EntityPlayer) entity);
 
 					// verify against known users
-					if (this.knownUsers.contains (player.getPersistentID ())) knownEntities++;
+					if (this.knownUsers.containsKey (player.getPersistentID ())) knownEntities++;
 				}
 			}
 
@@ -184,7 +186,7 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 
 					// verify UUID against this known users
 					if (entityPlayer.capabilities.isCreativeMode) continue;
-					if (this.knownUsers.contains (entityPlayer.getPersistentID ())) continue;
+					if (this.knownUsers.containsKey (entityPlayer.getPersistentID ())) continue;
 				}
 
 				// skip passive mods
@@ -236,14 +238,18 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 
 		// get a string list of known users
 		if (p_145839_1_.hasKey ("knownUsers")) {
-			NBTTagList knownUsers = p_145839_1_.getTagList ("knownUsers", Constants.NBT.TAG_STRING);
+			NBTTagList tagList = p_145839_1_.getTagList ("knownUsers", Constants.NBT.TAG_COMPOUND);
 
 			// create empty list
-			this.knownUsers = new ArrayList<UUID> ();
+			this.knownUsers = new HashMap<UUID, String> ();
 
 			// iterate over list items
-			for (int i = 0; i < knownUsers.tagCount (); i++) {
-				this.knownUsers.add (UUID.fromString (knownUsers.getStringTagAt (i)));
+			for (int i = 0; i < tagList.tagCount (); i++) {
+				// get tag
+				NBTTagCompound compound = tagList.getCompoundTagAt (i);
+
+				// get elements
+				this.knownUsers.put (UUID.fromString (compound.getString ("uuid")), compound.getString ("username"));
 			}
 		}
 	}
@@ -253,12 +259,19 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 */
 	@Override
 	public void setOwner (UUID owner) {
+		throw new NotImplementedException ();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setOwner (UUID owner, String username) {
 		// remove old owner
 		if (this.owner != null) this.knownUsers.remove (owner);
 
 		// set new owner
 		this.owner = owner;
-		this.knownUsers.add (owner);
+		this.knownUsers.put (owner, username);
 
 		// update tile entity
 		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
@@ -270,7 +283,7 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 */
 	@Override
 	public void setOwner (EntityPlayer player) {
-		this.setOwner (player.getPersistentID ());
+		this.setOwner (player.getPersistentID (), player.getDisplayName ());
 	}
 
 	/**
@@ -289,8 +302,16 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 			NBTTagList tagList = new NBTTagList ();
 
 			// append all known users
-			for (UUID user : this.knownUsers) {
-				tagList.appendTag (new NBTTagString (user.toString ()));
+			for (Map.Entry<UUID, String> user : this.knownUsers.entrySet ()) {
+				// create new tag compound
+				NBTTagCompound compound = new NBTTagCompound ();
+
+				// set data
+				compound.setString ("uuid", user.getKey ().toString ());
+				compound.setString ("username", user.getValue ().toString ());
+
+				// append tag
+				tagList.appendTag (compound);
 			}
 
 			// append tag
