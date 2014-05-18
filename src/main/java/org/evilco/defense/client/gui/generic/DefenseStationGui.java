@@ -16,6 +16,7 @@
 package org.evilco.defense.client.gui.generic;
 
 import cpw.mods.fml.common.network.FMLOutboundHandler;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -112,7 +113,7 @@ public class DefenseStationGui extends GuiScreen implements ReturnAwareGuiTextFi
 		int y = ((this.height - HEIGHT) / 2);
 
 		// draw gui name
-		this.fontRendererObj.drawString (StatCollector.translateToFallback ("defense.generic.defenseStation.title"), x, (y - 12), 0xFFFFFF);
+		this.fontRendererObj.drawString (LanguageRegistry.instance ().getStringLocalization ("defense.generic.defenseStation.title"), x, (y - 12), 0xFFFFFF);
 
 		// draw known users
 		Iterator<Map.Entry<UUID, String>> knownUserIterator = this.tileEntity.getKnownUsers ().entrySet ().iterator ();
