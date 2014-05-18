@@ -20,10 +20,12 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import org.evilco.defense.common.DefenseItem;
 import org.evilco.defense.common.entity.ai.EntityAISecurityBot;
@@ -281,6 +283,14 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 	@Override
 	protected void dropFewItems (boolean par1, int par2) {
 		this.dropItem (this.getDropItem (), 1);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ItemStack getPickedResult (MovingObjectPosition target) {
+		return new ItemStack (DefenseItem.SURVEILLANCE_SECURITY_BOT, 1);
 	}
 
 	@Override
