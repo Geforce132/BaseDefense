@@ -228,6 +228,12 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	public void readFromNBT (NBTTagCompound p_145839_1_) {
 		super.readFromNBT (p_145839_1_);
 
+		// read owner
+		if (p_145839_1_.hasKey ("owner"))
+			this.owner = UUID.fromString (p_145839_1_.getString ("owner"));
+		else
+			this.owner = null;
+
 		// get a string list of known users
 		if (p_145839_1_.hasKey ("knownUsers")) {
 			NBTTagList knownUsers = p_145839_1_.getTagList ("knownUsers", Constants.NBT.TAG_STRING);
@@ -240,12 +246,6 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 				this.knownUsers.add (UUID.fromString (knownUsers.getStringTagAt (i)));
 			}
 		}
-
-		// get owner
-		if (p_145839_1_.hasKey ("owner"))
-			this.owner = UUID.fromString (p_145839_1_.getString ("owner"));
-		else
-			this.owner = null;
 	}
 
 	/**
@@ -254,7 +254,7 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	@Override
 	public void setOwner (UUID owner) {
 		// remove old owner
-		if (this.owner != null) this.connectedClients.remove (owner);
+		if (this.owner != null) this.knownUsers.remove (owner);
 
 		// set new owner
 		this.owner = owner;
@@ -280,6 +280,9 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	public void writeToNBT (NBTTagCompound p_145841_1_) {
 		super.writeToNBT (p_145841_1_);
 
+		// set owner
+		if (this.owner != null) p_145841_1_.setString ("owner", this.owner.toString ());
+
 		// write list of known users
 		if (this.knownUsers != null) {
 			// create new tag
@@ -293,8 +296,5 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 			// append tag
 			p_145841_1_.setTag ("knownUsers", tagList);
 		}
-
-		// write owner
-		if (this.owner != null) p_145841_1_.setString ("owner", this.owner.toString ());
 	}
 }
