@@ -89,7 +89,7 @@ public class WirelessTunerItem extends Item {
 				return true;
 			} catch (SurveillanceEntityConnectionException ex) {
 				// notify user
-				player.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.unknownConnectionError", ex.getMessage ()));
+				player.addChatMessage (new ChatComponentTranslation ("defense.surveillance.tuner.unknownConnectionError", new ChatComponentTranslation (ex.getMessage ())));
 
 				// forbid item use
 				return false;
