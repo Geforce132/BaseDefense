@@ -291,6 +291,13 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	public boolean isScanningMobs () {
+		return this.isScanningMobs;
+	}
+
+	/**
 	 * Checks whether an entity lies within the scanning range.
 	 * @param coneAxis
 	 * @param origin
