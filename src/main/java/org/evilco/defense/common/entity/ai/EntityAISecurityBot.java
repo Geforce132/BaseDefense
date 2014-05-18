@@ -119,9 +119,6 @@ public class EntityAISecurityBot extends EntityAIBase {
 			// check whether we need to move the entity to be able to attack it
 			if (this.entity.getEntitySenses().canSee (this.entity.getAttackTarget ()) && this.entity.getDistanceSqToEntity (this.entity.getAttackTarget ()) <= SecurityBotEntity.MAXIMUM_GUN_DISTANCE) {
 				// attack entity (whatever it is ... I don't really care but it must die!!!!
-
-				System.out.println ("Trying to attack entity " + this.entity.getAttackTarget ().getClass ().getName ());
-
 				// tick down until next attack
 				this.attackTick = Math.max(this.attackTick - 1, 0);
 
