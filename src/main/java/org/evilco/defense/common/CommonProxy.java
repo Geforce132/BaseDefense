@@ -52,7 +52,7 @@ public class CommonProxy {
 		// register security bot
 		EntityRegistry.registerGlobalEntityID (SecurityBotEntity.class, "securityBot", securityBotID);
 		EntityRegistry.registerModEntity (SecurityBotEntity.class, "securityBot", securityBotID, DefenseMod.instance, 64, 1, true);
-		EntityList.entityEggs.put (securityBotID, new EntityList.EntityEggInfo (securityBotID, 16777215, 16711680));
+		// EntityList.entityEggs.put (securityBotID, new EntityList.EntityEggInfo (securityBotID, 16777215, 16711680));
 	}
 
 	/**
