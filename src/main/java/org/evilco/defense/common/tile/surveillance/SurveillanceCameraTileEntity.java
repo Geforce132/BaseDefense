@@ -357,6 +357,9 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	public void writeToNBT (NBTTagCompound p_145841_1_) {
 		super.writeToNBT (p_145841_1_);
 
+		// set owner
+		if (this.owner != null) p_145841_1_.setString ("owner", this.owner.toString ());
+
 		// write scanning mode
 		p_145841_1_.setBoolean ("mobScanning", this.isScanningMobs);
 
@@ -377,6 +380,12 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	@Override
 	public void readFromNBT (NBTTagCompound p_145839_1_) {
 		super.readFromNBT (p_145839_1_);
+
+		// read owner
+		if (p_145839_1_.hasKey ("owner"))
+			this.owner = UUID.fromString (p_145839_1_.getString ("owner"));
+		else
+			this.owner = null;
 
 		// get mob scanning
 		this.isScanningMobs = (p_145839_1_.hasKey ("mobScanning") && p_145839_1_.getBoolean ("mobScanning"));
