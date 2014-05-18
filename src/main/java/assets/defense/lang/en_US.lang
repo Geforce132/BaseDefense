@@ -1,0 +1,33 @@
+# Copyright (C) 2014 Evil-Co <http://wwww.evil-co.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+itemGroup.defense.surveillance=Surveillance
+
+item.defense.generic.aiProcessor.name=Simple AI Processor
+item.defense.generic.defenseStation.name=Defense Station
+item.defense.generic.lens.name=Glass Lens
+item.defense.generic.tuner.name=Wireless Tuner
+item.defense.surveillance.camera.name=Surveillance Camera
+item.defense.surveillance.bot.name=Security Bot
+
+defense.generic.defenseStation.title=Defense Station
+defense.generic.defenseStation.accessDenied=Access Denied
+
+defense.surveillance.tuner.storedEntity=Stored Data
+defense.surveillance.tuner.connectionSuccessful=Connected successfully
+defense.surveillance.tuner.hubConnectionUnsupported=You may not connect two defense stations.
+defense.surveillance.tuner.unknownConnectionError=Could not connect the entities: %s
+defense.surveillance.tuner.permissionDenied=You may not connect to one or more entities. Only the owner may connect entities.
+defense.surveillance.tuner.notAnEntity=Please click a surveillance network entity.
+defense.surveillance.tuner.brokenEntity=One or more entities do not seem to be available anymore. Make sure the entity still exists and is within loaded chunks.
+defense.surveillance.tuner.differentOwner=You may not connect entities which do not belong to you.
