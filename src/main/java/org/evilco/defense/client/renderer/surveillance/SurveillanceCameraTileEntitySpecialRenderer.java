@@ -45,8 +45,6 @@ public class SurveillanceCameraTileEntitySpecialRenderer extends TileEntitySpeci
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 
 		SurveillanceCameraTileEntity tileEntity = ((SurveillanceCameraTileEntity) var1);
-		System.out.println (tileEntity.getBlockMetadata ());
-
 		GL11.glRotated (tileEntity.getRotationAngle (), 0f, 1f, 0f);
 
 		GL11.glPushMatrix ();
