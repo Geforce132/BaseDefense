@@ -104,7 +104,7 @@ public class SecurityBotEntity extends EntityCreature implements ISurveillanceNe
 		this.worldObj.spawnParticle ("smoke", this.posX, this.posY, this.posZ, 0.0d, 0.0d, 0.0d);
 
 		// attack
-		par1Entity.attackEntityFrom (new DamageSource ("defense.surveillance.securityBot"), 1.5f);
+		par1Entity.attackEntityFrom (DamageSource.generic, 1.5f);
 		return true;
 	}
 

@@ -23,6 +23,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.evilco.defense.DefenseMod;
 import org.evilco.defense.common.packet.DefenseStationRegisterUserPacket;
+import org.evilco.defense.common.packet.DefenseStationUnregisterPacket;
 import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -187,7 +188,38 @@ public class DefenseStationGui extends GuiScreen implements ReturnAwareGuiTextFi
 	protected void mouseClicked (int par1, int par2, int par3) {
 		super.mouseClicked (par1, par2, par3);
 
+		// pass event to input field
 		this.inputField.mouseClicked (par1, par2, par3);
+
+		// calculate start location
+		int x = ((this.width - WIDTH) / 2) + 10;
+		int y = ((this.height - HEIGHT) / 2) + 10;
+
+		// ignore events outside of the box
+		if (par1 < (x + 10) || par1 > (x + 168) || par2 < y || par2 > (y + 169)) return;
+
+		int offsetY = 0;
+		Iterator<Map.Entry<UUID, String>> iterator = this.tileEntity.getKnownUsers ().entrySet ().iterator ();
+
+		while (iterator.hasNext ()) {
+			int correctY = (y + (offsetY * 12));
+
+			// skip if out of bounds
+			if (correctY >= (y + 169)) break;
+
+			// get selected user
+			Map.Entry<UUID, String> element = iterator.next ();
+
+			// verify position
+			if (par2 >= correctY && par2 <= (correctY + 8)) {
+				// send packet to server
+				DefenseMod.instance.channels.get (Side.CLIENT).attr (FMLOutboundHandler.FML_MESSAGETARGET).set (FMLOutboundHandler.OutboundTarget.TOSERVER);
+				DefenseMod.instance.channels.get (Side.CLIENT).writeOutbound (new DefenseStationUnregisterPacket (element.getKey (), this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord));
+				break;
+			}
+
+			offsetY++;
+		}
 	}
 
 	/**

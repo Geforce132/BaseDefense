@@ -27,7 +27,8 @@ import java.util.Map;
 public enum DefensePacketType {
 	DEFENSE_STATION_REGISTER_USER (0, DefenseStationRegisterUserPacket.class),
 	DEFENSE_STATION_REGISTER_USER_ERROR (1, DefenseStationRegisterUserErrorPacket.class),
-	DEFENSE_STATION_REGISTER_USER_SUCCESS (2, DefenseStationRegisterUserSuccessPacket.class);
+	DEFENSE_STATION_REGISTER_USER_SUCCESS (2, DefenseStationRegisterUserSuccessPacket.class),
+	DEFENSE_STATION_UNREGISTER_USER (3, DefenseStationUnregisterPacket.class);
 
 	/**
 	 * Static Initialization.

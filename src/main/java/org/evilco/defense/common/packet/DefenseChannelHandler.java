@@ -189,6 +189,49 @@ public class DefenseChannelHandler extends MessageToMessageCodec<FMLProxyPacket,
 
 			// set color
 			((DefenseStationGui) screen).reset ();
+		} else if (packet instanceof DefenseStationUnregisterPacket) {
+			// verify side
+			if (FMLCommonHandler.instance ().getEffectiveSide () != Side.SERVER) throw new Exception ("Cannot receive server related packet.");
+
+			DefenseStationUnregisterPacket unregisterPacket = ((DefenseStationUnregisterPacket) packet);
+
+			// get net handler
+			NetHandlerPlayServer netHandler = ((NetHandlerPlayServer) ctx.channel ().attr (NetworkRegistry.NET_HANDLER).get ());
+			EntityPlayer player = netHandler.playerEntity;
+
+			// get TE
+			TileEntity tileEntity = player.getEntityWorld ().getTileEntity (unregisterPacket.getX (), unregisterPacket.getY (), unregisterPacket.getZ ());
+
+			// check TE type
+			if (!(tileEntity instanceof DefenseStationTileEntity)) {
+				// forcefully close screen
+				player.closeScreen ();
+
+				// stop execution (we will not parse the packet)
+				return;
+			}
+
+			// cast TE
+			DefenseStationTileEntity defenseStationTileEntity = ((DefenseStationTileEntity) tileEntity);
+
+			// verify owner
+			if (defenseStationTileEntity.getOwner () == null || !defenseStationTileEntity.getOwner ().equals (player.getPersistentID ())) {
+				// forcefully close screen
+				player.closeScreen ();
+
+				// stop execution (we will not parse the packet)
+				return;
+			}
+
+			// deny removing of the owner
+			if (defenseStationTileEntity.getOwner ().equals (unregisterPacket.getUserID ())) return;
+
+			// add user
+			defenseStationTileEntity.getKnownUsers ().remove (unregisterPacket.getUserID ());
+
+			// force entity update
+			player.getEntityWorld ().markTileEntityChunkModified (defenseStationTileEntity.xCoord, defenseStationTileEntity.yCoord, defenseStationTileEntity.zCoord, defenseStationTileEntity);
+			player.getEntityWorld ().markBlockForUpdate (defenseStationTileEntity.xCoord, defenseStationTileEntity.yCoord, defenseStationTileEntity.zCoord);
 		}
 
 		// construct new instance
