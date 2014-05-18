@@ -17,8 +17,6 @@ package org.evilco.defense.common.creative;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import org.evilco.defense.common.DefenseBlock;
 import org.evilco.defense.common.DefenseItem;
 import org.evilco.defense.common.Strings;
 

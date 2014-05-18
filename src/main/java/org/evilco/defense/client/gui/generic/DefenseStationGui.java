@@ -21,7 +21,6 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import org.evilco.defense.DefenseMod;
 import org.evilco.defense.common.packet.DefenseStationRegisterUserPacket;
 import org.evilco.defense.common.packet.DefenseStationUnregisterPacket;
