@@ -18,11 +18,17 @@ package org.evilco.defense.common.block.surveillance;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.evilco.defense.common.DefenseItem;
 import org.evilco.defense.common.Strings;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
+
+import java.util.Random;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -95,5 +101,33 @@ public class SurveillanceCameraBlock extends Block implements ITileEntityProvide
 	@Override
 	public boolean shouldSideBeRendered (IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_) {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Item getItemDropped (int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+		return DefenseItem.SURVEILLANCE_CAMERA;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int damageDropped (int p_149692_1_) {
+		return (p_149692_1_ > 1000 ? 1 : 0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ItemStack getPickBlock (MovingObjectPosition target, World world, int x, int y, int z) {
+		// get tile entity
+		SurveillanceCameraTileEntity tileEntity = ((SurveillanceCameraTileEntity) world.getTileEntity (x, y, z));
+
+		// return correct item
+		return (new ItemStack (DefenseItem.SURVEILLANCE_CAMERA, 1, (tileEntity.isScanningMobs () ? 1 : 0)));
 	}
 }

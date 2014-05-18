@@ -17,6 +17,7 @@ package org.evilco.defense.common.item.surveillance;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,6 +28,8 @@ import org.evilco.defense.common.Strings;
 import org.evilco.defense.common.tile.network.ISurveillanceNetworkEntity;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
 import org.evilco.defense.util.Location;
+
+import java.util.List;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -45,6 +48,23 @@ public class SurveillanceCameraItem extends Item {
 
 		this.setCreativeTab (DefenseCreativeTabs.SURVEILLANCE);
 		this.setUnlocalizedName (Strings.ITEM_SURVEILLANCE_CAMERA);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
+		p_150895_3_.add (new ItemStack (this, 1, 0));
+		p_150895_3_.add (new ItemStack (this, 1, 1));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean getHasSubtypes () {
+		return true;
 	}
 
 	/**
@@ -83,7 +103,7 @@ public class SurveillanceCameraItem extends Item {
 		if (!par3World.isAirBlock (((int) blockLocation.xCoord), ((int) blockLocation.yCoord), ((int) blockLocation.zCoord))) return false;
 
 		// set block
-		par3World.setBlock (((int) blockLocation.xCoord), ((int) blockLocation.yCoord), ((int) blockLocation.zCoord), DefenseBlock.SURVEILLANCE_CAMERA, (par7 - 2), 2);
+		par3World.setBlock (((int) blockLocation.xCoord), ((int) blockLocation.yCoord), ((int) blockLocation.zCoord), DefenseBlock.SURVEILLANCE_CAMERA, ((par7 - 2) + (par1ItemStack.getItemDamage () == 1 ? 10 : 0)), 2);
 		par1ItemStack.stackSize--;
 
 		// update tile entity

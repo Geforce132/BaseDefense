@@ -206,7 +206,10 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	 * @return The rotation.
 	 */
 	public float getRotationAngle () {
-		switch (this.getBlockMetadata ()) {
+		int metadata = this.getBlockMetadata ();
+		if (metadata >= 10) metadata -= 10;
+
+		switch (metadata) {
 			case 0: return 180.0f;
 			case 1: return 0.0f;
 			case 2: return 90.0f;
@@ -244,7 +247,10 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	 * @return The detection radius.
 	 */
 	public AxisAlignedBB getCameraDetectionBounds () {
-		switch (this.getBlockMetadata ()) {
+		int metadata = this.getBlockMetadata ();
+		if (metadata >= 10) metadata -= 10;
+
+		switch (metadata) {
 			case 3: return AxisAlignedBB.getBoundingBox (this.xCoord, (this.yCoord - CAMERA_RANGE), (this.zCoord - CAMERA_RANGE), (this.xCoord + CAMERA_RANGE), this.yCoord, (this.zCoord + CAMERA_RANGE));
 			case 1: return AxisAlignedBB.getBoundingBox ((this.xCoord - CAMERA_RANGE), (this.yCoord - CAMERA_RANGE), this.zCoord, (this.xCoord + CAMERA_RANGE), this.yCoord, (this.zCoord + CAMERA_RANGE));
 			case 2: return AxisAlignedBB.getBoundingBox ((this.xCoord - CAMERA_RANGE), (this.yCoord - CAMERA_RANGE), (this.zCoord - CAMERA_RANGE), this.xCoord, this.yCoord, (this.zCoord + CAMERA_RANGE));
@@ -351,6 +357,9 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	public void writeToNBT (NBTTagCompound p_145841_1_) {
 		super.writeToNBT (p_145841_1_);
 
+		// write scanning mode
+		p_145841_1_.setBoolean ("mobScanning", this.isScanningMobs);
+
 		// store camera controller location
 		if (this.hubLocation != null) {
 			NBTTagCompound location = new NBTTagCompound ();
@@ -368,6 +377,9 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	@Override
 	public void readFromNBT (NBTTagCompound p_145839_1_) {
 		super.readFromNBT (p_145839_1_);
+
+		// get mob scanning
+		this.isScanningMobs = (p_145839_1_.hasKey ("mobScanning") && p_145839_1_.getBoolean ("mobScanning"));
 
 		// get controller location
 		if (p_145839_1_.hasKey ("hubLocation")) {

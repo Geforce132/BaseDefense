@@ -44,10 +44,13 @@ public class SurveillanceCameraTileEntitySpecialRenderer extends TileEntitySpeci
 		GL11.glTranslatef (0.5f, 1.5f, 0.5f);
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 
-		GL11.glRotated (((SurveillanceCameraTileEntity) var1).getRotationAngle (), 0f, 1f, 0f);
+		SurveillanceCameraTileEntity tileEntity = ((SurveillanceCameraTileEntity) var1);
+		System.out.println (tileEntity.getBlockMetadata ());
+
+		GL11.glRotated (tileEntity.getRotationAngle (), 0f, 1f, 0f);
 
 		GL11.glPushMatrix ();
-		this.bindTexture (new ResourceLocation ("defense", "textures/models/surveillance/camera.png"));
+		this.bindTexture (new ResourceLocation ("defense", "textures/models/surveillance/camera" + (tileEntity.isScanningMobs () ? "Mob" : "") + ".png"));
 		model.render (null, 0.0f, 0.0f, -0.1f, 0.0f, 0.0f, 0.062f, ((SurveillanceCameraTileEntity) var1).getCameraAngle (var8));
 		GL11.glPopMatrix ();
 
