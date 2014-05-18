@@ -304,17 +304,6 @@ public class SurveillanceCameraTileEntity extends TileEntity implements ISurveil
 	}
 
 	/**
-	 * Checks whether an entity lies within the scanning range.
-	 * @param coneAxis
-	 * @param origin
-	 * @param halfAperture
-	 * @return
-	 */
-	public boolean isWithinCameraBounds (Vec3 coneAxis, Vec3 origin, double halfAperture) { // Do some crazy maths. Google it ... srsly
-		return ((origin.dotProduct (coneAxis) / origin.lengthVector () / coneAxis.lengthVector ()) > Math.cos (halfAperture));
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
