@@ -82,7 +82,7 @@ public class SurveillanceCameraItemRenderer implements IItemRenderer {
 		// move
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 		GL11.glRotatef (-170.0f, 0.0f, 1.0f, 0.0f);
-		GL11.glRotatef (-20.0f, 1.0f, 0.0f, 0.0f);
+		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) GL11.glRotatef (-20.0f, 1.0f, 0.0f, 0.0f);
 		GL11.glTranslatef (-0.8f, -1.6f, 0.15f);
 
 		// rotate
@@ -103,6 +103,18 @@ public class SurveillanceCameraItemRenderer implements IItemRenderer {
 
 			// scale model down
 			GL11.glScalef (0.95f, 0.95f, 0.95f);
+		} else {
+			// fix rotation
+			GL11.glRotatef (-45.0f, 0.0f, 0.0f, 1.0f);
+
+			// fix position
+			GL11.glTranslatef (0.0f, -0.9f, 0.0f);
+
+			// fix rotation further
+			GL11.glRotatef (-45.0f, 0.0f, 1.0f, 0.0f);
+
+			// fix position further
+			GL11.glTranslatef (0.25f, 0.0f, 0.0f);
 		}
 
 		// bind texture
