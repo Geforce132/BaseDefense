@@ -79,7 +79,7 @@ public class CommonProxy {
 			"X X",
 			" X ",
 			"   ",
-			'X', Blocks.grass
+			'X', Blocks.glass
 		);
 
 		// camera
