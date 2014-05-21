@@ -61,8 +61,8 @@ public class SurveillanceCameraItemRenderer implements IItemRenderer {
 	 */
 	public void renderDroppedItem (ItemStack item, Object[] data) {
 		// correct position
-		GL11.glTranslatef (0.0f, 1.0f, 0.0f);
-		GL11.glScalef (0.8f, 0.8f, 0.8f);
+		GL11.glTranslatef (0.0f, 1.5f, 0.0f);
+		GL11.glScalef (1.2f, 1.2f, 1.2f);
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 
 		// bind texture
