@@ -18,6 +18,8 @@ package org.evilco.defense.common;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.evilco.defense.DefenseMod;
@@ -77,7 +79,7 @@ public class CommonProxy {
 			"X X",
 			" X ",
 			"   ",
-			'X', Block.getBlockFromName ("glass")
+			'X', Blocks.grass
 		);
 
 		// camera
@@ -86,8 +88,8 @@ public class CommonProxy {
 			"XXX",
 			"XYZ",
 			"XXX",
-			'X', Block.getBlockFromName ("iron_block"),
-			'Y', Item.getItemById (368), // FIXME: Use item names here
+			'X', Blocks.iron_block,
+			'Y', Items.ender_pearl,
 			'Z', DefenseItem.GENERIC_LENS
 		);
 
@@ -110,9 +112,9 @@ public class CommonProxy {
 			" Y ",
 			"XZX",
 			"XXX",
-			'Y', Item.getItemById (280),
-			'X', Item.getItemById (265),
-			'Z', Item.getItemById (368)
+			'Y', Items.stick,
+			'X', Items.iron_ingot,
+			'Z', Items.ender_pearl
 		);
 
 		// ai processor
@@ -121,9 +123,9 @@ public class CommonProxy {
 			"ZXZ",
 			"XYX",
 			"ZXZ",
-			'X', Item.getItemById (265),
-			'Y', Item.getItemById (331),
-			'Z', Item.getItemById (280)
+			'X', Items.iron_ingot,
+			'Y', Items.redstone,
+			'Z', Items.stick
 		);
 
 		// security bot
@@ -133,9 +135,9 @@ public class CommonProxy {
 			"XYX",
 			"XZX",
 			'W', DefenseItem.GENERIC_WIRELESS_TUNER,
-			'X', Block.getBlockFromName ("iron_block"),
+			'X', Blocks.iron_block,
 			'Y', DefenseItem.GENERIC_AI_PROCESSOR,
-			'Z', Item.getItemById (328)
+			'Z', Items.minecart
 		);
 
 		// defense station
@@ -144,7 +146,7 @@ public class CommonProxy {
 			"XZX",
 			"XYX",
 			"XXX",
-			'X', Block.getBlockFromName ("iron_block"),
+			'X', Blocks.iron_block,
 			'Y', DefenseItem.GENERIC_AI_PROCESSOR,
 			'Z', DefenseItem.GENERIC_WIRELESS_TUNER
 		);
