@@ -39,11 +39,6 @@ import java.util.List;
 public class SurveillanceCameraItem extends Item {
 
 	/**
-	 * Stores all item icons.
-	 */
-	protected IIcon[] icons = new IIcon[2];
-
-	/**
 	 * Constructs a new SurveillanceCameraItem.
 	 */
 	public SurveillanceCameraItem () {
@@ -71,14 +66,6 @@ public class SurveillanceCameraItem extends Item {
 	@Override
 	public boolean getHasSubtypes () {
 		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public IIcon getIconFromDamage (int par1) {
-		return this.icons[par1];
 	}
 
 	/**
@@ -131,16 +118,5 @@ public class SurveillanceCameraItem extends Item {
 
 		// use item
 		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void registerIcons (IIconRegister par1IconRegister) {
-		super.registerIcons (par1IconRegister);
-
-		this.icons[0] = par1IconRegister.registerIcon ("defense:surveillance/surveillanceCamera");
-		this.icons[1] = par1IconRegister.registerIcon ("defense:surveillance/surveillanceCameraMob");
 	}
 }

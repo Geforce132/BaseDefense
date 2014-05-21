@@ -41,7 +41,6 @@ public class DefenseStationItem extends Item {
 
 		this.setMaxStackSize (1);
 		this.setMaxDamage (0);
-		this.setTextureName ("defense:generic/defenseStation");
 
 		this.setCreativeTab (DefenseCreativeTabs.SURVEILLANCE);
 		this.setUnlocalizedName (Strings.ITEM_GENERIC_DEFENSE_STATION);

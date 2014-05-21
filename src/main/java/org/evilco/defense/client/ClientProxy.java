@@ -17,10 +17,15 @@ package org.evilco.defense.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.client.MinecraftForgeClient;
 import org.evilco.defense.client.renderer.entity.SecurityBotRenderer;
+import org.evilco.defense.client.renderer.item.DefenseStationItemRenderer;
+import org.evilco.defense.client.renderer.item.SecurityBotItemRenderer;
+import org.evilco.defense.client.renderer.item.SurveillanceCameraItemRenderer;
 import org.evilco.defense.client.renderer.tile.generic.DefenseStationTileEntitySpecialRenderer;
 import org.evilco.defense.client.renderer.tile.surveillance.SurveillanceCameraTileEntitySpecialRenderer;
 import org.evilco.defense.common.CommonProxy;
+import org.evilco.defense.common.DefenseItem;
 import org.evilco.defense.common.entity.SecurityBotEntity;
 import org.evilco.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.defense.common.tile.surveillance.SurveillanceCameraTileEntity;
@@ -44,5 +49,10 @@ public class ClientProxy extends CommonProxy {
 
 		// register entity renderers
 		RenderingRegistry.registerEntityRenderingHandler (SecurityBotEntity.class, new SecurityBotRenderer ());
+
+		// register item renderers
+		MinecraftForgeClient.registerItemRenderer (DefenseItem.SURVEILLANCE_SECURITY_BOT, new SecurityBotItemRenderer ());
+		MinecraftForgeClient.registerItemRenderer (DefenseItem.GENERIC_DEFENSE_STATION, new DefenseStationItemRenderer ());
+		MinecraftForgeClient.registerItemRenderer (DefenseItem.SURVEILLANCE_CAMERA, new SurveillanceCameraItemRenderer ());
 	}
 }

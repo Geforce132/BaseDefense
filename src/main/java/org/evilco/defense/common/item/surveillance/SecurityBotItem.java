@@ -40,7 +40,6 @@ public class SecurityBotItem extends Item {
 
 		this.setMaxStackSize (1);
 		this.setMaxDamage (0);
-		this.setTextureName ("defense:surveillance/securityBot");
 
 		this.setCreativeTab (DefenseCreativeTabs.SURVEILLANCE);
 		this.setUnlocalizedName (Strings.ITEM_SURVEILLANCE_SECURITY_BOT);
