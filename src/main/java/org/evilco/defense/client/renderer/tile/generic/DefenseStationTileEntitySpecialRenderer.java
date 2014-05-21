@@ -44,7 +44,7 @@ public class DefenseStationTileEntitySpecialRenderer extends TileEntitySpecialRe
 		GL11.glRotated (((DefenseStationTileEntity) var1).getRotationAngle (), 0f, 1f, 0f);
 
 		GL11.glPushMatrix ();
-		this.bindTexture (new ResourceLocation ("defense", "textures/models/generic/defenseStation.png"));
+		this.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation.png"));
 		model.render (null, 0.0f, 0.0f, -0.1f, 0.0f, 0.0f, 0.062f);
 		GL11.glPopMatrix ();
 
