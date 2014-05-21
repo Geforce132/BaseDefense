@@ -97,7 +97,7 @@ public class CommonProxy {
 		GameRegistry.addShapelessRecipe (
 			new ItemStack (DefenseItem.SURVEILLANCE_CAMERA, 1, 1),
 			new ItemStack (DefenseItem.SURVEILLANCE_CAMERA, 1, 0),
-			new ItemStack (Item.getItemById (352))
+			new ItemStack (Items.bone)
 		);
 
 		// camera (normal)
