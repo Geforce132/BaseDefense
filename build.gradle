@@ -20,7 +20,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0.1-A2"
+version = "1.0.1-SNAPSHOT"
 group= "org.evilco" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "defense"
 
