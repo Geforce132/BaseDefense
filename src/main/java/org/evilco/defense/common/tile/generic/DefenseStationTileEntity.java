@@ -29,7 +29,6 @@ import net.minecraftforge.common.util.Constants;
 import org.evilco.defense.common.entity.SecurityBotEntity;
 import org.evilco.defense.common.tile.network.*;
 import org.evilco.defense.util.Location;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
 
@@ -255,7 +254,7 @@ public class DefenseStationTileEntity extends TileEntity implements ISurveillanc
 	 */
 	@Override
 	public void setOwner (UUID owner) {
-		throw new NotImplementedException ();
+		throw new UnsupportedOperationException ();
 	}
 
 	/**
