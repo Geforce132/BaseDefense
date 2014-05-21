@@ -89,7 +89,7 @@ public class CommonProxy {
 			"XYZ",
 			"XXX",
 			'X', Blocks.iron_block,
-			'Y', Items.ender_pearl,
+			'Y', DefenseItem.GENERIC_WIRELESS_TUNER,
 			'Z', DefenseItem.GENERIC_LENS
 		);
 
