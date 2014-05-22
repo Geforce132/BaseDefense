@@ -52,7 +52,7 @@ public class DefenseStationItem extends Item {
 	@Override
 	public boolean onItemUse (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		// skip client version
-		if (FMLCommonHandler.instance ().getEffectiveSide () == Side.CLIENT) return false;
+		if (par3World.isRemote) return true;
 
 		// check whether players may edit the block
 		if (!par2EntityPlayer.canPlayerEdit (par4, par5, par6, par7, par1ItemStack)) return false;

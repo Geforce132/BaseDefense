@@ -25,6 +25,9 @@ import org.evilco.defense.common.Strings;
  */
 public class GenericLensItem extends Item {
 
+	/**
+	 * Constructs a new GenericLensItem.
+	 */
 	public GenericLensItem () {
 		super ();
 
