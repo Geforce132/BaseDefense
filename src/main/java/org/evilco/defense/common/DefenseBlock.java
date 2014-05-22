@@ -16,6 +16,7 @@
 package org.evilco.defense.common;
 
 import net.minecraft.block.Block;
+import org.evilco.defense.common.block.generic.BarbedWirePaneBlock;
 import org.evilco.defense.common.block.generic.DefenseStationBlock;
 import org.evilco.defense.common.block.surveillance.SurveillanceCameraBlock;
 
@@ -26,6 +27,7 @@ import org.evilco.defense.common.block.surveillance.SurveillanceCameraBlock;
 public class DefenseBlock {
 
 	// Generic blocks
+	public static final Block BARBED_WIRE_FENCE = new BarbedWirePaneBlock ();
 	public static final Block DEFENSE_STATION = new DefenseStationBlock ();
 
 	// Surveillance blocks

@@ -39,6 +39,7 @@ public class CommonProxy {
 	 */
 	public void registerBlocks () {
 		GameRegistry.registerBlock (DefenseBlock.DEFENSE_STATION, "defense_station_block");
+		GameRegistry.registerBlock (DefenseBlock.BARBED_WIRE_FENCE, "barbed_wire_fence");
 
 		GameRegistry.registerBlock (DefenseBlock.SURVEILLANCE_CAMERA, "surveillance_camera_block");
 	}
