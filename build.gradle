@@ -24,8 +24,14 @@ version = "1.0.1-SNAPSHOT"
 group= "org.evilco" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "defense"
 
+// Bamboo
+if (System.getenv ()['bamboo.buildNumber']) version += '-bamboo' + System.getenv ()['bamboo.buildNumber'];
+
+// JamCraft
+if (System.getenv ()['BUILD_NUMBER']) version += '-jam' + System.getenv ()['BUILD_NUMBER'];
+
 minecraft {
-	version = "1.7.2-10.12.1.1060"
+	version = "1.7.2-10.12.1.1097"
 	assetDir = "eclipse/assets"
 }
 
@@ -37,7 +43,7 @@ processResources {
 	// replace stuff in mcmod.info, nothing else
 		from(sourceSets.main.resources.srcDirs) {
 		include 'mcmod.info'
-                
+
 		// replace version and mcversion
 		expand 'version':project.version, 'mcversion':project.minecraft.version
 	}
