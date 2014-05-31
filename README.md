@@ -11,7 +11,13 @@ to the contribution section for more information and notices).
 Compiling
 ---------
 
-<Insert forge gradle manual here>
+This modification uses [Gradle](http://www.gradle.org/) to automatically compile with the correct dependencies and
+settings. To build the modification you may use the included wrapper which will make sure you're using either a local
+installation of Gradle or a temporary installation:
+
+	gradlew build
+
+Alternatively you may issue ```gradle build```, if you have a local installation of Gradle in your path.
 
 Contributing
 ------------
