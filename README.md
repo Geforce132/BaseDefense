@@ -22,9 +22,6 @@ Alternatively you may issue ```gradle build```, if you have a local installation
 Contributing
 ------------
 
-NOTE: No contributions will be accepted during modjam (as per the modjam rules). The following
-paragraph does only apply after modjam 4 has ended!
-
 We happily accept contributions. The best way to do this is to fork Simple Event
 on GitHub, add your changes, and then submit a pull request. We'll look at it,
 make comments, and merge it into our master if everything works out.
