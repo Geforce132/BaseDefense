@@ -31,7 +31,7 @@ if (System.getenv ()['bamboo.buildNumber']) version += '-bamboo' + System.getenv
 if (System.getenv ()['BUILD_NUMBER']) version += '-jam' + System.getenv ()['BUILD_NUMBER'];
 
 minecraft {
-	version = "1.7.2-10.12.1.1097"
+	version = "1.7.2-10.12.1.1103"
 	assetDir = "eclipse/assets"
 }
 
