@@ -22,7 +22,7 @@ import org.evilco.mc.defense.common.util.Location;
  * @auhtor Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
-public interface ISurveillanceNetworkSensor {
+public interface ISurveillanceNetworkSensor extends ISurveillanceNetworkEntity {
 
 	/**
 	 * Checks whether a sensor may identify the entity.
