@@ -22,7 +22,7 @@ Alternatively you may issue ```gradle build```, if you have a local installation
 Contributing
 ------------
 
-We happily accept contributions. The best way to do this is to fork Simple Event
+We happily accept contributions. The best way to do this is to fork Base Defense
 on GitHub, add your changes, and then submit a pull request. We'll look at it,
 make comments, and merge it into our master if everything works out.
 
