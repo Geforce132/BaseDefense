@@ -15,7 +15,6 @@
  */
 package org.evilco.mc.defense.common;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -28,10 +27,9 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import org.evilco.mc.defense.DefenseModification;
-import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.IModificationProxy;
+import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.event.CapeHandler;
-import org.evilco.mc.defense.common.event.CraftingHandler;
 import org.evilco.mc.defense.common.gui.DefenseGuiHandler;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.network.DefenseChannelHandler;

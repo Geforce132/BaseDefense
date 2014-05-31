@@ -15,7 +15,6 @@
  */
 package org.evilco.mc.defense.api.network.surveillance;
 
-import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.entity.Entity;
 import org.evilco.mc.defense.common.util.Location;
 

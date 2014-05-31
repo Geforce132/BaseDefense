@@ -20,7 +20,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import org.evilco.defense.common.DefenseCreativeTabs;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 

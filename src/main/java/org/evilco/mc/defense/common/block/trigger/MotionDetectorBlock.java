@@ -19,11 +19,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.evilco.mc.defense.common.DefenseNames;
-import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 import org.evilco.mc.defense.common.tile.trigger.MotionDetectorTileEntity;
 
 /**

@@ -16,7 +16,6 @@
 package org.evilco.mc.defense.common.item.generic;
 
 import org.evilco.mc.defense.common.DefenseNames;
-import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>

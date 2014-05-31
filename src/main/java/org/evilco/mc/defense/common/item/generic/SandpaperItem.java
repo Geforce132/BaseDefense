@@ -15,13 +15,10 @@
  */
 package org.evilco.mc.defense.common.item.generic;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
-
-import java.util.List;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>

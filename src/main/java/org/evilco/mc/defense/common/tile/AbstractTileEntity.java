@@ -15,8 +15,6 @@
  */
 package org.evilco.mc.defense.common.tile;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.tileentity.TileEntity;
 
 /**

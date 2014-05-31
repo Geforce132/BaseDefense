@@ -18,7 +18,6 @@ package org.evilco.mc.defense.api.network.surveillance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import org.evilco.mc.defense.common.util.Location;
 
 import java.util.Map;
 import java.util.UUID;

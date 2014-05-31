@@ -16,8 +16,6 @@
 package org.evilco.mc.defense.common.tile.generic;
 
 import com.google.common.collect.ImmutableMap;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,9 +25,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.util.Constants;
-import org.evilco.defense.common.tile.network.ISurveillanceNetworkClient;
 import org.evilco.mc.defense.DefenseModification;
 import org.evilco.mc.defense.api.network.identification.DetectedEntity;
 import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkAuthority;

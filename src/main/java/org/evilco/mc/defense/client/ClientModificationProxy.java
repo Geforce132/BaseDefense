@@ -16,14 +16,12 @@
 package org.evilco.mc.defense.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.evilco.mc.defense.client.renderer.item.generic.DefenseStationItemRenderer;
 import org.evilco.mc.defense.client.renderer.item.trigger.MotionDetectorItemRenderer;
 import org.evilco.mc.defense.client.renderer.tile.generic.DefenseStationTileEntityRenderer;
 import org.evilco.mc.defense.client.renderer.tile.trigger.MotionDetectorTileEntityRenderer;
 import org.evilco.mc.defense.common.CommonModificationProxy;
-import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.mc.defense.common.tile.trigger.MotionDetectorTileEntity;

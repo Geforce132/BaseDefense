@@ -17,9 +17,7 @@ package org.evilco.mc.defense.common.event;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
-import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import org.evilco.mc.defense.common.item.IReusableItem;
 
 /**
  * Stores all modification related blocks.

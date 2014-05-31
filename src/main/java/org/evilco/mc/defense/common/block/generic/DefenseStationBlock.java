@@ -25,7 +25,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.evilco.mc.defense.DefenseModification;
 import org.evilco.mc.defense.common.DefenseNames;
-import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 
 /**

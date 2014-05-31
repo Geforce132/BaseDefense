@@ -17,14 +17,12 @@ package org.evilco.mc.defense.common.item.generic;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkAuthority;
-import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkEntity;
-import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.DefenseNames;
+import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 
 /**
