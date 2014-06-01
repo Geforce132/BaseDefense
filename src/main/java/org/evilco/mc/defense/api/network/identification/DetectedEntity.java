@@ -106,4 +106,12 @@ public class DetectedEntity {
 	public void setIdentity (EntityIdentity identity) {
 		this.identity = identity;
 	}
+
+	/**
+	 * Sets the entity type.
+	 * @param type The entity type.
+	 */
+	public void setType (EntityType type) {
+		this.type = type;
+	}
 }
