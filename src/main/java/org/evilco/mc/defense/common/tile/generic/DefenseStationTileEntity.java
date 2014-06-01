@@ -73,6 +73,11 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 	protected List<Location> connections = new ArrayList<Location> ();
 
 	/**
+	 * Stores all detected intruders.
+	 */
+	protected Map<Integer, DetectedEntity> detectedIntruders = new HashMap<Integer, DetectedEntity> ();
+
+	/**
 	 * Stores the current alarm state.
 	 */
 	protected SurveillanceNetworkAlarmState state = SurveillanceNetworkAlarmState.GREEN;
@@ -261,6 +266,23 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 	 * {@inheritDoc}
 	 */
 	@Override
+	public DetectedEntity getDetectedEntity (int hashCode) {
+		if (!this.detectedIntruders.containsKey (hashCode)) return null;
+		return this.detectedIntruders.get (hashCode);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public DetectedEntity getDetectedEntity (Entity entity) {
+		return this.getDetectedEntity (entity.hashCode ());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public Location getLocation () {
 		return (new Location (this.xCoord, this.yCoord, this.zCoord));
 	}
@@ -420,6 +442,13 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 		// disabled?
 		if (this.getAlarmState () == SurveillanceNetworkAlarmState.OFFLINE) return;
 
+		// create wrapper
+		Location intruderLocation = new Location (intruder);
+		DetectedEntity detected = new DetectedEntity (intruder, intruderLocation);
+
+		// add to intruder list
+		this.detectedIntruders.put (intruder.hashCode (), detected);
+
 		// try to find type and identify entities
 		for (ISurveillanceNetworkEntity current : this.activeConnections) {
 			// skip non-sensors
@@ -427,10 +456,6 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 
 			// get sensor
 			ISurveillanceNetworkSensor sensor = ((ISurveillanceNetworkSensor) current);
-
-			// create wrapper
-			Location intruderLocation = new Location (intruder);
-			DetectedEntity detected = new DetectedEntity (intruder, intruderLocation);
 
 			// check typing
 			if (this.tier >= 1 && sensor.canDeclareType (intruder, intruderLocation)) sensor.setActive (true); // TODO: Add check settings
@@ -601,8 +626,9 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 		else
 			this.stateTimeout = 0;
 
-		// disable all sensors
+		// reset state
 		if (this.state == SurveillanceNetworkAlarmState.GREEN) {
+			// disable all sensors
 			for (ISurveillanceNetworkEntity entity : this.activeConnections) {
 				// skip non-sensors
 				if (!(entity instanceof ISurveillanceNetworkSensor)) continue; // TODO: Add support for response entities
@@ -613,6 +639,9 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 				// de-activate
 				if (sensor.getActive ()) sensor.setActive (false);
 			}
+
+			// delete intruder list
+			this.detectedIntruders.clear ();
 		}
 	}
 

@@ -18,6 +18,7 @@ package org.evilco.mc.defense.api.network.surveillance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import org.evilco.mc.defense.api.network.identification.DetectedEntity;
 
 import java.util.Map;
 import java.util.UUID;
@@ -73,6 +74,20 @@ public interface ISurveillanceNetworkAuthority extends ISurveillanceNetworkEntit
 	 * @return The blacklist map.
 	 */
 	public Map<UUID, String> getBlacklist ();
+
+	/**
+	 * Returns a detected entity instance.
+	 * @param hashCode The hash code of the original entity.
+	 * @return A detected entity (null if none can be found).
+	 */
+	public DetectedEntity getDetectedEntity (int hashCode);
+
+	/**
+	 * Returns a detected entity instance.
+	 * @param entity The original entity.
+	 * @return A detected entity (null if none can be found).
+	 */
+	public DetectedEntity getDetectedEntity (Entity entity);
 
 	/**
 	 * Returns the complete list of whitelisted users.
