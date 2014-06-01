@@ -15,7 +15,6 @@
  */
 package org.evilco.mc.defense.common.tile.machine;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,7 +22,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import org.evilco.mc.defense.common.tile.AbstractTileEntity;
 import org.evilco.mc.defense.common.tile.IRotateableTileEntity;
 
