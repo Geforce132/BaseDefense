@@ -49,7 +49,7 @@ public class DetectedEntity {
 	 * @param entity The entity.
 	 * @param identity The identity.
 	 * @param lastKnownLocation The last known location.
-	 * @param type The entity type
+	 * @param type The entity type.
 	 */
 	public DetectedEntity (Entity entity, Location lastKnownLocation, EntityType type, EntityIdentity identity) {
 		this.entity = entity;
@@ -100,8 +100,8 @@ public class DetectedEntity {
 	}
 
 	/**
-	 * Sets
-	 * @param identity
+	 * Sets a new entity identity.
+	 * @param identity The identity.
 	 */
 	public void setIdentity (EntityIdentity identity) {
 		this.identity = identity;
