@@ -25,28 +25,29 @@ import net.minecraft.entity.Entity;
  */
 public class MotionDetectorModel extends ModelBase {
 	//fields
-	ModelRenderer Base;
-	ModelRenderer Extension;
+	ModelRenderer base;
+	ModelRenderer extension;
 
 	/**
 	 * Constructs a new MovementSensorModel instance.
 	 */
 	public MotionDetectorModel () {
-		textureWidth = 32;
-		textureHeight = 32;
+		this.textureWidth = 32;
+		this.textureHeight = 32;
 
-		Base = new ModelRenderer (this, 0, 6);
-		Base.addBox (-2F, -1F, -1F, 4, 2, 1);
-		Base.setRotationPoint (0F, 16F, 8F);
-		Base.setTextureSize (32, 32);
-		Base.mirror = true;
-		setRotation (Base, 0F, 0F, 0F);
-		Extension = new ModelRenderer (this, 0, 0);
-		Extension.addBox (-4F, -2F, -2F, 8, 4, 2);
-		Extension.setRotationPoint (0F, 16F, 7F);
-		Extension.setTextureSize (32, 32);
-		Extension.mirror = true;
-		setRotation (Extension, 0F, 0F, 0F);
+		this.base = new ModelRenderer (this, 0, 6);
+		this.base.addBox (-2F, -1F, -1F, 4, 2, 1);
+		this.base.setRotationPoint (0F, 16F, 8F);
+		this.base.setTextureSize (32, 32);
+		this.base.mirror = true;
+		this.setRotation (this.base, 0F, 0F, 0F);
+
+		this.extension = new ModelRenderer (this, 0, 0);
+		this.extension.addBox (-4F, -2F, -2F, 8, 4, 2);
+		this.extension.setRotationPoint (0F, 16F, 7F);
+		this.extension.setTextureSize (32, 32);
+		this.extension.mirror = true;
+		this.setRotation (this.extension, 0F, 0F, 0F);
 	}
 
 	/**
@@ -54,9 +55,10 @@ public class MotionDetectorModel extends ModelBase {
 	 */
 	public void render (Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render (entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles (f, f1, f2, f3, f4, f5, entity);
-		Base.render (f5);
-		Extension.render (f5);
+		this.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
+
+		this.base.render (f5);
+		this.extension.render (f5);
 	}
 
 	/**
