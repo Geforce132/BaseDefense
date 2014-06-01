@@ -44,7 +44,7 @@ public class Location {
 	public double zCoord;
 
 	/**
-	 * Constructs a new Location.
+	 * Constructs a new Location instance.
 	 * @param x The X coordinate.
 	 * @param y The Y coordinate.
 	 * @param z The Z coordinate.
@@ -56,7 +56,7 @@ public class Location {
 	}
 
 	/**
-	 * Constructs a new Location.
+	 * Constructs a new Location instance.
 	 * @param entity The entity to copy a position from.
 	 */
 	public Location (Entity entity) {
