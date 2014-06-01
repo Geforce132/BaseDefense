@@ -18,6 +18,7 @@ package org.evilco.mc.defense.common.event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.item.ItemStack;
+import org.evilco.mc.defense.common.item.DefenseItem;
 
 /**
  * Stores all modification related blocks.
@@ -32,19 +33,7 @@ public class CraftingHandler {
 	 */
 	@SubscribeEvent
 	public void onItemCrafted (PlayerEvent.ItemCraftedEvent event) {
-		// get crafting matrix
-		for (int i = 0; i < event.craftMatrix.getSizeInventory (); i++) {
-			// get stack
-			ItemStack stack = event.craftMatrix.getStackInSlot (i);
-
-			// skip empty stacks
-			if (stack == null) continue;
-
-			// check item
-			// if (!(stack.getItem () instanceof IReusableItem) && !(stack.getItem () instanceof ItemBucket)) continue;
-
-			// add item back to grid
-			event.craftMatrix.setInventorySlotContents (i, new ItemStack (stack.getItem (), stack.stackSize, (stack.getItemDamage () + 1)));
-		}
+		// motion detector (copy damage)
+		if (event.crafting.getItem ().equals (DefenseItem.TRIGGER_MOTION_DETECTOR)) event.crafting.setItemDamage (event.craftMatrix.getStackInSlot (5).getItemDamage ());
 	}
 }

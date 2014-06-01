@@ -15,6 +15,7 @@
  */
 package org.evilco.mc.defense.common;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -30,6 +31,7 @@ import org.evilco.mc.defense.DefenseModification;
 import org.evilco.mc.defense.IModificationProxy;
 import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.event.CapeHandler;
+import org.evilco.mc.defense.common.event.CraftingHandler;
 import org.evilco.mc.defense.common.gui.DefenseGuiHandler;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.network.DefenseChannelHandler;
@@ -141,6 +143,8 @@ public class CommonModificationProxy implements IModificationProxy {
 	 */
 	public void registerEvents () {
 		MinecraftForge.EVENT_BUS.register (new CapeHandler ());
+
+		FMLCommonHandler.instance ().bus ().register (new CraftingHandler ());
 	}
 
 	/**
@@ -308,6 +312,18 @@ public class CommonModificationProxy implements IModificationProxy {
 			"XYX",
 			'X', Items.iron_ingot,
 			'Y', DefenseItem.GENERIC_IRON_WIRE
+		);
+
+		// redstone lamp + wireless tuner + iron ingot + lens -> motion detector
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.TRIGGER_MOTION_DETECTOR, 1),
+			"XXX",
+			"YZW",
+			"XXX",
+			'X', Items.iron_ingot,
+			'Y', DefenseItem.GENERIC_WIRELESS_TUNER,
+			'Z', Blocks.redstone_lamp,
+			'W', new ItemStack (DefenseItem.GENERIC_LENS, 1, OreDictionary.WILDCARD_VALUE)
 		);
 
 		// add rolling mill recipes
