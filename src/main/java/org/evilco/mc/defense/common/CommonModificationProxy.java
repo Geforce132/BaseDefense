@@ -34,6 +34,7 @@ import org.evilco.mc.defense.common.gui.DefenseGuiHandler;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.network.DefenseChannelHandler;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
+import org.evilco.mc.defense.common.tile.machine.RollingMillTileEntity;
 import org.evilco.mc.defense.common.tile.trigger.MotionDetectorTileEntity;
 
 import java.util.EnumMap;
@@ -102,6 +103,9 @@ public class CommonModificationProxy implements IModificationProxy {
 	public void registerBlocks () {
 		GameRegistry.registerBlock (DefenseBlock.GENERIC_BARBED_WIRE_PANE, DefenseNames.REGISTRATION_BLOCK_GENERIC_BARBED_WIRE_FENCE);
 		GameRegistry.registerBlock (DefenseBlock.GENERIC_DEFENSE_STATION, DefenseNames.REGISTRATION_BLOCK_GENERIC_DEFENSE_STATION);
+
+		GameRegistry.registerBlock (DefenseBlock.MACHINE_ROLLING_MILL, DefenseNames.REGISTRATION_BLOCK_MACHINE_ROLLING_MILL);
+
 		GameRegistry.registerBlock (DefenseBlock.TRIGGER_MOTION_DETECTOR, DefenseNames.REGISTRATION_BLOCK_TRIGGER_MOTION_DETECTOR);
 	}
 
@@ -149,6 +153,8 @@ public class CommonModificationProxy implements IModificationProxy {
 		GameRegistry.registerItem (DefenseItem.GENERIC_LENS, DefenseNames.REGISTRATION_ITEM_GENERIC_LENS);
 		GameRegistry.registerItem (DefenseItem.GENERIC_LENS_FISHEYE, DefenseNames.REGISTRATION_ITEM_GENERIC_LENS_FISHEYE);
 		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, DefenseNames.REGISTRATION_ITEM_GENERIC_WIRELESS_TUNER);
+
+		GameRegistry.registerItem (DefenseItem.MACHINE_ROLLING_MILL, DefenseNames.REGISTRATION_ITEM_MACHINE_ROLLING_MILL);
 
 		GameRegistry.registerItem (DefenseItem.TRIGGER_MOTION_DETECTOR, DefenseNames.REGISTRATION_ITEM_TRIGGER_MOTION_DETECTOR);
 	}
@@ -292,6 +298,9 @@ public class CommonModificationProxy implements IModificationProxy {
 			new ItemStack (DefenseItem.GENERIC_LENS_FISHEYE, 1, 80),
 			Items.water_bucket
 		);
+
+		// add rolling mill recipes
+		RollingMillTileEntity.addRecipe (Items.iron_ingot, new ItemStack (DefenseBlock.GENERIC_BARBED_WIRE_PANE, 1));
 	}
 
 	/**
@@ -299,6 +308,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	 */
 	public void registerTileEntities () {
 		GameRegistry.registerTileEntity (DefenseStationTileEntity.class, DefenseNames.REGISTRATION_TILE_ENTITY_GENERIC_DEFENSE_STATION);
+		GameRegistry.registerTileEntity (RollingMillTileEntity.class, DefenseNames.REGISTRATION_TILE_ENTITY_MACHINE_ROLLING_MILL);
 		GameRegistry.registerTileEntity (MotionDetectorTileEntity.class, DefenseNames.REGISTRATION_TILE_ENTITY_TRIGGER_MOTION_DETECTOR);
 	}
 }
