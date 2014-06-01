@@ -398,6 +398,22 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 	 * {@inheritDoc}
 	 */
 	@Override
+	public boolean isKnownIntruder (int hashCode) {
+		return this.detectedIntruders.containsKey (hashCode);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isKnownIntruder (Entity entity) {
+		return this.isKnownIntruder (entity.hashCode ());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public boolean isValidAttackTarget (EntityLivingBase entity) {
 		// allow attack to everybody else
 		if (!(entity instanceof EntityPlayer)) return true;

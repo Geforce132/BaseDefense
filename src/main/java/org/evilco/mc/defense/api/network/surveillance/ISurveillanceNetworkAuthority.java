@@ -111,6 +111,20 @@ public interface ISurveillanceNetworkAuthority extends ISurveillanceNetworkEntit
 	public boolean isBlacklisted (EntityPlayer player);
 
 	/**
+	 * Checks whether the specified intruder is already known.
+	 * @param hashCode The hash code of the original entity.
+	 * @return True if the intruder is already known.
+	 */
+	public boolean isKnownIntruder (int hashCode);
+
+	/**
+	 * Checks whether the specified intruder is already known.
+	 * @param entity The original entity.
+	 * @return True if the intruder is already known.
+	 */
+	public boolean isKnownIntruder (Entity entity);
+
+	/**
 	 * Checks whether the specified entity is a valid attack target.
 	 * @param entity The entity.
 	 * @return True if the entity is a valid target.
