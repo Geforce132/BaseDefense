@@ -27,6 +27,7 @@ import org.evilco.mc.defense.common.item.trigger.MotionDetectorItem;
  */
 public class DefenseItem {
 	public static final Item GENERIC_DEFENSE_STATION = new DefenseStationItem ();
+	public static final Item GENERIC_IRON_WIRE = new IronWireItem ();
 	public static final Item GENERIC_LENS = new LensItem ();
 	public static final Item GENERIC_LENS_FISHEYE = new FisheyeLensItem ();
 	public static final Item GENERIC_SANDPAPER = new SandpaperItem ();

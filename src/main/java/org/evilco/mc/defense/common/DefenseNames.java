@@ -40,6 +40,7 @@ public class DefenseNames {
 
 	// ITEM START
 	public static final String ITEM_GENERIC_DEFENSE_STATION = PREFIX + "generic.defenseStation";
+	public static final String ITEM_GENERIC_IRON_WIRE = PREFIX + "generic.ironWire";
 	public static final String ITEM_GENERIC_LENS = PREFIX + "generic.lens";
 	public static final String ITEM_GENERIC_LENS_FISHEYE = PREFIX + "generic.lens.fisheye";
 	public static final String ITEM_GENERIC_SANDPAPER = PREFIX + "generic.sandpaper";
@@ -58,6 +59,7 @@ public class DefenseNames {
 	public static final String REGISTRATION_BLOCK_TRIGGER_MOTION_DETECTOR = "motion_detector_block";
 
 	public static final String REGISTRATION_ITEM_GENERIC_DEFENSE_STATION = "defense_station";
+	public static final String REGISTRATION_ITEM_GENERIC_IRON_WIRE = "iron_wire";
 	public static final String REGISTRATION_ITEM_GENERIC_LENS = "lens";
 	public static final String REGISTRATION_ITEM_GENERIC_LENS_FISHEYE = "lens_fisheye";
 	public static final String REGISTRATION_ITEM_GENERIC_SANDPAPER = "sandpaper";

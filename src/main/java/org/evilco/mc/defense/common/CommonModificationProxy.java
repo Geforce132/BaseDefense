@@ -148,6 +148,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	 */
 	public void registerItems () {
 		GameRegistry.registerItem (DefenseItem.GENERIC_DEFENSE_STATION, DefenseNames.REGISTRATION_ITEM_GENERIC_DEFENSE_STATION);
+		GameRegistry.registerItem (DefenseItem.GENERIC_IRON_WIRE, DefenseNames.REGISTRATION_ITEM_GENERIC_IRON_WIRE);
 		GameRegistry.registerItem (DefenseItem.GENERIC_SANDPAPER, DefenseNames.REGISTRATION_ITEM_GENERIC_SANDPAPER);
 		GameRegistry.registerItem (DefenseItem.GENERIC_SANDPAPER_DIAMOND, DefenseNames.REGISTRATION_ITEM_GENERIC_SANDPAPER_DIAMOND);
 		GameRegistry.registerItem (DefenseItem.GENERIC_LENS, DefenseNames.REGISTRATION_ITEM_GENERIC_LENS);
@@ -299,8 +300,18 @@ public class CommonModificationProxy implements IModificationProxy {
 			Items.water_bucket
 		);
 
+		// iron ingot + iron wire -> barbed wire fence
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseBlock.GENERIC_BARBED_WIRE_PANE, 1),
+			"XYX",
+			"XYX",
+			"XYX",
+			'X', Items.iron_ingot,
+			'Y', DefenseItem.GENERIC_IRON_WIRE
+		);
+
 		// add rolling mill recipes
-		RollingMillTileEntity.addRecipe (Items.iron_ingot, new ItemStack (DefenseBlock.GENERIC_BARBED_WIRE_PANE, 1));
+		RollingMillTileEntity.addRecipe (Items.iron_ingot, new ItemStack (DefenseItem.GENERIC_IRON_WIRE, 4));
 	}
 
 	/**
