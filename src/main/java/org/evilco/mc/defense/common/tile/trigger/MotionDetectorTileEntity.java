@@ -349,7 +349,7 @@ public class MotionDetectorTileEntity extends AbstractTileEntity implements IRot
 		Vec3 coneAxis = this.worldObj.getWorldVec3Pool ().getVecFromPool ((coneBase.xCoord - coneApex.xCoord), (coneBase.yCoord - coneApex.yCoord), (coneBase.zCoord - coneApex.zCoord));
 
 		// notify authority
-		for (EntityLivingBase entity : entities) {
+		for (Entity entity : entities) {
 			// skip non living
 			if (!(entity instanceof EntityLivingBase) && !(entity instanceof EntityPlayer)) continue;
 
