@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 /**
@@ -96,6 +97,15 @@ public class Location {
 
 		// construct location
 		return (new Location (x, y, z));
+	}
+
+	/**
+	 * Returns the vector representation of this location.
+	 * @param world The world to create the vector for.
+	 * @return The vector.
+	 */
+	public Vec3 toVector (World world) {
+		return world.getWorldVec3Pool ().getVecFromPool (this.xCoord, this.yCoord, this.zCoord);
 	}
 
 	/**
