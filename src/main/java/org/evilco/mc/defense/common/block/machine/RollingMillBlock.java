@@ -19,11 +19,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.evilco.mc.defense.common.DefenseNames;
+import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.tile.machine.RollingMillTileEntity;
+
+import java.util.Random;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>
@@ -47,6 +53,22 @@ public class RollingMillBlock extends Block implements ITileEntityProvider {
 	@Override
 	public TileEntity createNewTileEntity (World var1, int var2) {
 		return (new RollingMillTileEntity ());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Item getItemDropped (int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+		return DefenseItem.MACHINE_ROLLING_MILL;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ItemStack getPickBlock (MovingObjectPosition target, World world, int x, int y, int z) {
+		return (new ItemStack (DefenseItem.MACHINE_ROLLING_MILL, 1));
 	}
 
 	/**
