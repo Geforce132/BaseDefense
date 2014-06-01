@@ -64,6 +64,14 @@ public class Location {
 	}
 
 	/**
+	 * Constructs a new Location instance.
+	 * @param vector The vector to copy the coordinates from.
+	 */
+	public Location (Vec3 vector) {
+		this (vector.xCoord, vector.yCoord, vector.zCoord);
+	}
+
+	/**
 	 * Returns the block stored at this location.
 	 * @param world The world to search in.
 	 * @return The block.
