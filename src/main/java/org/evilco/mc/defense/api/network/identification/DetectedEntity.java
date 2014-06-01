@@ -108,6 +108,14 @@ public class DetectedEntity {
 	}
 
 	/**
+	 * Sets a new last known location.
+	 * @param lastKnownLocation The last known location.
+	 */
+	public void setLastKnownLocation (Location lastKnownLocation) {
+		this.lastKnownLocation = lastKnownLocation;
+	}
+
+	/**
 	 * Sets the entity type.
 	 * @param type The entity type.
 	 */
