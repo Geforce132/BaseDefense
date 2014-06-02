@@ -11,3 +11,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+item.defense.generic.chipset.simple.name=Simple Chipset
+item.defense.generic.chipset.advanced.name=Advanced Chipset
+item.defense.generic.chipset.expert.name=Expert Chipset
+item.defense.generic.defenseStation.name=Defense Station
+item.defense.generic.defenseStation.advanced.name=Advanced Defense Station
+item.defense.generic.defenseStation.expert.name=Expert Defense Station
+item.defense.generic.ironWire.name=Iron Wire
+item.defense.generic.lens.name=Glass Lens
+item.defense.generic.lens.fisheye.name=Fisheye Glass Lens
+item.defense.generic.sandpaper.name=Sandpaper
+item.defense.generic.sandpaper.diamond.name=Diamond Sandpaper
+item.defense.generic.wirelessTuner.name=Wireless Tuner
+item.defense.machine.rollingMill.name=Rolling Mill
+item.defense.sensor.camera.name=Camera
+item.defense.trigger.motionDetector.name=Motion Detector
+
+itemGroup.defense.generic=Base Defense
+
+tile.defense.generic.barbedWireFence.name=Barbed Wire Fence
