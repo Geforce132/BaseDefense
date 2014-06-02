@@ -34,7 +34,7 @@ public class ChipsetItem extends Item {
 	/**
 	 * Stores all chipset icons.
 	 */
-	protected IIcon[] icons = new IIcon[3];
+	protected IIcon[] icons = new IIcon[6];
 
 	/**
 	 * Constructs a new CircuitBoardItem instance.
@@ -62,7 +62,7 @@ public class ChipsetItem extends Item {
 	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
 		super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
 
-		for (int i = 1; i < 3; i++) {
+		for (int i = 1; i < 6; i++) {
 			p_150895_3_.add (new ItemStack (this, 1, i));
 		}
 	}
@@ -78,6 +78,9 @@ public class ChipsetItem extends Item {
 			case 0: name += ".simple"; break;
 			case 1: name += ".advanced"; break;
 			case 2: name += ".expert"; break;
+			case 3: name += ".intelligence"; break;
+			case 4: name += ".recognition"; break;
+			case 5: name += ".faceRecognition"; break;
 			default: name += ".unknown"; break;
 		}
 
@@ -94,5 +97,9 @@ public class ChipsetItem extends Item {
 		this.icons[0] = par1IconRegister.registerIcon ("defense:generic/chipsetSimple");
 		this.icons[1] = par1IconRegister.registerIcon ("defense:generic/chipsetAdvanced");
 		this.icons[2] = par1IconRegister.registerIcon ("defense:generic/chipsetExpert");
+
+		this.icons[3] = par1IconRegister.registerIcon ("defense:generic/chipsetIntelligence");
+		this.icons[4] = par1IconRegister.registerIcon ("defense:generic/chipsetRecognition");
+		this.icons[5] = par1IconRegister.registerIcon ("defense:generic/chipsetFaceRecognition");
 	}
 }
