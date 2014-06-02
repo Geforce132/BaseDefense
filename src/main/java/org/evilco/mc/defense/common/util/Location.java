@@ -120,6 +120,44 @@ public class Location {
 	}
 
 	/**
+	 * Sets a block type.
+	 * @param world The world to refactor.
+	 * @param type The type to set.
+	 */
+	public void setBlock (World world, Block type) {
+		this.setBlock (world, type, 0);
+	}
+
+	/**
+	 * Sets a block type and metadata.
+	 * @param world The world to refactor.
+	 * @param type The type to set.
+	 * @param metadata The metadata value to set.
+	 */
+	public void setBlock (World world, Block type, int metadata) {
+		this.setBlock (world, type, metadata, 2);
+	}
+
+	/**
+	 * Sets a block type and metadata.
+	 * @param world The world to refactor.
+	 * @param type The type to set.
+	 * @param metadata The metadata value to set.
+	 * @param flag The flag to use.
+	 */
+	public void setBlock (World world, Block type, int metadata, int flag) {
+		world.setBlock (((int) this.xCoord), ((int) this.yCoord), ((int) this.zCoord), type, metadata, flag);
+	}
+
+	/**
+	 * Sets a block to air.
+	 * @param world The world to refactor.
+	 */
+	public void setBlockToAir (World world) {
+		world.setBlockToAir (((int) this.xCoord), ((int) this.yCoord), ((int) this.zCoord));
+	}
+
+	/**
 	 * Returns the vector representation of this location.
 	 * @param world The world to create the vector for.
 	 * @return The vector.
