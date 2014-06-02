@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+defense.generic.item.lensQuality=Lens Quality: %s%%
+
 item.defense.generic.chipset.simple.name=Simple Chipset
 item.defense.generic.chipset.advanced.name=Advanced Chipset
 item.defense.generic.chipset.expert.name=Expert Chipset
