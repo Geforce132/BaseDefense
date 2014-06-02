@@ -22,11 +22,13 @@ import org.evilco.mc.defense.client.renderer.item.machine.RollingMillItemRendere
 import org.evilco.mc.defense.client.renderer.item.trigger.MotionDetectorItemRenderer;
 import org.evilco.mc.defense.client.renderer.tile.generic.DefenseStationTileEntityRenderer;
 import org.evilco.mc.defense.client.renderer.tile.machine.RollingMillTileEntityRenderer;
+import org.evilco.mc.defense.client.renderer.tile.sensor.CameraTileEntityRenderer;
 import org.evilco.mc.defense.client.renderer.tile.trigger.MotionDetectorTileEntityRenderer;
 import org.evilco.mc.defense.common.CommonModificationProxy;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.mc.defense.common.tile.machine.RollingMillTileEntity;
+import org.evilco.mc.defense.common.tile.sensor.CameraTileEntity;
 import org.evilco.mc.defense.common.tile.trigger.MotionDetectorTileEntity;
 
 /**
@@ -49,9 +51,10 @@ public class ClientModificationProxy extends CommonModificationProxy {
 	 * Registers all rendering callbacks.
 	 */
 	public void registerRenderingCallbacks () {
+		ClientRegistry.bindTileEntitySpecialRenderer (CameraTileEntity.class, new CameraTileEntityRenderer ());
 		ClientRegistry.bindTileEntitySpecialRenderer (DefenseStationTileEntity.class, new DefenseStationTileEntityRenderer ());
-		ClientRegistry.bindTileEntitySpecialRenderer (RollingMillTileEntity.class, new RollingMillTileEntityRenderer ());
 		ClientRegistry.bindTileEntitySpecialRenderer (MotionDetectorTileEntity.class, new MotionDetectorTileEntityRenderer ());
+		ClientRegistry.bindTileEntitySpecialRenderer (RollingMillTileEntity.class, new RollingMillTileEntityRenderer ());
 
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.GENERIC_DEFENSE_STATION, new DefenseStationItemRenderer ());
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.MACHINE_ROLLING_MILL, new RollingMillItemRenderer ());

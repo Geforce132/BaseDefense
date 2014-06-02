@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import org.evilco.mc.defense.common.block.generic.BarbedWirePaneBlock;
 import org.evilco.mc.defense.common.block.generic.DefenseStationBlock;
 import org.evilco.mc.defense.common.block.machine.RollingMillBlock;
+import org.evilco.mc.defense.common.block.sensor.CameraBlock;
 import org.evilco.mc.defense.common.block.trigger.MotionDetectorBlock;
 
 /**
@@ -31,6 +32,8 @@ public class DefenseBlock {
 	public static final Block GENERIC_DEFENSE_STATION = new DefenseStationBlock ();
 
 	public static final Block MACHINE_ROLLING_MILL = new RollingMillBlock ();
+
+	public static final Block SENSOR_CAMERA = new CameraBlock ();
 
 	public static final Block TRIGGER_MOTION_DETECTOR = new MotionDetectorBlock ();
 }

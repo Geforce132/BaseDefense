@@ -37,6 +37,7 @@ import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.network.DefenseChannelHandler;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.mc.defense.common.tile.machine.RollingMillTileEntity;
+import org.evilco.mc.defense.common.tile.sensor.CameraTileEntity;
 import org.evilco.mc.defense.common.tile.trigger.MotionDetectorTileEntity;
 
 import java.util.EnumMap;
@@ -108,6 +109,8 @@ public class CommonModificationProxy implements IModificationProxy {
 
 		GameRegistry.registerBlock (DefenseBlock.MACHINE_ROLLING_MILL, DefenseNames.REGISTRATION_BLOCK_MACHINE_ROLLING_MILL);
 
+		GameRegistry.registerBlock (DefenseBlock.SENSOR_CAMERA, DefenseNames.REGISTRATION_BLOCK_SENSOR_CAMERA);
+
 		GameRegistry.registerBlock (DefenseBlock.TRIGGER_MOTION_DETECTOR, DefenseNames.REGISTRATION_BLOCK_TRIGGER_MOTION_DETECTOR);
 	}
 
@@ -160,6 +163,8 @@ public class CommonModificationProxy implements IModificationProxy {
 		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, DefenseNames.REGISTRATION_ITEM_GENERIC_WIRELESS_TUNER);
 
 		GameRegistry.registerItem (DefenseItem.MACHINE_ROLLING_MILL, DefenseNames.REGISTRATION_ITEM_MACHINE_ROLLING_MILL);
+
+		GameRegistry.registerItem (DefenseItem.SENSOR_CAMERA, DefenseNames.REGISTRATION_ITEM_SENSOR_CAMERA);
 
 		GameRegistry.registerItem (DefenseItem.TRIGGER_MOTION_DETECTOR, DefenseNames.REGISTRATION_ITEM_TRIGGER_MOTION_DETECTOR);
 	}
@@ -335,7 +340,11 @@ public class CommonModificationProxy implements IModificationProxy {
 	 */
 	public void registerTileEntities () {
 		GameRegistry.registerTileEntity (DefenseStationTileEntity.class, DefenseNames.REGISTRATION_TILE_ENTITY_GENERIC_DEFENSE_STATION);
+
 		GameRegistry.registerTileEntity (RollingMillTileEntity.class, DefenseNames.REGISTRATION_TILE_ENTITY_MACHINE_ROLLING_MILL);
+
+		GameRegistry.registerTileEntity (CameraTileEntity.class, DefenseNames.REGISTRATION_TILE_ENTITY_SENSOR_CAMERA);
+
 		GameRegistry.registerTileEntity (MotionDetectorTileEntity.class, DefenseNames.REGISTRATION_TILE_ENTITY_TRIGGER_MOTION_DETECTOR);
 	}
 }

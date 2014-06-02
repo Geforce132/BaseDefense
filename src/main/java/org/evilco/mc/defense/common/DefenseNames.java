@@ -31,6 +31,8 @@ public class DefenseNames {
 
 	public static final String BLOCK_MACHINE_ROLLING_MILL = PREFIX + "machine.rollingMill";
 
+	public static final String BLOCK_SENSOR_CAMERA = PREFIX + "sensor.camera";
+
 	public static final String BLOCK_TRIGGER_MOTION_DETECTOR = PREFIX + "trigger.motionDetector";
 	// BLOCK END
 
@@ -49,6 +51,8 @@ public class DefenseNames {
 
 	public static final String ITEM_MACHINE_ROLLING_MILL = PREFIX + "machine.rollingMill";
 
+	public static final String ITEM_SENSOR_CAMERA = PREFIX + "sensor.camera";
+
 	public static final String ITEM_TRIGGER_MOTION_DETECTOR = PREFIX + "trigger.motionDetector";
 	// ITEM END
 
@@ -56,6 +60,7 @@ public class DefenseNames {
 	public static final String REGISTRATION_BLOCK_GENERIC_BARBED_WIRE_FENCE = "barbed_wire_fence";
 	public static final String REGISTRATION_BLOCK_GENERIC_DEFENSE_STATION = "defense_station_block";
 	public static final String REGISTRATION_BLOCK_MACHINE_ROLLING_MILL = "rolling_mill_block";
+	public static final String REGISTRATION_BLOCK_SENSOR_CAMERA = "camera_block";
 	public static final String REGISTRATION_BLOCK_TRIGGER_MOTION_DETECTOR = "motion_detector_block";
 
 	public static final String REGISTRATION_ITEM_GENERIC_DEFENSE_STATION = "defense_station";
@@ -66,10 +71,12 @@ public class DefenseNames {
 	public static final String REGISTRATION_ITEM_GENERIC_SANDPAPER_DIAMOND = "sandpaper_diamond";
 	public static final String REGISTRATION_ITEM_GENERIC_WIRELESS_TUNER = "wireless_tuner";
 	public static final String REGISTRATION_ITEM_MACHINE_ROLLING_MILL = "rolling_mill";
+	public static final String REGISTRATION_ITEM_SENSOR_CAMERA = "camera";
 	public static final String REGISTRATION_ITEM_TRIGGER_MOTION_DETECTOR = "motion_detector";
 
 	public static final String REGISTRATION_TILE_ENTITY_GENERIC_DEFENSE_STATION = "defenseGenericDefenseStation";
 	public static final String REGISTRATION_TILE_ENTITY_MACHINE_ROLLING_MILL = "defenseMachineRollingMill";
+	public static final String REGISTRATION_TILE_ENTITY_SENSOR_CAMERA = "defenseSensorCamera";
 	public static final String REGISTRATION_TILE_ENTITY_TRIGGER_MOTION_DETECTOR = "defenseTriggerMotionDetector";
 	// REGISTRATION END
 
