@@ -209,12 +209,19 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 		if (simulate) return;
 
 		// remove connection
-		this.connections.remove (entity.getLocation ());
+		this.forceDisconnect (entity);
 
 		// notify entity
 		if (notifyPeer) entity.disconnect (this, false, false);
+	}
 
-		// remove active connection
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void forceDisconnect (ISurveillanceNetworkEntity entity) {
+		// delete connection
+		this.connections.remove (entity.getLocation ());
 		this.activeConnections.remove (entity);
 
 		// mark update

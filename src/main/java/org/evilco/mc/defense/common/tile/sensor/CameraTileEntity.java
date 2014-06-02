@@ -165,10 +165,19 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 		// stop writing
 		if (simulate) return;
 
+		// disconnect
+		this.forceDisconnect (entity);
+
 		// notify other side
 		if (notifyPeer && this.authority != null) this.authority.disconnect (this, false, false);
+	}
 
-		// delete data
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void forceDisconnect (ISurveillanceNetworkEntity entity) {
+		// reset data
 		this.authorityLocation = null;
 		this.authority = null;
 

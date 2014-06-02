@@ -58,6 +58,12 @@ public interface ISurveillanceNetworkEntity {
 	public void disconnect (ISurveillanceNetworkEntity entity, boolean simulate, boolean notifyPeer) throws SurveillanceNetworkException;
 
 	/**
+	 * Forcefully disconnects an entity.
+	 * @param entity The network entity.
+	 */
+	public void forceDisconnect (ISurveillanceNetworkEntity entity);
+
+	/**
 	 * Returns the entity world location.
 	 * @return The location.
 	 */

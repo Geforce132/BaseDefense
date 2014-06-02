@@ -118,10 +118,18 @@ public class MotionDetectorTileEntity extends AbstractTileEntity implements IRot
 		// stop writing
 		if (simulate) return;
 
+		// disconnect
+		this.forceDisconnect (entity);
+
 		// notify other side
 		if (notifyPeer && this.authority != null) this.authority.disconnect (this, false, false);
+	}
 
-		// delete data
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void forceDisconnect (ISurveillanceNetworkEntity entity) {
 		this.authorityLocation = null;
 		this.authority = null;
 
