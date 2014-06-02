@@ -689,6 +689,9 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 				// cast
 				ISurveillanceNetworkSensor sensor = ((ISurveillanceNetworkSensor) entity);
 
+				// skip disabled sensors
+				if (!sensor.getActive ()) continue;
+
 				// try to identify/type
 				sensor.tryDeclareType ();
 				sensor.tryIdentify ();
