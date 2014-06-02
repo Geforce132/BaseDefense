@@ -713,8 +713,8 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 				if (!sensor.getActive ()) continue;
 
 				// try to identify/type
-				sensor.tryDeclareType ();
-				sensor.tryIdentify ();
+				if (this.tier >= 1) sensor.tryDeclareType ();
+				if (this.tier >= 2) sensor.tryIdentify ();
 			}
 		}
 	}
