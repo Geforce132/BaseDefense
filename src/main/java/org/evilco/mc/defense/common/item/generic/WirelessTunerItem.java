@@ -76,7 +76,7 @@ public class WirelessTunerItem extends Item {
 			itemStack.setTagCompound (null);
 
 			// damage item
-			itemStack.damageItem (1, entityPlayer);
+			if (!entityPlayer.capabilities.isCreativeMode) itemStack.damageItem (1, entityPlayer);
 
 			// notify player
 			entityPlayer.addChatComponentMessage (new ChatComponentTranslation (DefenseNames.TRANSLATION_GENERIC_WIRELESS_TUNER_CONNECTION_SUCCESS));
@@ -94,12 +94,17 @@ public class WirelessTunerItem extends Item {
 
 	/**
 	 * Disconnects two entities.
+	 * @param entityPlayer The player.
+	 * @param itemStack The item stack.
 	 * @param entity The entity.
 	 */
-	protected void disconnect (EntityPlayer entityPlayer, ISurveillanceNetworkEntity entity) {
+	protected void disconnect (EntityPlayer entityPlayer, ItemStack itemStack, ISurveillanceNetworkEntity entity) {
 		try {
 			// disconnect
 			entity.disconnect (null, false, true);
+
+			// damage item
+			if (!entityPlayer.capabilities.isCreativeMode) itemStack.damageItem (1, entityPlayer);
 		} catch (SurveillanceNetworkPermissionException ex) {
 			entityPlayer.addChatComponentMessage (new ChatComponentTranslation (DefenseNames.TRANSLATION_GENERIC_WIRELESS_TUNER_PERMISSION_DENIED));
 		} catch (SurveillanceNetworkException ex) {
@@ -181,7 +186,7 @@ public class WirelessTunerItem extends Item {
 		// check for previous connections
 		if (entity1.isConnected () && !(entity1 instanceof ISurveillanceNetworkAuthority)) {
 			// disconnect
-			this.disconnect (par2EntityPlayer, entity1);
+			this.disconnect (par2EntityPlayer, par1ItemStack, entity1);
 
 			// skip execution
 			return true;
@@ -205,7 +210,7 @@ public class WirelessTunerItem extends Item {
 			par1ItemStack.setTagCompound (compound);
 
 			// damage item
-			par1ItemStack.damageItem (1, par2EntityPlayer);
+			if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.damageItem (1, par2EntityPlayer);
 
 			// notify player
 			par2EntityPlayer.addChatComponentMessage (new ChatComponentTranslation (DefenseNames.TRANSLATION_GENERIC_WIRELESS_TUNER_DATA_STORED));
@@ -244,7 +249,7 @@ public class WirelessTunerItem extends Item {
 		// check for previous connections
 		if (entity1.isConnected () && !(entity1 instanceof ISurveillanceNetworkAuthority)) {
 			// disconnect
-			this.disconnect (par2EntityPlayer, entity1);
+			this.disconnect (par2EntityPlayer, par1ItemStack, entity1);
 
 			// skip execution
 			return true;
@@ -265,7 +270,7 @@ public class WirelessTunerItem extends Item {
 			par1ItemStack.setTagCompound (compound);
 
 			// damage item
-			par1ItemStack.damageItem (1, par2EntityPlayer);
+			if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.damageItem (1, par2EntityPlayer);
 
 			// notify player
 			par2EntityPlayer.addChatComponentMessage (new ChatComponentTranslation (DefenseNames.TRANSLATION_GENERIC_WIRELESS_TUNER_DATA_STORED));
