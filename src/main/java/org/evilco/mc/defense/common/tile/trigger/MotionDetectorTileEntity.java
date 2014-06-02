@@ -367,7 +367,7 @@ public class MotionDetectorTileEntity extends AbstractTileEntity implements IRot
 
 			// get random
 			double random = Math.random ();
-			double detectionChance = (this.lensQuality / 100);
+			double detectionChance = (this.lensQuality / 100.0f);
 
 			// skip by chance
 			if (random > detectionChance) continue;
