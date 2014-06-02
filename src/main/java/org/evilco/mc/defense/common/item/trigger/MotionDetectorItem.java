@@ -15,6 +15,7 @@
  */
 package org.evilco.mc.defense.common.item.trigger;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -45,6 +46,16 @@ public class MotionDetectorItem extends Item {
 
 		this.setUnlocalizedName (DefenseNames.ITEM_TRIGGER_MOTION_DETECTOR);
 		this.setCreativeTab (DefenseCreativeTab.GENERIC);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addInformation (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		super.addInformation (par1ItemStack, par2EntityPlayer, par3List, par4);
+
+		par3List.add (String.format (LanguageRegistry.instance ().getStringLocalization (DefenseNames.TRANSLATION_GENERIC_ITEM_LENS_QUALITY), par1ItemStack.getItemDamage ()));
 	}
 
 	/**
@@ -101,13 +112,5 @@ public class MotionDetectorItem extends Item {
 
 		// confirm item use
 		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getUnlocalizedName (ItemStack par1ItemStack) {
-		return super.getUnlocalizedName (par1ItemStack) + par1ItemStack.getItemDamage ();
 	}
 }

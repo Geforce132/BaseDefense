@@ -15,7 +15,9 @@
  */
 package org.evilco.mc.defense.common.item.generic;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.evilco.mc.defense.common.DefenseNames;
@@ -46,6 +48,16 @@ public class LensItem extends Item {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void addInformation (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		super.addInformation (par1ItemStack, par2EntityPlayer, par3List, par4);
+
+		par3List.add (String.format (LanguageRegistry.instance ().getStringLocalization (DefenseNames.TRANSLATION_GENERIC_ITEM_LENS_QUALITY), par1ItemStack.getItemDamage ()));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public boolean getHasSubtypes () {
 		return true;
 	}
@@ -63,13 +75,5 @@ public class LensItem extends Item {
 
 		p_150895_3_.add (new ItemStack (this, 1, 80));
 		p_150895_3_.add (new ItemStack (this, 1, 99));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getUnlocalizedName (ItemStack par1ItemStack) {
-		return super.getUnlocalizedName (par1ItemStack) + par1ItemStack.getItemDamage ();
 	}
 }

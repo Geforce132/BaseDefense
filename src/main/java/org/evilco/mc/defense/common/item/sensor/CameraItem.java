@@ -15,9 +15,9 @@
  */
 package org.evilco.mc.defense.common.item.sensor;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -51,6 +51,16 @@ public class CameraItem extends Item {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void addInformation (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		super.addInformation (par1ItemStack, par2EntityPlayer, par3List, par4);
+
+		par3List.add (String.format (LanguageRegistry.instance ().getStringLocalization (DefenseNames.TRANSLATION_GENERIC_ITEM_LENS_QUALITY), par1ItemStack.getItemDamage ()));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
 		super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
 
@@ -62,14 +72,6 @@ public class CameraItem extends Item {
 
 		p_150895_3_.add (new ItemStack (this, 1, 80));
 		p_150895_3_.add (new ItemStack (this, 1, 99));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getUnlocalizedName (ItemStack par1ItemStack) {
-		return super.getUnlocalizedName (par1ItemStack) + par1ItemStack.getItemDamage ();
 	}
 
 	/**

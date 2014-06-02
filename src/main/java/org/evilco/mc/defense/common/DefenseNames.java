@@ -85,6 +85,8 @@ public class DefenseNames {
 	// TRANSLATION START
 	public static final String TRANSLATION_GENERIC_DEFENSE_STATION_PERMISSION_DENIED = PREFIX + "generic.defenseStation.permissionDenied";
 
+	public static final String TRANSLATION_GENERIC_ITEM_LENS_QUALITY = PREFIX + "generic.item.lensQuality";
+
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_CANNOT_CONNECT = PREFIX + "generic.wirelessTuner.cannotConnect";
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_CONNECTION_SUCCESS = PREFIX + "generic.wirelessTuner.connectionSuccess";
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_DATA_STORED = PREFIX + "generic.wirelessTuner.dataStored";
