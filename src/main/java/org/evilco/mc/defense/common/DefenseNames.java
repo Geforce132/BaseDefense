@@ -83,6 +83,8 @@ public class DefenseNames {
 	// REGISTRATION END
 
 	// TRANSLATION START
+	public static final String TRANSLATION_DAMAGE_SOURCE_GENERIC_BARBED_WIRE_FENCE = PREFIX + "entity.damageSource.barbedWireFence";
+
 	public static final String TRANSLATION_GENERIC_DEFENSE_STATION_PERMISSION_DENIED = PREFIX + "generic.defenseStation.permissionDenied";
 
 	public static final String TRANSLATION_GENERIC_ITEM_LENS_QUALITY = PREFIX + "generic.item.lensQuality";

@@ -21,6 +21,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import org.evilco.mc.defense.common.DefenseNames;
+import org.evilco.mc.defense.common.entity.DefenseDamageSource;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 
 /**
@@ -46,6 +47,6 @@ public class BarbedWirePaneBlock extends BlockPane {
 	public void onEntityCollidedWithBlock (World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_, Entity p_149670_5_) {
 		super.onEntityCollidedWithBlock (p_149670_1_, p_149670_2_, p_149670_3_, p_149670_4_, p_149670_5_);
 
-		p_149670_5_.attackEntityFrom (DamageSource.generic, 1.0f);
+		p_149670_5_.attackEntityFrom (DefenseDamageSource.GENERIC_BARBED_WIRE_FENCE, 2.0f);
 	}
 }
