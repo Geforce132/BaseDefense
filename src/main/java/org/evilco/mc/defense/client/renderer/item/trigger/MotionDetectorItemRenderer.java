@@ -23,6 +23,10 @@ import net.minecraftforge.client.IItemRenderer;
 import org.evilco.mc.defense.client.model.trigger.MotionDetectorModel;
 import org.lwjgl.opengl.GL11;
 
+/**
+ * @auhtor Johannes Donath <johannesd@evil-co.com>
+ * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
+ */
 public class MotionDetectorItemRenderer implements IItemRenderer {
 
 	/**
