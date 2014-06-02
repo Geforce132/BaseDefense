@@ -356,7 +356,7 @@ public class MotionDetectorTileEntity extends AbstractTileEntity implements IRot
 			// check for people in creative
 			if (entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode) continue;
 
-			// skil already known intruders
+			// ignore already known intruders
 			if (this.authority.isKnownIntruder (entity)) continue;
 
 			// get axis
