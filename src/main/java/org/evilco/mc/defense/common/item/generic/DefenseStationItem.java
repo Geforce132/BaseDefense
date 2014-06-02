@@ -24,6 +24,7 @@ import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkAuthor
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
+import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>
@@ -66,7 +67,13 @@ public class DefenseStationItem extends Item {
 		if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.stackSize--;
 
 		// update tile entity
-		((ISurveillanceNetworkAuthority) par3World.getTileEntity (par4, (par5 + 1), par6)).addWhitelist (par2EntityPlayer);
+		DefenseStationTileEntity tileEntity = ((DefenseStationTileEntity) par3World.getTileEntity(par4, (par5 + 1), par6));
+
+		// add player to whitelist
+		tileEntity.addWhitelist (par2EntityPlayer);
+
+		// set tier
+		tileEntity.setTier (par1ItemStack.getItemDamage ());
 
 		// confirm item use
 		return true;

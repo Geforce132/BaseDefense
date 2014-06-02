@@ -296,6 +296,14 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 	}
 
 	/**
+	 * Returns the authority tier.
+	 * @return The tier.
+	 */
+	public int getTier () {
+		return this.tier;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -659,6 +667,18 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 			// delete intruder list
 			this.detectedIntruders.clear ();
 		}
+	}
+
+	/**
+	 * Sets a new authority tier.
+	 * @param tier The new tier.
+	 */
+	public void setTier (int tier) {
+		this.tier = tier;
+
+		// mark update
+		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
 	}
 
 	/**
