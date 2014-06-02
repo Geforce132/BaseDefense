@@ -34,6 +34,6 @@ public class CraftingHandler {
 	@SubscribeEvent
 	public void onItemCrafted (PlayerEvent.ItemCraftedEvent event) {
 		// motion detector (copy damage)
-		if (event.crafting.getItem ().equals (DefenseItem.TRIGGER_MOTION_DETECTOR)) event.crafting.setItemDamage (event.craftMatrix.getStackInSlot (5).getItemDamage ());
+		if (event.crafting.getItem ().equals (DefenseItem.TRIGGER_MOTION_DETECTOR) || event.crafting.getItem ().equals (DefenseItem.SENSOR_CAMERA)) event.crafting.setItemDamage (event.craftMatrix.getStackInSlot (5).getItemDamage ());
 	}
 }
