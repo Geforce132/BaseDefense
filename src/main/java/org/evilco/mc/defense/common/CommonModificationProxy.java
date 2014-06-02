@@ -353,7 +353,7 @@ public class CommonModificationProxy implements IModificationProxy {
 			'Y', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 0)
 		);
 
-		// emerald -> diamond chipset -> expert chipset
+		// emerald + advanced chipset -> expert chipset
 		GameRegistry.addRecipe (
 			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2),
 			"XXX",
@@ -361,6 +361,35 @@ public class CommonModificationProxy implements IModificationProxy {
 			"XXX",
 			'X', Items.emerald,
 			'Y', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 1)
+		);
+
+		// simple chipset + redstone -> intelligence chipset
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 3),
+			"ZXZ",
+			"XYX",
+			"ZXZ",
+			'X', Items.redstone,
+			'Y', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 0),
+			'Z', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 1)
+		);
+
+		// advanced chipset + emerald -> recognition chipset
+		GameRegistry.addShapelessRecipe (
+			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 4),
+			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 1),
+			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2)
+		);
+
+		// expert chipset + expert chipset + lapis -> face recognition chipset
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 5),
+			"ZXZ",
+			"XYX",
+			"ZXZ",
+			'X', new ItemStack (Items.dye, 1, 4),
+			'Y', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2),
+			'Z', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2)
 		);
 
 		// add rolling mill recipes
