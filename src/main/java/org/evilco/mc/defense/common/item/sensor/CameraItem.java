@@ -96,6 +96,10 @@ public class CameraItem extends Item {
 
 		// set block
 		location.setBlock (par3World, DefenseBlock.SENSOR_CAMERA, metadata);
+
+		// remove item from stack
+		if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.stackSize--;
+
 		return true;
 	}
 }

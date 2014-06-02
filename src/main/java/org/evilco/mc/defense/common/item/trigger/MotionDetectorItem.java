@@ -110,6 +110,9 @@ public class MotionDetectorItem extends Item {
 		TileEntity tileEntity = blockLocation.getTileEntity (par3World);
 		((MotionDetectorTileEntity) tileEntity).setLensQuality (par1ItemStack.getItemDamage ());
 
+		// remove item from stack
+		if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.stackSize--;
+
 		// confirm item use
 		return true;
 	}
