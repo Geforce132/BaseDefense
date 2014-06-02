@@ -45,6 +45,23 @@ public class DefenseStationItem extends Item {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public String getUnlocalizedName (ItemStack par1ItemStack) {
+		String name = super.getUnlocalizedName (par1ItemStack);
+
+		switch (par1ItemStack.getItemDamage ()) {
+			case 0: break;
+			case 1: name += ".advanced"; break;
+			case 2: name += ".expert"; break;
+			default: name += ".unknown"; break;
+		}
+
+		return name;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public boolean onItemUse (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		// skip client execution
 		if (par3World.isRemote) return true;
@@ -76,22 +93,5 @@ public class DefenseStationItem extends Item {
 
 		// confirm item use
 		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getUnlocalizedName (ItemStack par1ItemStack) {
-		String name = super.getUnlocalizedName (par1ItemStack);
-
-		switch (par1ItemStack.getItemDamage ()) {
-			case 0: break;
-			case 1: name += ".advanced"; break;
-			case 2: name += ".expert"; break;
-			default: name += ".unknown"; break;
-		}
-
-		return name;
 	}
 }
