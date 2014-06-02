@@ -154,6 +154,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	 * Registers all modification items.
 	 */
 	public void registerItems () {
+		GameRegistry.registerItem (DefenseItem.GENERIC_CHIPSET, DefenseNames.REGISTRATION_ITEM_GENERIC_CHIPSET);
 		GameRegistry.registerItem (DefenseItem.GENERIC_DEFENSE_STATION, DefenseNames.REGISTRATION_ITEM_GENERIC_DEFENSE_STATION);
 		GameRegistry.registerItem (DefenseItem.GENERIC_IRON_WIRE, DefenseNames.REGISTRATION_ITEM_GENERIC_IRON_WIRE);
 		GameRegistry.registerItem (DefenseItem.GENERIC_SANDPAPER, DefenseNames.REGISTRATION_ITEM_GENERIC_SANDPAPER);

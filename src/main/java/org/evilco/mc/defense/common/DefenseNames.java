@@ -41,6 +41,7 @@ public class DefenseNames {
 	// CREATIVE END
 
 	// ITEM START
+	public static final String ITEM_GENERIC_CHIPSET = PREFIX + "generic.chipset";
 	public static final String ITEM_GENERIC_DEFENSE_STATION = PREFIX + "generic.defenseStation";
 	public static final String ITEM_GENERIC_IRON_WIRE = PREFIX + "generic.ironWire";
 	public static final String ITEM_GENERIC_LENS = PREFIX + "generic.lens";
@@ -63,6 +64,7 @@ public class DefenseNames {
 	public static final String REGISTRATION_BLOCK_SENSOR_CAMERA = "camera_block";
 	public static final String REGISTRATION_BLOCK_TRIGGER_MOTION_DETECTOR = "motion_detector_block";
 
+	public static final String REGISTRATION_ITEM_GENERIC_CHIPSET = "chipset";
 	public static final String REGISTRATION_ITEM_GENERIC_DEFENSE_STATION = "defense_station";
 	public static final String REGISTRATION_ITEM_GENERIC_IRON_WIRE = "iron_wire";
 	public static final String REGISTRATION_ITEM_GENERIC_LENS = "lens";

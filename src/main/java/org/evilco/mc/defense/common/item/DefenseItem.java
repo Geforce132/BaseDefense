@@ -27,6 +27,7 @@ import org.evilco.mc.defense.common.item.trigger.MotionDetectorItem;
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.org>
  */
 public class DefenseItem {
+	public static final Item GENERIC_CHIPSET = new ChipsetItem ();
 	public static final Item GENERIC_DEFENSE_STATION = new DefenseStationItem ();
 	public static final Item GENERIC_IRON_WIRE = new IronWireItem ();
 	public static final Item GENERIC_LENS = new LensItem ();
