@@ -90,6 +90,7 @@ public class DefenseNames {
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_CANNOT_CONNECT = PREFIX + "generic.wirelessTuner.cannotConnect";
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_CONNECTION_SUCCESS = PREFIX + "generic.wirelessTuner.connectionSuccess";
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_DATA_STORED = PREFIX + "generic.wirelessTuner.dataStored";
+	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_DISCONNECT_SUCCESS = PREFIX + "generic.wirelessTuner.disconnectSuccess";
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_INVALID_ENTITY = PREFIX + "generic.wirelessTuner.invalidEntity";
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_PERMISSION_DENIED = PREFIX + "generic.wirelessTuner.permissionDenied";
 	public static final String TRANSLATION_GENERIC_WIRELESS_TUNER_UNKNOWN_ERROR = PREFIX + "generic.wirelessTuner.unknownError";

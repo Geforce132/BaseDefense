@@ -105,6 +105,9 @@ public class WirelessTunerItem extends Item {
 
 			// damage item
 			if (!entityPlayer.capabilities.isCreativeMode) itemStack.damageItem (1, entityPlayer);
+
+			// notify player
+			entityPlayer.addChatComponentMessage (new ChatComponentTranslation (DefenseNames.TRANSLATION_GENERIC_WIRELESS_TUNER_DISCONNECT_SUCCESS));
 		} catch (SurveillanceNetworkPermissionException ex) {
 			entityPlayer.addChatComponentMessage (new ChatComponentTranslation (DefenseNames.TRANSLATION_GENERIC_WIRELESS_TUNER_PERMISSION_DENIED));
 		} catch (SurveillanceNetworkException ex) {
