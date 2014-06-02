@@ -12,7 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+defense.generic.defenseStation.permissionDenied=Permission Denied
 defense.generic.item.lensQuality=Lens Quality: %s%%
+defense.generic.wirelessTuner.cannotConnect=Cannot connect the selected network entities.
+defense.generic.generic.wirelessTuner.connectionSuccess=Successfully linked entities.
+defense.generic.wirelessTuner.dataStored=Stored entity data.
+defense.generic.wirelessTuner.disconnectSuccess=Disconnected network entity successfully.
+defense.generic.wirelessTuner.invalidEntity=Please select a valid network entity.
+defense.generic.wirelessTuner.permissionDenied=You may not modify connections on this network entity.
+defense.generic.wirelessTuner.unknownError=Could not connect network entity: Unknown error.
+defense.generic.wirelessTuner.unsupportedConnection=You may not connect these network entities.
 
 item.defense.generic.chipset.simple.name=Simple Chipset
 item.defense.generic.chipset.advanced.name=Advanced Chipset
