@@ -258,6 +258,14 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	}
 
 	/**
+	 * Returns the lens quality.
+	 * @return The quality.
+	 */
+	public float getLensQuality () {
+		return this.lensQuality;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
