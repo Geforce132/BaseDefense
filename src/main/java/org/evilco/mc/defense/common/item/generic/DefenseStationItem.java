@@ -20,7 +20,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkAuthority;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
@@ -79,5 +78,20 @@ public class DefenseStationItem extends Item {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getUnlocalizedName (ItemStack par1ItemStack) {
+		String name = super.getUnlocalizedName (par1ItemStack);
 
+		switch (par1ItemStack.getItemDamage ()) {
+			case 0: break;
+			case 1: name += ".advanced"; break;
+			case 2: name += ".expert"; break;
+			default: name += ".unknown"; break;
+		}
+
+		return name;
+	}
 }
