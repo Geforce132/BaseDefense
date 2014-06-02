@@ -332,6 +332,37 @@ public class CommonModificationProxy implements IModificationProxy {
 			'W', new ItemStack (DefenseItem.GENERIC_LENS, 1, OreDictionary.WILDCARD_VALUE)
 		);
 
+		// iron ingot + redstone + iron wire -> simple chipset
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 0),
+			"XYX",
+			"YZY",
+			"XYX",
+			'X', Items.gold_ingot,
+			'Y', Items.redstone,
+			'Z', DefenseItem.GENERIC_IRON_WIRE
+		);
+
+		// diamond + simple chipset -> advanced chipset
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 1),
+			"XXX",
+			"XYX",
+			"XXX",
+			'X', Items.diamond,
+			'Y', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 0)
+		);
+
+		// emerald -> diamond chipset -> expert chipset
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2),
+			"XXX",
+			"XYX",
+			"XXX",
+			'X', Items.emerald,
+			'Y', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 1)
+		);
+
 		// add rolling mill recipes
 		RollingMillTileEntity.addRecipe (Items.iron_ingot, new ItemStack (DefenseItem.GENERIC_IRON_WIRE, 4));
 	}
