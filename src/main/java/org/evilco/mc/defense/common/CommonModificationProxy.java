@@ -392,6 +392,30 @@ public class CommonModificationProxy implements IModificationProxy {
 			'Z', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2)
 		);
 
+		// iron wire + iron ingot + simple chipset + ender pearl -> wireless tuner
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.GENERIC_WIRELESS_TUNER, 1),
+			" X ",
+			"YZY",
+			"YUY",
+			'X', DefenseItem.GENERIC_IRON_WIRE,
+			'Y', Items.iron_ingot,
+			'Z', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 0),
+			'U', Items.ender_pearl
+		);
+
+		// wireless tuner + expert chipset + iron block + lens -> camera
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.SENSOR_CAMERA, 1),
+			"XXX",
+			"YZU",
+			"XXX",
+			'X', Blocks.iron_block,
+			'Y', DefenseItem.GENERIC_WIRELESS_TUNER,
+			'Z', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2),
+			'U', new ItemStack (DefenseItem.GENERIC_LENS, 1, OreDictionary.WILDCARD_VALUE)
+		);
+
 		// add rolling mill recipes
 		RollingMillTileEntity.addRecipe (Items.iron_ingot, new ItemStack (DefenseItem.GENERIC_IRON_WIRE, 4));
 	}
