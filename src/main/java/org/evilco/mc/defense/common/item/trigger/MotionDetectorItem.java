@@ -15,6 +15,7 @@
  */
 package org.evilco.mc.defense.common.item.trigger;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,6 +28,8 @@ import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 import org.evilco.mc.defense.common.tile.trigger.MotionDetectorTileEntity;
 import org.evilco.mc.defense.common.util.Location;
+
+import java.util.List;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>
@@ -42,6 +45,23 @@ public class MotionDetectorItem extends Item {
 
 		this.setUnlocalizedName (DefenseNames.ITEM_TRIGGER_MOTION_DETECTOR);
 		this.setCreativeTab (DefenseCreativeTab.GENERIC);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
+		super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
+
+		p_150895_3_.add (new ItemStack (this, 1, 1));
+
+		for (int i = 10; i <= 50; i += 10) {
+			p_150895_3_.add (new ItemStack (this, 1, i));
+		}
+
+		p_150895_3_.add (new ItemStack (this, 1, 80));
+		p_150895_3_.add (new ItemStack (this, 1, 99));
 	}
 
 	/**
