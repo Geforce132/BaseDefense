@@ -15,6 +15,7 @@
  */
 package org.evilco.mc.defense.common.item.generic;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,6 +25,8 @@ import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
+
+import java.util.List;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>
@@ -39,6 +42,19 @@ public class DefenseStationItem extends Item {
 
 		this.setUnlocalizedName (DefenseNames.ITEM_GENERIC_DEFENSE_STATION);
 		this.setCreativeTab (DefenseCreativeTab.GENERIC);
+		this.setHasSubtypes (true);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
+		super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
+
+		for (int i = 1; i < 3; i++) {
+			p_150895_3_.add (new ItemStack (this, 1, i));
+		}
 	}
 
 	/**
