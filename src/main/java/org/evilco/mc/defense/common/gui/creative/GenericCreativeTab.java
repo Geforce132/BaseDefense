@@ -18,7 +18,7 @@ package org.evilco.mc.defense.common.gui.creative;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import org.evilco.mc.defense.common.DefenseNames;
-import org.evilco.mc.defense.common.block.DefenseBlock;
+import org.evilco.mc.defense.common.item.DefenseItem;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>
@@ -38,6 +38,6 @@ public class GenericCreativeTab extends CreativeTabs {
 	 */
 	@Override
 	public Item getTabIconItem () {
-		return Item.getItemFromBlock (DefenseBlock.GENERIC_BARBED_WIRE_PANE); // TODO: Use different item here
+		return DefenseItem.SENSOR_CAMERA;
 	}
 }
