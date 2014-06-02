@@ -18,13 +18,18 @@ package org.evilco.mc.defense.common.block.sensor;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkEntity;
 import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkException;
 import org.evilco.mc.defense.common.DefenseNames;
+import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.tile.sensor.CameraTileEntity;
+
+import java.util.Random;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>
@@ -49,7 +54,7 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 	@Override
 	public void breakBlock (World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_) {
 		// get TileEntity
-		ISurveillanceNetworkEntity entity = ((ISurveillanceNetworkEntity) p_149749_1_.getTileEntity (p_149749_2_, p_149749_3_, p_149749_4_));
+		CameraTileEntity entity = ((CameraTileEntity) p_149749_1_.getTileEntity (p_149749_2_, p_149749_3_, p_149749_4_));
 
 		// disconnect
 		try {
@@ -57,6 +62,9 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 		} catch (SurveillanceNetworkException ex) {
 			entity.forceDisconnect (null);
 		}
+
+		// drop item
+		this.dropBlockAsItem (p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, new ItemStack (DefenseItem.SENSOR_CAMERA, 1, ((int) entity.getLensQuality ())));
 
 		// call parent
 		super.breakBlock (p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_);
@@ -68,6 +76,26 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 	@Override
 	public TileEntity createNewTileEntity (World var1, int var2) {
 		return (new CameraTileEntity ());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Item getItemDropped (int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ItemStack getPickBlock (MovingObjectPosition target, World world, int x, int y, int z) {
+		// get TileEntity
+		CameraTileEntity tileEntity = ((CameraTileEntity) world.getTileEntity (x, y, z));
+
+		// return item stack
+		return (new ItemStack (DefenseItem.SENSOR_CAMERA, 1, ((int) tileEntity.getLensQuality ())));
 	}
 
 	/**
