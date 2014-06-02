@@ -149,7 +149,7 @@ public class RollingMillModel extends ModelBase {
 	 * @see RollingMillModel.render ()
 	 */
 	public void renderDrums (Entity entity, float f, float f1, float f2, float f3, float f4, float f5, double rotation) {
-		setRotationAngles (f, f1, f2, f3, f4, f5, entity);
+		this.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 
 		this.drum0.rotateAngleZ = ((float) rotation);
 		this.drum1.rotateAngleZ = ((float) rotation);
