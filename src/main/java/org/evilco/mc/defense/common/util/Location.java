@@ -21,6 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * @author 		Johannes Donath <johannesd@evil-co.com>
@@ -87,6 +88,17 @@ public class Location {
 	 */
 	public TileEntity getTileEntity (World world) {
 		return world.getTileEntity ((int) this.xCoord, (int) this.yCoord, (int) this.zCoord);
+	}
+
+	/**
+	 * Moves the location into a specific location.
+	 * @param direction The direction.
+	 * @param distance The distance.
+	 */
+	public void moveTowardsDirection (ForgeDirection direction, int distance) {
+		this.xCoord += direction.offsetX;
+		this.yCoord += direction.offsetY;
+		this.zCoord += direction.offsetZ;
 	}
 
 	/**
