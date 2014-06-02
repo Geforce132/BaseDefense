@@ -80,7 +80,7 @@ public class DefenseStationItemRenderer implements IItemRenderer {
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 
 		// bind texture
-		Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation.png"));
+		Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation" + (item.getItemDamage () == 1 ? "Advanced" : (item.getItemDamage () == 2 ? "Expert" : "")) + ".png"));
 
 		// render model
 		model.render (null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0625f);
@@ -115,7 +115,7 @@ public class DefenseStationItemRenderer implements IItemRenderer {
 		}
 
 		// bind texture
-		Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation.png"));
+		Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation" + (item.getItemDamage () == 1 ? "Advanced" : (item.getItemDamage () == 2 ? "Expert" : "")) + ".png"));
 
 		// render model
 		model.render (((Entity) data[1]), 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0625f);
@@ -133,7 +133,7 @@ public class DefenseStationItemRenderer implements IItemRenderer {
 		GL11.glRotatef (180.0f, 1.0f, 0.0f, 0.0f);
 
 		// bind texture
-		Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation.png"));
+		Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation" + (item.getItemDamage () == 1 ? "Advanced" : (item.getItemDamage () == 2 ? "Expert" : "")) + ".png"));
 
 		// render model
 		model.render (null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0625f);

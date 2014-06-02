@@ -20,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.evilco.mc.defense.client.model.generic.DefenseStationModel;
 import org.evilco.mc.defense.common.tile.IRotateableTileEntity;
+import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -46,8 +47,11 @@ public class DefenseStationTileEntityRenderer extends TileEntitySpecialRenderer 
 
 		GL11.glRotated (((IRotateableTileEntity) var1).getRotationAngle (), 0f, 1f, 0f);
 
+		// cast entity
+		DefenseStationTileEntity defenseStationTileEntity = ((DefenseStationTileEntity) var1);
+
 		GL11.glPushMatrix ();
-		this.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation.png"));
+		this.bindTexture (new ResourceLocation ("defense", "textures/blocks/generic/defenseStation" + (defenseStationTileEntity.getTier () == 1 ? "Advanced" : (defenseStationTileEntity.getTier () == 2 ? "Expert" : "")) + ".png"));
 		model.render (null, 0.0f, 0.0f, -0.1f, 0.0f, 0.0f, 0.062f);
 		GL11.glPopMatrix ();
 
