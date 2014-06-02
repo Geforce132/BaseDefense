@@ -26,6 +26,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.block.DefenseBlock;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
+import org.evilco.mc.defense.common.tile.sensor.CameraTileEntity;
 import org.evilco.mc.defense.common.util.Location;
 
 import java.util.List;
@@ -96,6 +97,9 @@ public class CameraItem extends Item {
 
 		// set block
 		location.setBlock (par3World, DefenseBlock.SENSOR_CAMERA, metadata);
+
+		// set lens quality
+		((CameraTileEntity) location.getTileEntity (par3World)).setLensQuality (par1ItemStack.getItemDamage ());
 
 		// remove item from stack
 		if (!par2EntityPlayer.capabilities.isCreativeMode) par1ItemStack.stackSize--;
