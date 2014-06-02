@@ -166,7 +166,7 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 		if (simulate) return;
 
 		// notify other side
-		if (notifyPeer) entity.disconnect (this, false, false);
+		if (notifyPeer && this.authority != null) this.authority.disconnect (this, false, false);
 
 		// delete data
 		this.authorityLocation = null;
