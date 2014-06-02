@@ -67,7 +67,7 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	/**
 	 * Defines the rotation speed.
 	 */
-	public static final float ROTATION_SPEED = 1.25f;
+	public static final float ROTATION_SPEED = 0.5f;
 
 	/**
 	 * Indicates whether the sensor is active.
@@ -192,7 +192,10 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	 */
 	public double getCameraAngle (float partialTicks) {
 		// modify angle
-		if (this.getActive ()) this.cameraAngle += Math.max ((MAX_ANGLE * (this.isRotationReversed ? -1 : 1)), (this.cameraAngle + (ROTATION_SPEED * (this.isRotationReversed ? -1 : 1))));
+		if (this.getActive ()) this.cameraAngle = (this.isRotationReversed ? Math.max ((MAX_ANGLE * -1), (this.cameraAngle + (ROTATION_SPEED * partialTicks * -1))) : Math.min (MAX_ANGLE, (this.cameraAngle + (ROTATION_SPEED * partialTicks))));
+
+		// reverse
+		if (this.cameraAngle >= MAX_ANGLE || this.cameraAngle <= (MAX_ANGLE * -1)) this.isRotationReversed = !this.isRotationReversed;
 
 		// return radians
 		return Math.toRadians (this.cameraAngle);
