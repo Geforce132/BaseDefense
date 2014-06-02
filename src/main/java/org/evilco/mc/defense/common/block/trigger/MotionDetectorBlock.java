@@ -24,6 +24,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkEntity;
+import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkException;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.tile.trigger.MotionDetectorTileEntity;
@@ -45,6 +47,25 @@ public class MotionDetectorBlock extends Block implements ITileEntityProvider {
 		this.setBlockName (DefenseNames.BLOCK_TRIGGER_MOTION_DETECTOR);
 		this.setBlockTextureName ("defense:trigger/motionDetector");
 		this.setBlockBounds (0.00f, 0.25f, 0.00f, 1f, 0.75f, 1f);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void breakBlock (World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_) {
+		// get TileEntity
+		ISurveillanceNetworkEntity entity = ((ISurveillanceNetworkEntity) p_149749_1_.getTileEntity (p_149749_2_, p_149749_3_, p_149749_4_));
+
+		// disconnect
+		try {
+			entity.disconnect (null, false, true);
+		} catch (SurveillanceNetworkException ex) {
+			entity.forceDisconnect (null);
+		}
+
+		// call parent
+		super.breakBlock (p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_);
 	}
 
 	/**

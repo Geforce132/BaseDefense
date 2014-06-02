@@ -21,6 +21,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkEntity;
+import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkException;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.tile.sensor.CameraTileEntity;
 
@@ -39,6 +41,25 @@ public class CameraBlock extends Block implements ITileEntityProvider {
 		this.setBlockBounds (0.10f, 0.05f, 0.10f, 0.90f, 0.65f, 0.90f);
 		this.setBlockName (DefenseNames.BLOCK_SENSOR_CAMERA);
 		this.setBlockTextureName ("defense:sensor/camera");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void breakBlock (World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_) {
+		// get TileEntity
+		ISurveillanceNetworkEntity entity = ((ISurveillanceNetworkEntity) p_149749_1_.getTileEntity (p_149749_2_, p_149749_3_, p_149749_4_));
+
+		// disconnect
+		try {
+			entity.disconnect (null, false, true);
+		} catch (SurveillanceNetworkException ex) {
+			entity.forceDisconnect (null);
+		}
+
+		// call parent
+		super.breakBlock (p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_);
 	}
 
 	/**

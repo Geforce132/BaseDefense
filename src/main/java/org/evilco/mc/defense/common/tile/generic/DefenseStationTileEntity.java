@@ -196,23 +196,34 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 	 */
 	@Override
 	public void disconnect (ISurveillanceNetworkEntity entity, boolean simulate, boolean notifyPeer) throws SurveillanceNetworkException {
-		// verify entity
-		if (entity instanceof ISurveillanceNetworkAuthority) throw new SurveillanceNetworkUnsupportedEntityException ("Cannot connect multiple authorities.");
+		if (entity != null) {
+			// verify entity
+			if (entity instanceof ISurveillanceNetworkAuthority) throw new SurveillanceNetworkUnsupportedEntityException ("Cannot connect multiple authorities.");
 
-		// verify connection to other side
-		if (!entity.canConnect (this)) throw new SurveillanceNetworkUnsupportedEntityException ("Cannot connect entity for unknown reasons.");
+			// verify connection to other side
+			if (!entity.canConnect (this)) throw new SurveillanceNetworkUnsupportedEntityException ("Cannot connect entity for unknown reasons.");
 
-		// check connection
-		if (!this.connections.contains (entity.getLocation ())) throw new SurveillanceNetworkUnknownConnectionException ("There is no connection to the supplied entity.");
+			// check connection
+			if (!this.connections.contains (entity.getLocation ())) throw new SurveillanceNetworkUnknownConnectionException ("There is no connection to the supplied entity.");
+		}
 
 		// skip writing
 		if (simulate) return;
+
+		// copy active connections
+		List<ISurveillanceNetworkEntity> entityList = new ArrayList (this.activeConnections);
 
 		// remove connection
 		this.forceDisconnect (entity);
 
 		// notify entity
-		if (notifyPeer) entity.disconnect (this, false, false);
+		if (notifyPeer && entity != null)
+			entity.disconnect (this, false, false);
+		else {
+			for (ISurveillanceNetworkEntity entity1 : entityList) {
+				entity1.disconnect (this, false, false);
+			}
+		}
 	}
 
 	/**
@@ -221,8 +232,13 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 	@Override
 	public void forceDisconnect (ISurveillanceNetworkEntity entity) {
 		// delete connection
-		this.connections.remove (entity.getLocation ());
-		this.activeConnections.remove (entity);
+		if (entity != null) {
+			this.connections.remove (entity.getLocation ());
+			this.activeConnections.remove (entity);
+		} else {
+			this.connections.clear ();
+			this.activeConnections.clear ();
+		}
 
 		// mark update
 		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
