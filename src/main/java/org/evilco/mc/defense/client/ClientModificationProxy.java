@@ -19,6 +19,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
 import org.evilco.mc.defense.client.renderer.item.generic.DefenseStationItemRenderer;
 import org.evilco.mc.defense.client.renderer.item.machine.RollingMillItemRenderer;
+import org.evilco.mc.defense.client.renderer.item.sensor.CameraItemRenderer;
 import org.evilco.mc.defense.client.renderer.item.trigger.MotionDetectorItemRenderer;
 import org.evilco.mc.defense.client.renderer.tile.generic.DefenseStationTileEntityRenderer;
 import org.evilco.mc.defense.client.renderer.tile.machine.RollingMillTileEntityRenderer;
@@ -58,6 +59,7 @@ public class ClientModificationProxy extends CommonModificationProxy {
 
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.GENERIC_DEFENSE_STATION, new DefenseStationItemRenderer ());
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.MACHINE_ROLLING_MILL, new RollingMillItemRenderer ());
+		MinecraftForgeClient.registerItemRenderer (DefenseItem.SENSOR_CAMERA, new CameraItemRenderer ());
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.TRIGGER_MOTION_DETECTOR, new MotionDetectorItemRenderer ());
 	}
 }
