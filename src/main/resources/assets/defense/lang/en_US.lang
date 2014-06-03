@@ -37,6 +37,7 @@ item.defense.generic.lens.fisheye.name=Fisheye Glass Lens
 item.defense.generic.sandpaper.name=Sandpaper
 item.defense.generic.sandpaper.diamond.name=Diamond Sandpaper
 item.defense.generic.wirelessTuner.name=Wireless Tuner
+item.defense.machine.drum.name=Drum
 item.defense.machine.rollingMill.name=Rolling Mill
 item.defense.sensor.camera.name=Camera
 item.defense.trigger.motionDetector.name=Motion Detector
