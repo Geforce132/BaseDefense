@@ -448,6 +448,27 @@ public class CommonModificationProxy implements IModificationProxy {
 			'Y', new ItemStack (DefenseItem.GENERIC_DEFENSE_STATION, 1, 1)
 		);
 
+		// stick + iron block -> drum
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.MACHINE_DRUM, 1),
+			"XXX",
+			"YYY",
+			"XXX",
+			'X', Blocks.iron_block,
+			'Y', Items.stick
+		);
+
+		// drum + iron ingot + iron block -> rolling mill
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.MACHINE_ROLLING_MILL, 1),
+			"XYX",
+			"X X",
+			"ZZZ",
+			'X', Items.iron_ingot,
+			'Y', DefenseItem.MACHINE_DRUM,
+			'Z', Blocks.iron_block
+		);
+
 		// add rolling mill recipes
 		RollingMillTileEntity.addRecipe (Items.iron_ingot, new ItemStack (DefenseItem.GENERIC_IRON_WIRE, 4));
 	}
