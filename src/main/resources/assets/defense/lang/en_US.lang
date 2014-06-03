@@ -15,6 +15,7 @@
 death.attack.defense.entity.damageSource.barbedWireFence=%s got pricked to death.
 
 defense.generic.defenseStation.permissionDenied=Permission Denied
+defense.generic.defenseStation.title=Defense Station
 defense.generic.item.lensQuality=Lens Quality: %s%%
 defense.generic.wirelessTuner.cannotConnect=Cannot connect the selected network entities.
 defense.generic.generic.wirelessTuner.connectionSuccess=Successfully linked entities.
