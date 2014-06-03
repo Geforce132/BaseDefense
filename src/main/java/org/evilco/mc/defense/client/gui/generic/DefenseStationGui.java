@@ -23,6 +23,7 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.ResourceLocation;
 import org.evilco.mc.defense.DefenseModification;
 import org.evilco.mc.defense.client.gui.ReturnAwareGuiTextField;
+import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.network.DefenseStationRegisterUserPacket;
 import org.evilco.mc.defense.common.network.DefenseStationUnregisterPacket;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
@@ -122,7 +123,7 @@ public class DefenseStationGui extends GuiScreen implements ReturnAwareGuiTextFi
 		int y = ((this.height - HEIGHT) / 2);
 
 		// draw gui name
-		this.fontRendererObj.drawString (LanguageRegistry.instance ().getStringLocalization ("defense.generic.defenseStation.title"), x, (y - 12), 0xFFFFFF);
+		this.fontRendererObj.drawString (LanguageRegistry.instance ().getStringLocalization (DefenseNames.TRANSLATION_GENERIC_DEFENSE_STATION_TITLE), x, (y - 12), 0xFFFFFF);
 
 		// draw known users
 		Iterator<Map.Entry<UUID, String>> knownUserIterator = (this.mode ? this.tileEntity.getBlacklist () : this.tileEntity.getWhitelist ()).entrySet ().iterator ();
