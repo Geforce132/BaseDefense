@@ -55,6 +55,11 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	public static final double APERTURE = (1.2 / 2.0);
 
 	/**
+	 * Stores the amount of time which has to pass until the camera is allowed to crash.
+	 */
+	public static final double CRASH_RUNTIME = 72000;
+
+	/**
 	 * Defines the maximum angle.
 	 */
 	public static final float MAX_ANGLE = 45.0f;
@@ -85,6 +90,11 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	protected Location authorityLocation = null;
 
 	/**
+	 * Indicates whether the camera is broken.
+	 */
+	protected boolean broken = false;
+
+	/**
 	 * Stores the camera angle.
 	 */
 	protected float cameraAngle = 0.0f;
@@ -98,6 +108,11 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	 * Defines the lens quality.
 	 */
 	protected float lensQuality = 0;
+
+	/**
+	 * Stores the amount of time the camera has run.
+	 */
+	protected double runtime = 0;
 
 	/**
 	 * {@inheritDoc}
@@ -282,6 +297,14 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	}
 
 	/**
+	 * Checks whether the camera is broken.
+	 * @return True if the camera broke.
+	 */
+	public boolean isBroken () {
+		return this.broken;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -358,6 +381,31 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	 * Processes an identification or type request.
 	 */
 	protected void process (boolean mode) {
+		// skip if broken
+		if (this.broken) return;
+
+		// update runtime
+		this.runtime++;
+
+		// check time
+		if (this.runtime > CRASH_RUNTIME) {
+			// calculate random
+			double random = Math.random ();
+
+			// break
+			if (random <= 0.1) {
+				// set flag
+				this.broken = true;
+
+				// mark update
+				this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+				this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
+
+				// abort further execution
+				return;
+			}
+		}
+
 		// find all entities in range
 		List<Entity> entityList = this.worldObj.getEntitiesWithinAABB (Entity.class, this.getDetectionBounds ());
 
@@ -420,6 +468,7 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 
 		// read simple variables
 		this.active = p_145839_1_.getBoolean ("active");
+		this.broken = p_145839_1_.getBoolean ("broken");
 		this.lensQuality = p_145839_1_.getFloat ("lensQuality");
 
 		// read authority
@@ -432,6 +481,18 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	@Override
 	public void setActive (boolean b) {
 		this.active = b;
+
+		// mark update
+		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
+		this.worldObj.markBlockForUpdate (this.xCoord, this.yCoord, this.zCoord);
+	}
+
+	/**
+	 * Sets whether the camera is broken.
+	 * @param b True if the camera is broken from now on.
+	 */
+	public void setBroken (boolean b) {
+		this.broken = b;
 
 		// mark update
 		this.worldObj.markTileEntityChunkModified (this.xCoord, this.yCoord, this.zCoord, this);
@@ -466,11 +527,26 @@ public class CameraTileEntity extends TileEntity implements IRotateableTileEntit
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void updateEntity () {
+		super.updateEntity ();
+
+		// skip client execution
+		if (!this.worldObj.isRemote) return;
+
+		// emit particle
+		if (this.broken) this.worldObj.spawnParticle ("largesmoke", (this.xCoord + 0.5f), (this.yCoord + 0.8f), (this.zCoord + 0.5f), 0, 0, 0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void writeToNBT (NBTTagCompound p_145841_1_) {
 		super.writeToNBT (p_145841_1_);
 
 		// write simple properties
 		p_145841_1_.setBoolean ("active", this.active);
+		p_145841_1_.setBoolean ("broken", this.broken);
 		p_145841_1_.setFloat ("lensQuality", this.lensQuality);
 
 		// write authority information
