@@ -17,6 +17,7 @@ package org.evilco.mc.defense.common.item;
 
 import net.minecraft.item.Item;
 import org.evilco.mc.defense.common.item.generic.*;
+import org.evilco.mc.defense.common.item.machine.DrumItem;
 import org.evilco.mc.defense.common.item.machine.RollingMillItem;
 import org.evilco.mc.defense.common.item.sensor.CameraItem;
 import org.evilco.mc.defense.common.item.trigger.MotionDetectorItem;
@@ -36,6 +37,7 @@ public class DefenseItem {
 	public static final Item GENERIC_SANDPAPER_DIAMOND = new DiamondSandpaperItem ();
 	public static final Item GENERIC_WIRELESS_TUNER = new WirelessTunerItem ();
 
+	public static final Item MACHINE_DRUM = new DrumItem ();
 	public static final Item MACHINE_ROLLING_MILL = new RollingMillItem ();
 
 	public static final Item SENSOR_CAMERA = new CameraItem ();

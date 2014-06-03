@@ -50,6 +50,7 @@ public class DefenseNames {
 	public static final String ITEM_GENERIC_SANDPAPER_DIAMOND = ITEM_GENERIC_SANDPAPER + ".diamond";
 	public static final String ITEM_GENERIC_WIRELESS_TUNER = PREFIX + "generic.wirelessTuner";
 
+	public static final String ITEM_MACHINE_DRUM = PREFIX + "machine.drum";
 	public static final String ITEM_MACHINE_ROLLING_MILL = PREFIX + "machine.rollingMill";
 
 	public static final String ITEM_SENSOR_CAMERA = PREFIX + "sensor.camera";
@@ -72,6 +73,7 @@ public class DefenseNames {
 	public static final String REGISTRATION_ITEM_GENERIC_SANDPAPER = "sandpaper";
 	public static final String REGISTRATION_ITEM_GENERIC_SANDPAPER_DIAMOND = "sandpaper_diamond";
 	public static final String REGISTRATION_ITEM_GENERIC_WIRELESS_TUNER = "wireless_tuner";
+	public static final String REGISTRATION_ITEM_MACHINE_DRUM = "drum";
 	public static final String REGISTRATION_ITEM_MACHINE_ROLLING_MILL = "rolling_mill";
 	public static final String REGISTRATION_ITEM_SENSOR_CAMERA = "camera";
 	public static final String REGISTRATION_ITEM_TRIGGER_MOTION_DETECTOR = "motion_detector";

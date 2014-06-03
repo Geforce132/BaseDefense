@@ -163,6 +163,7 @@ public class CommonModificationProxy implements IModificationProxy {
 		GameRegistry.registerItem (DefenseItem.GENERIC_LENS_FISHEYE, DefenseNames.REGISTRATION_ITEM_GENERIC_LENS_FISHEYE);
 		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, DefenseNames.REGISTRATION_ITEM_GENERIC_WIRELESS_TUNER);
 
+		GameRegistry.registerItem (DefenseItem.MACHINE_DRUM, DefenseNames.REGISTRATION_ITEM_MACHINE_DRUM);
 		GameRegistry.registerItem (DefenseItem.MACHINE_ROLLING_MILL, DefenseNames.REGISTRATION_ITEM_MACHINE_ROLLING_MILL);
 
 		GameRegistry.registerItem (DefenseItem.SENSOR_CAMERA, DefenseNames.REGISTRATION_ITEM_SENSOR_CAMERA);
