@@ -204,7 +204,7 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 			if (!entity.canConnect (this)) throw new SurveillanceNetworkUnsupportedEntityException ("Cannot connect entity for unknown reasons.");
 
 			// check connection
-			if (!this.connections.contains (entity.getLocation ())) throw new SurveillanceNetworkUnknownConnectionException ("There is no connection to the supplied entity.");
+			if (!this.connections.contains (entity.getLocation ()) && entity.getLocation () != null) throw new SurveillanceNetworkUnknownConnectionException ("There is no connection to the supplied entity.");
 		}
 
 		// skip writing
@@ -233,7 +233,7 @@ public class DefenseStationTileEntity extends AbstractTileEntity implements ISur
 	public void forceDisconnect (ISurveillanceNetworkEntity entity) {
 		// delete connection
 		if (entity != null) {
-			this.connections.remove (entity.getLocation ());
+			if (entity.getLocation () != null) this.connections.remove (entity.getLocation ());
 			this.activeConnections.remove (entity);
 		} else {
 			this.connections.clear ();
