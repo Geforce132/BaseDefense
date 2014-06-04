@@ -24,4 +24,5 @@ import org.evilco.mc.defense.common.DefenseNames;
  */
 public class DefenseDamageSource {
 	public static final DamageSource GENERIC_BARBED_WIRE_FENCE = new DamageSource (DefenseNames.TRANSLATION_DAMAGE_SOURCE_GENERIC_BARBED_WIRE_FENCE).setDifficultyScaled ();
+	public static final DamageSource GENERIC_SECURITY_BOT = new DamageSource (DefenseNames.TRANSLATION_DAMAGE_SOURCE_GENERIC_SECURITY_BOT).setDifficultyScaled ().setProjectile ();
 }
