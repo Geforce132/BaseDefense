@@ -32,6 +32,7 @@ import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetw
 import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkUnsupportedEntityException;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
+import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.util.Location;
 
 /**
@@ -243,6 +244,21 @@ public class WirelessTunerItem extends Item {
 			par2EntityPlayer.addChatComponentMessage (new ChatComponentTranslation (DefenseNames.TRANSLATION_GENERIC_WIRELESS_TUNER_INVALID_ENTITY));
 
 			// skip further execution
+			return true;
+		}
+
+		// check sneak - click
+		if (par2EntityPlayer.isSneaking ()) {
+			// kill entity
+			par3EntityLivingBase.setDead ();
+
+			// drop item
+			par3EntityLivingBase.dropItem (DefenseItem.GENERIC_SECURITY_BOT, 1);
+
+			// damage item
+			par1ItemStack.damageItem (1, par2EntityPlayer);
+
+			// abort further execution
 			return true;
 		}
 
