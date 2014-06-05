@@ -58,10 +58,21 @@ public class SecurityBotItem extends Item {
 		// create entity
 		SecurityBotEntity bot = new SecurityBotEntity (par3World, par4, (par5 + 1), par6);
 
+		// break
+		if (par1ItemStack.getItemDamage () == 0) bot.setBroken (true);
+
 		// spawn entity
 		par3World.spawnEntityInWorld (bot);
 
 		// finish up
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getUnlocalizedName (ItemStack par1ItemStack) {
+		return super.getUnlocalizedName (par1ItemStack) + (par1ItemStack.getItemDamage () == 0 ? ".broken" : "");
 	}
 }
