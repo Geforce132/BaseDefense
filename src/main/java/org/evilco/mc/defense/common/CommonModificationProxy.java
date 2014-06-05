@@ -144,7 +144,7 @@ public class CommonModificationProxy implements IModificationProxy {
 
 		EntityRegistry.registerGlobalEntityID (SecurityBotEntity.class, DefenseNames.REGISTRATION_ENTITY_GENERIC_SECURITY_BOT, securityBotID);
 
-		EntityRegistry.registerModEntity (SecurityBotEntity.class, DefenseNames.REGISTRATION_ENTITY_GENERIC_SECURITY_BOT, securityBotID, DefenseModification.getInstance (), 64, 1, true);
+		EntityRegistry.registerModEntity (SecurityBotEntity.class, DefenseNames.REGISTRATION_ENTITY_GENERIC_SECURITY_BOT, securityBotID, DefenseModification.getInstance (), 64, 1, false);
 	}
 
 	/**
