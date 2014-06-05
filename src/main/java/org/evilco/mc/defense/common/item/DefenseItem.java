@@ -35,6 +35,7 @@ public class DefenseItem {
 	public static final Item GENERIC_LENS_FISHEYE = new FisheyeLensItem ();
 	public static final Item GENERIC_SANDPAPER = new SandpaperItem ();
 	public static final Item GENERIC_SANDPAPER_DIAMOND = new DiamondSandpaperItem ();
+	public static final Item GENERIC_SECURITY_BOT = new SecurityBotItem ();
 	public static final Item GENERIC_WIRELESS_TUNER = new WirelessTunerItem ();
 
 	public static final Item MACHINE_DRUM = new DrumItem ();

@@ -16,8 +16,11 @@
 package org.evilco.mc.defense.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
+import org.evilco.mc.defense.client.renderer.entity.generic.SecurityBotRenderer;
 import org.evilco.mc.defense.client.renderer.item.generic.DefenseStationItemRenderer;
+import org.evilco.mc.defense.client.renderer.item.generic.SecurityBotItemRenderer;
 import org.evilco.mc.defense.client.renderer.item.machine.DrumItemRenderer;
 import org.evilco.mc.defense.client.renderer.item.machine.RollingMillItemRenderer;
 import org.evilco.mc.defense.client.renderer.item.sensor.CameraItemRenderer;
@@ -27,6 +30,7 @@ import org.evilco.mc.defense.client.renderer.tile.machine.RollingMillTileEntityR
 import org.evilco.mc.defense.client.renderer.tile.sensor.CameraTileEntityRenderer;
 import org.evilco.mc.defense.client.renderer.tile.trigger.MotionDetectorTileEntityRenderer;
 import org.evilco.mc.defense.common.CommonModificationProxy;
+import org.evilco.mc.defense.common.entity.generic.SecurityBotEntity;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.mc.defense.common.tile.machine.RollingMillTileEntity;
@@ -53,12 +57,15 @@ public class ClientModificationProxy extends CommonModificationProxy {
 	 * Registers all rendering callbacks.
 	 */
 	public void registerRenderingCallbacks () {
+		RenderingRegistry.registerEntityRenderingHandler (SecurityBotEntity.class, new SecurityBotRenderer ());
+
 		ClientRegistry.bindTileEntitySpecialRenderer (CameraTileEntity.class, new CameraTileEntityRenderer ());
 		ClientRegistry.bindTileEntitySpecialRenderer (DefenseStationTileEntity.class, new DefenseStationTileEntityRenderer ());
 		ClientRegistry.bindTileEntitySpecialRenderer (MotionDetectorTileEntity.class, new MotionDetectorTileEntityRenderer ());
 		ClientRegistry.bindTileEntitySpecialRenderer (RollingMillTileEntity.class, new RollingMillTileEntityRenderer ());
 
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.GENERIC_DEFENSE_STATION, new DefenseStationItemRenderer ());
+		MinecraftForgeClient.registerItemRenderer (DefenseItem.GENERIC_SECURITY_BOT, new SecurityBotItemRenderer ());
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.MACHINE_DRUM, new DrumItemRenderer ());
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.MACHINE_ROLLING_MILL, new RollingMillItemRenderer ());
 		MinecraftForgeClient.registerItemRenderer (DefenseItem.SENSOR_CAMERA, new CameraItemRenderer ());

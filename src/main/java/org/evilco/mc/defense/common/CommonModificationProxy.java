@@ -18,6 +18,7 @@ package org.evilco.mc.defense.common;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.init.Blocks;
@@ -30,6 +31,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.evilco.mc.defense.DefenseModification;
 import org.evilco.mc.defense.IModificationProxy;
 import org.evilco.mc.defense.common.block.DefenseBlock;
+import org.evilco.mc.defense.common.entity.generic.SecurityBotEntity;
 import org.evilco.mc.defense.common.event.CapeHandler;
 import org.evilco.mc.defense.common.event.CraftingHandler;
 import org.evilco.mc.defense.common.gui.DefenseGuiHandler;
@@ -138,7 +140,11 @@ public class CommonModificationProxy implements IModificationProxy {
 	 * Registers all modification entities.
 	 */
 	public void registerEntities () {
+		int securityBotID = EntityRegistry.findGlobalUniqueEntityId ();
 
+		EntityRegistry.registerGlobalEntityID (SecurityBotEntity.class, DefenseNames.REGISTRATION_ENTITY_GENERIC_SECURITY_BOT, securityBotID);
+
+		EntityRegistry.registerModEntity (SecurityBotEntity.class, DefenseNames.REGISTRATION_ENTITY_GENERIC_SECURITY_BOT, securityBotID, DefenseModification.getInstance (), 64, 1, true);
 	}
 
 	/**
@@ -159,6 +165,7 @@ public class CommonModificationProxy implements IModificationProxy {
 		GameRegistry.registerItem (DefenseItem.GENERIC_IRON_WIRE, DefenseNames.REGISTRATION_ITEM_GENERIC_IRON_WIRE);
 		GameRegistry.registerItem (DefenseItem.GENERIC_SANDPAPER, DefenseNames.REGISTRATION_ITEM_GENERIC_SANDPAPER);
 		GameRegistry.registerItem (DefenseItem.GENERIC_SANDPAPER_DIAMOND, DefenseNames.REGISTRATION_ITEM_GENERIC_SANDPAPER_DIAMOND);
+		GameRegistry.registerItem (DefenseItem.GENERIC_SECURITY_BOT, DefenseNames.REGISTRATION_ITEM_GENERIC_SECURITY_BOT);
 		GameRegistry.registerItem (DefenseItem.GENERIC_LENS, DefenseNames.REGISTRATION_ITEM_GENERIC_LENS);
 		GameRegistry.registerItem (DefenseItem.GENERIC_LENS_FISHEYE, DefenseNames.REGISTRATION_ITEM_GENERIC_LENS_FISHEYE);
 		GameRegistry.registerItem (DefenseItem.GENERIC_WIRELESS_TUNER, DefenseNames.REGISTRATION_ITEM_GENERIC_WIRELESS_TUNER);

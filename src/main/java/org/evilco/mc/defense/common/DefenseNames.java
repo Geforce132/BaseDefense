@@ -48,6 +48,7 @@ public class DefenseNames {
 	public static final String ITEM_GENERIC_LENS_FISHEYE = PREFIX + "generic.lens.fisheye";
 	public static final String ITEM_GENERIC_SANDPAPER = PREFIX + "generic.sandpaper";
 	public static final String ITEM_GENERIC_SANDPAPER_DIAMOND = ITEM_GENERIC_SANDPAPER + ".diamond";
+	public static final String ITEM_GENERIC_SECURITY_BOT = PREFIX + "generic.securityBot";
 	public static final String ITEM_GENERIC_WIRELESS_TUNER = PREFIX + "generic.wirelessTuner";
 
 	public static final String ITEM_MACHINE_DRUM = PREFIX + "machine.drum";
@@ -65,6 +66,8 @@ public class DefenseNames {
 	public static final String REGISTRATION_BLOCK_SENSOR_CAMERA = "camera_block";
 	public static final String REGISTRATION_BLOCK_TRIGGER_MOTION_DETECTOR = "motion_detector_block";
 
+	public static final String REGISTRATION_ENTITY_GENERIC_SECURITY_BOT = "security_bot";
+
 	public static final String REGISTRATION_ITEM_GENERIC_CHIPSET = "chipset";
 	public static final String REGISTRATION_ITEM_GENERIC_DEFENSE_STATION = "defense_station";
 	public static final String REGISTRATION_ITEM_GENERIC_IRON_WIRE = "iron_wire";
@@ -72,6 +75,7 @@ public class DefenseNames {
 	public static final String REGISTRATION_ITEM_GENERIC_LENS_FISHEYE = "lens_fisheye";
 	public static final String REGISTRATION_ITEM_GENERIC_SANDPAPER = "sandpaper";
 	public static final String REGISTRATION_ITEM_GENERIC_SANDPAPER_DIAMOND = "sandpaper_diamond";
+	public static final String REGISTRATION_ITEM_GENERIC_SECURITY_BOT = "security_bot";
 	public static final String REGISTRATION_ITEM_GENERIC_WIRELESS_TUNER = "wireless_tuner";
 	public static final String REGISTRATION_ITEM_MACHINE_DRUM = "drum";
 	public static final String REGISTRATION_ITEM_MACHINE_ROLLING_MILL = "rolling_mill";
