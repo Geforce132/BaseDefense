@@ -15,6 +15,7 @@
  */
 package org.evilco.mc.defense.common.item.generic;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,6 +23,8 @@ import net.minecraft.world.World;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.entity.generic.SecurityBotEntity;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
+
+import java.util.List;
 
 /**
  * @auhtor Johannes Donath <johannesd@evil-co.com>
@@ -39,6 +42,7 @@ public class SecurityBotItem extends Item {
 		this.setMaxStackSize (1);
 		this.setMaxDamage (0);
 		this.setCreativeTab (DefenseCreativeTab.GENERIC);
+		this.setHasSubtypes (true);
 	}
 
 	/**
@@ -66,6 +70,16 @@ public class SecurityBotItem extends Item {
 
 		// finish up
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
+		super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
+
+		p_150895_3_.add (new ItemStack (this, 1, 1));
 	}
 
 	/**
