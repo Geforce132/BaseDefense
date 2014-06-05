@@ -25,6 +25,7 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -38,6 +39,7 @@ import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetw
 import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkUnknownConnectionException;
 import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkUnsupportedEntityException;
 import org.evilco.mc.defense.common.entity.DefenseDamageSource;
+import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.util.Location;
 
 /**
@@ -146,6 +148,14 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	 * {@inheritDoc}
 	 */
 	@Override
+	public boolean canBePushed () {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	protected boolean canDespawn () {
 		return false;
 	}
@@ -205,6 +215,16 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	 * {@inheritDoc}
 	 */
 	@Override
+	protected void entityInit () {
+		super.entityInit ();
+
+		this.dataWatcher.addObject (13, ((byte) 0));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void forceDisconnect (ISurveillanceNetworkEntity entity) {
 		// reset data
 		this.authorityLocation = null;
@@ -228,6 +248,13 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	@Override
 	protected boolean isAIEnabled () {
 		return this.aiActive;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public boolean isBroken () {
+		return (this.dataWatcher.getWatchableObjectByte (13) > 0);
 	}
 
 	/**
@@ -315,11 +342,14 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 			this.spawnExplosionParticle ();
 
 			// kill entity
-			this.attackEntityFrom (DamageSource.generic, this.getMaxHealth ());
+			if (!this.worldObj.isRemote) this.attackEntityFrom (DamageSource.generic, this.getMaxHealth ());
 
 			// skip further execution
 			return;
 		}
+
+		// broken entity
+		if (this.isBroken ()) this.worldObj.spawnParticle ("largesmoke", (this.posX), (this.posY + 0.8f), (this.posZ), 0, 0, 0);
 
 		// check connection
 		if (this.authorityLocation != null && this.authority == null) {
@@ -351,5 +381,37 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 				}
 			}
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void readEntityFromNBT (NBTTagCompound par1NBTTagCompound) {
+		super.readEntityFromNBT (par1NBTTagCompound);
+
+		this.setBroken (par1NBTTagCompound.getBoolean ("broken"));
+	}
+
+	/**
+	 * Sets whether the security bot is broken.
+	 * @param b True if the entity is broken.
+	 */
+	public void setBroken (boolean b) {
+		// update
+		this.dataWatcher.updateObject (13, ((byte) (b ? 1 : 0)));
+
+		// mark for update
+		this.worldObj.updateEntity (this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void writeEntityToNBT (NBTTagCompound par1NBTTagCompound) {
+		super.writeEntityToNBT (par1NBTTagCompound);
+
+		par1NBTTagCompound.setBoolean ("broken", this.isBroken ());
 	}
 }
