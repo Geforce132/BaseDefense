@@ -151,8 +151,6 @@ public class CommonModificationProxy implements IModificationProxy {
 	 * Registers all modification event handlers.
 	 */
 	public void registerEvents () {
-		MinecraftForge.EVENT_BUS.register (new CapeHandler ());
-
 		FMLCommonHandler.instance ().bus ().register (new CraftingHandler ());
 	}
 
