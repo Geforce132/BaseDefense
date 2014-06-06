@@ -322,11 +322,14 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	 */
 	@Override
 	public void onStruckByLightning (EntityLightningBolt par1EntityLightningBolt) {
-		// spawn explosion particle
-		this.spawnExplosionParticle ();
+		// skip client execution
+		if (!this.worldObj.isRemote) return;
 
-		// kill entity
-		this.attackEntityFrom (DamageSource.generic, this.getMaxHealth ());
+		// spawn explosion
+		this.worldObj.createExplosion (this, this.posX, this.posY, this.posZ, 3, this.worldObj.getGameRules ().getGameRuleBooleanValue ("mobGriefing"));
+
+		// kill
+		this.setDead ();
 	}
 
 	/**
