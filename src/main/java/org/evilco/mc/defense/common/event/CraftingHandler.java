@@ -33,25 +33,6 @@ public class CraftingHandler {
 	 */
 	@SubscribeEvent
 	public void onItemCrafted (PlayerEvent.ItemCraftedEvent event) {
-		// motion detector (copy damage)
-		if (event.crafting.getItem ().equals (DefenseItem.TRIGGER_MOTION_DETECTOR) || event.crafting.getItem ().equals (DefenseItem.SENSOR_CAMERA)) event.crafting.setItemDamage (event.craftMatrix.getStackInSlot (5).getItemDamage ());
-
-		// security bot (broken to fixed)
-		if (event.crafting.getItem ().equals (DefenseItem.GENERIC_SECURITY_BOT) && event.crafting.getItemDamage () != 0) {
-			// iterate over all elements
-			for (int i = 0; i < event.craftMatrix.getSizeInventory (); i++) {
-				// get stack
-				ItemStack stack = event.craftMatrix.getStackInSlot (i);
-
-				// skip items other than the security bot
-				if (!stack.getItem ().equals (DefenseItem.GENERIC_SECURITY_BOT) || stack.getItemDamage () != 0) continue;
-
-				// copy data
-				event.crafting.setItemDamage (((stack.getTagCompound () == null || !stack.getTagCompound ().hasKey ("tier")) ? 1 : stack.getTagCompound ().getInteger ("tier")));
-
-				// skip further execution
-				break;
-			}
-		}
+		// TODO: Achievements
 	}
 }
