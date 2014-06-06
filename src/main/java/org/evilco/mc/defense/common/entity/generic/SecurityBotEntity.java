@@ -41,6 +41,7 @@ import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetw
 import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkUnsupportedEntityException;
 import org.evilco.mc.defense.common.entity.DefenseDamageSource;
 import org.evilco.mc.defense.common.item.DefenseItem;
+import org.evilco.mc.defense.common.item.generic.SecurityBotItem;
 import org.evilco.mc.defense.common.util.Location;
 
 /**
@@ -342,6 +343,17 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	@Override
 	public void notifyInvalidation (ISurveillanceNetworkEntity entity) throws SurveillanceNetworkException {
 		this.authority = null;
+	}
+
+	@Override
+	public void onDeath (DamageSource par1DamageSource) {
+		super.onDeath (par1DamageSource);
+
+		// drop item
+		if (this.getRNG ().nextFloat () <= 0.33)
+			this.entityDropItem (this.getPickedResult (null), 0.0f);
+		else
+			this.entityDropItem (SecurityBotItem.getBroken (this.getPickedResult (null)));
 	}
 
 	/**

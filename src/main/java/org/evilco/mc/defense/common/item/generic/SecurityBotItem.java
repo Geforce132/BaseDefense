@@ -20,10 +20,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import org.evilco.mc.defense.common.DefenseNames;
 import org.evilco.mc.defense.common.entity.generic.SecurityBotEntity;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
+import org.evilco.mc.defense.common.item.DefenseItem;
 
 import java.util.List;
 
@@ -54,6 +56,26 @@ public class SecurityBotItem extends Item {
 		super.addInformation (par1ItemStack, par2EntityPlayer, par3List, par4);
 
 		if (par1ItemStack.getItemDamage () == 0) par3List.add (LanguageRegistry.instance ().getStringLocalization (DefenseNames.TRANSLATION_GENERIC_SECURITY_BOT_BROKEN));
+	}
+
+	/**
+	 * Returns the broken version of an item stack.
+	 * @param par1ItemStack The original item stack.
+	 * @return The broken item stack.
+	 */
+	public static ItemStack getBroken (ItemStack par1ItemStack) {
+		// create item stack
+		ItemStack itemStack = new ItemStack (DefenseItem.GENERIC_SECURITY_BOT, par1ItemStack.stackSize, 0);
+
+		// create NBT
+		NBTTagCompound nbt = (par1ItemStack.getTagCompound () == null ? new NBTTagCompound () : par1ItemStack.getTagCompound ());
+		nbt.setInteger ("tier", par1ItemStack.getItemDamage ());
+
+		// append data
+		par1ItemStack.setTagCompound (nbt);
+
+		// return finished item stack
+		return itemStack;
 	}
 
 	/**
