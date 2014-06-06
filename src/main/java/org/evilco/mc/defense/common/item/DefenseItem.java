@@ -38,6 +38,7 @@ public class DefenseItem {
 	public static final Item GENERIC_SECURITY_BOT = new SecurityBotItem ();
 	public static final Item GENERIC_TOOLKIT = new ToolkitItem ();
 	public static final Item GENERIC_WIRELESS_TUNER = new WirelessTunerItem ();
+	public static final Item GENERIC_WRENCH = new WrenchItem ();
 
 	public static final Item MACHINE_DRUM = new DrumItem ();
 	public static final Item MACHINE_ROLLING_MILL = new RollingMillItem ();

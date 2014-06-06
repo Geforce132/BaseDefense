@@ -51,6 +51,7 @@ public class DefenseNames {
 	public static final String ITEM_GENERIC_SECURITY_BOT = PREFIX + "generic.securityBot";
 	public static final String ITEM_GENERIC_TOOLKIT = PREFIX + "generic.toolkit";
 	public static final String ITEM_GENERIC_WIRELESS_TUNER = PREFIX + "generic.wirelessTuner";
+	public static final String ITEM_GENERIC_WRENCH = PREFIX + "generic.wrench";
 
 	public static final String ITEM_MACHINE_DRUM = PREFIX + "machine.drum";
 	public static final String ITEM_MACHINE_ROLLING_MILL = PREFIX + "machine.rollingMill";
@@ -79,6 +80,7 @@ public class DefenseNames {
 	public static final String REGISTRATION_ITEM_GENERIC_SECURITY_BOT = "security_bot";
 	public static final String REGISTRATION_ITEM_GENERIC_TOOLKIT = "toolkit";
 	public static final String REGISTRATION_ITEM_GENERIC_WIRELESS_TUNER = "wireless_tuner";
+	public static final String REGISTRATION_ITEM_GENERIC_WRENCH = "wrench";
 	public static final String REGISTRATION_ITEM_MACHINE_DRUM = "drum";
 	public static final String REGISTRATION_ITEM_MACHINE_ROLLING_MILL = "rolling_mill";
 	public static final String REGISTRATION_ITEM_SENSOR_CAMERA = "camera";
