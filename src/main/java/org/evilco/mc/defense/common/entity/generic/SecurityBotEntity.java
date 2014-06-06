@@ -84,6 +84,11 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	protected boolean returnToOriginRequested = false;
 
 	/**
+	 * Indicates whether the bot is waterproof.
+	 */
+	protected boolean waterproof = false;
+
+	/**
 	 * Constructs a new SecurityBotEntity instance.
 	 * @param par1World The world to spawn the entity in.
 	 */
@@ -284,6 +289,13 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	/**
 	 * {@inheritDoc}
 	 */
+	public boolean isWaterproof () {
+		return this.waterproof;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void notifyAlarm (ISurveillanceNetworkAuthority authority, SurveillanceNetworkAlarmState alarmState, DetectedEntity entity) {
 		// reset back to normal
@@ -345,8 +357,14 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	public void onUpdate () {
 		super.onUpdate ();
 
+		// broken entity
+		if (this.worldObj.isRemote && this.isBroken ()) this.worldObj.spawnParticle ("largesmoke", (this.posX), (this.posY + 0.8f), (this.posZ), 0, 0, 0);
+
+		// skip client
+		if (this.worldObj.isRemote) return;
+
 		// check whether bot is in water
-		if (this.isInWater () && !this.worldObj.isRemote) {
+		if (this.isInWater () && !this.isWaterproof ()) {
 			// spawn explosion
 			this.worldObj.createExplosion (this, this.posX, this.posY, this.posZ, 3, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
 
@@ -356,9 +374,6 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 			// skip further execution
 			return;
 		}
-
-		// broken entity
-		if (this.isBroken ()) this.worldObj.spawnParticle ("largesmoke", (this.posX), (this.posY + 0.8f), (this.posZ), 0, 0, 0);
 
 		// check connection
 		if (this.authorityLocation != null && this.authority == null) {
@@ -409,6 +424,17 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	public void setBroken (boolean b) {
 		// update
 		this.dataWatcher.updateObject (13, ((byte) (b ? 1 : 0)));
+
+		// mark for update
+		this.worldObj.updateEntity (this);
+	}
+
+	/**
+	 * Sets whether the security bot is waterproof.
+	 * @param b True if the security bot is waterproof.
+	 */
+	public void setWaterproof (boolean b) {
+		this.waterproof = b;
 
 		// mark for update
 		this.worldObj.updateEntity (this);
