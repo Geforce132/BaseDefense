@@ -254,7 +254,7 @@ public class WirelessTunerItem extends Item {
 			par3EntityLivingBase.setDead ();
 
 			// drop item
-			par3EntityLivingBase.dropItem (DefenseItem.GENERIC_SECURITY_BOT, 1);
+			par3EntityLivingBase.entityDropItem (new ItemStack (DefenseItem.GENERIC_SECURITY_BOT, 1, (((SecurityBotEntity) par3EntityLivingBase).isBroken () ? 0 : 1)), 0.0f);
 
 			// damage item
 			par1ItemStack.damageItem (1, par2EntityPlayer);
