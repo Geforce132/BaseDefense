@@ -15,6 +15,7 @@
  */
 package org.evilco.mc.defense.common.item.generic;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -43,6 +44,16 @@ public class SecurityBotItem extends Item {
 		this.setMaxDamage (0);
 		this.setCreativeTab (DefenseCreativeTab.GENERIC);
 		this.setHasSubtypes (true);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addInformation (ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+		super.addInformation (par1ItemStack, par2EntityPlayer, par3List, par4);
+
+		if (par1ItemStack.getItemDamage () == 0) par3List.add (LanguageRegistry.instance ().getStringLocalization (DefenseNames.TRANSLATION_GENERIC_SECURITY_BOT_BROKEN));
 	}
 
 	/**
@@ -80,13 +91,5 @@ public class SecurityBotItem extends Item {
 		super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
 
 		p_150895_3_.add (new ItemStack (this, 1, 1));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getUnlocalizedName (ItemStack par1ItemStack) {
-		return super.getUnlocalizedName (par1ItemStack) + (par1ItemStack.getItemDamage () == 0 ? ".broken" : "");
 	}
 }

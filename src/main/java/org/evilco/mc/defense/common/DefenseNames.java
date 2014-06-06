@@ -94,6 +94,7 @@ public class DefenseNames {
 
 	public static final String TRANSLATION_GENERIC_DEFENSE_STATION_PERMISSION_DENIED = PREFIX + "generic.defenseStation.permissionDenied";
 	public static final String TRANSLATION_GENERIC_DEFENSE_STATION_TITLE = PREFIX + "generic.defenseStation.title";
+	public static final String TRANSLATION_GENERIC_SECURITY_BOT_BROKEN = PREFIX + "generic.securityBot.broken";
 
 	public static final String TRANSLATION_GENERIC_ITEM_LENS_QUALITY = PREFIX + "generic.item.lensQuality";
 
