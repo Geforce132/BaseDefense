@@ -27,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import org.evilco.mc.defense.DefenseModification;
 import org.evilco.mc.defense.IModificationProxy;
 import org.evilco.mc.defense.common.block.DefenseBlock;
@@ -472,6 +473,25 @@ public class CommonModificationProxy implements IModificationProxy {
 			'X', Items.iron_ingot,
 			'Y', DefenseItem.MACHINE_DRUM,
 			'Z', Blocks.iron_block
+		);
+
+		// iron ingot -> wrench
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.GENERIC_WRENCH, 1),
+			" XX",
+			"XXX",
+			"XX ",
+			'X', Items.iron_ingot
+		);
+
+		// wrench + iron ingot -> toolkit
+		GameRegistry.addRecipe (
+			new ItemStack (DefenseItem.GENERIC_TOOLKIT),
+			"XXX",
+			"XYX",
+			"XXX",
+			'X', Items.iron_ingot,
+			'Y', DefenseItem.GENERIC_WRENCH
 		);
 
 		// add rolling mill recipes
