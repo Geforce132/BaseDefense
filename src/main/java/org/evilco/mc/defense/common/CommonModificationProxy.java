@@ -37,11 +37,14 @@ import org.evilco.mc.defense.common.gui.DefenseGuiHandler;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.network.DefenseChannelHandler;
 import org.evilco.mc.defense.common.recipe.generic.LensRecipe;
+import org.evilco.mc.defense.common.recipe.generic.SecurityBotRecipe;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.mc.defense.common.tile.machine.RollingMillTileEntity;
 import org.evilco.mc.defense.common.tile.sensor.CameraTileEntity;
 import org.evilco.mc.defense.common.tile.trigger.MotionDetectorTileEntity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 
 /**
@@ -508,6 +511,15 @@ public class CommonModificationProxy implements IModificationProxy {
 			'X', Items.iron_ingot,
 			'Y', DefenseItem.GENERIC_WRENCH
 		);
+
+		// toolkit + broken security bot -> security bot
+		GameRegistry.addRecipe (new SecurityBotRecipe (
+			new ItemStack (DefenseItem.GENERIC_SECURITY_BOT, 1, 0),
+			Arrays.asList (new ItemStack[] {
+				new ItemStack (DefenseItem.GENERIC_SECURITY_BOT, 1, 0),
+				new ItemStack (DefenseItem.GENERIC_TOOLKIT, 1, OreDictionary.WILDCARD_VALUE)
+			})
+		));
 
 		// add rolling mill recipes
 		RollingMillTileEntity.addRecipe (Items.iron_ingot, new ItemStack (DefenseItem.GENERIC_IRON_WIRE, 4));
