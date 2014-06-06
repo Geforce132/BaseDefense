@@ -345,6 +345,9 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 		this.authority = null;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onDeath (DamageSource par1DamageSource) {
 		super.onDeath (par1DamageSource);
