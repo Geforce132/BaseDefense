@@ -28,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import org.evilco.mc.defense.api.network.identification.DetectedEntity;
 import org.evilco.mc.defense.api.network.surveillance.ISurveillanceNetworkAuthority;
@@ -245,6 +246,14 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 	@Override
 	public Location getLocation () {
 		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ItemStack getPickedResult (MovingObjectPosition target) {
+		return (new ItemStack (DefenseItem.GENERIC_SECURITY_BOT, 1, (this.isWaterproof () ? 2 : 1)));
 	}
 
 	/**
