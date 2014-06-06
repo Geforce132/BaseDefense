@@ -36,6 +36,7 @@ import org.evilco.mc.defense.common.event.CraftingHandler;
 import org.evilco.mc.defense.common.gui.DefenseGuiHandler;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.network.DefenseChannelHandler;
+import org.evilco.mc.defense.common.recipe.generic.LensRecipe;
 import org.evilco.mc.defense.common.tile.generic.DefenseStationTileEntity;
 import org.evilco.mc.defense.common.tile.machine.RollingMillTileEntity;
 import org.evilco.mc.defense.common.tile.sensor.CameraTileEntity;
@@ -328,16 +329,22 @@ public class CommonModificationProxy implements IModificationProxy {
 		);
 
 		// redstone lamp + wireless tuner + iron ingot + lens -> motion detector
-		GameRegistry.addRecipe (
-			new ItemStack (DefenseItem.TRIGGER_MOTION_DETECTOR, 1),
-			"XXX",
-			"YZW",
-			"XXX",
-			'X', Items.iron_ingot,
-			'Y', DefenseItem.GENERIC_WIRELESS_TUNER,
-			'Z', Blocks.redstone_lamp,
-			'W', new ItemStack (DefenseItem.GENERIC_LENS, 1, OreDictionary.WILDCARD_VALUE)
-		);
+		GameRegistry.addRecipe (new LensRecipe (
+			3,
+			3,
+			new ItemStack[] {
+				new ItemStack (Items.iron_ingot, 1),
+				new ItemStack (Items.iron_ingot, 1),
+				new ItemStack (Items.iron_ingot, 1),
+				new ItemStack (DefenseItem.GENERIC_WIRELESS_TUNER),
+				new ItemStack (Blocks.redstone_lamp),
+				new ItemStack (DefenseItem.GENERIC_LENS, 1, OreDictionary.WILDCARD_VALUE),
+				new ItemStack (Items.iron_ingot, 1),
+				new ItemStack (Items.iron_ingot, 1),
+				new ItemStack (Items.iron_ingot, 1),
+			},
+			new ItemStack (DefenseItem.TRIGGER_MOTION_DETECTOR, 1)
+		));
 
 		// iron ingot + redstone + iron wire -> simple chipset
 		GameRegistry.addRecipe (
