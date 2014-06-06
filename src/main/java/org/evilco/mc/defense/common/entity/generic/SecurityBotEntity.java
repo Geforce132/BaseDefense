@@ -307,14 +307,20 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void notifyConnection (ISurveillanceNetworkEntity entity) throws SurveillanceNetworkException {
-
+		throw new UnsupportedOperationException ();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void notifyInvalidation (ISurveillanceNetworkEntity entity) throws SurveillanceNetworkException {
-
+		this.authority = null;
 	}
 
 	/**
