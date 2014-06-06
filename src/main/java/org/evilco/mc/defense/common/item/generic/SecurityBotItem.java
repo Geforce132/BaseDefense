@@ -83,8 +83,6 @@ public class SecurityBotItem extends Item {
 	 */
 	@Override
 	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_) {
-		super.getSubItems (p_150895_1_, p_150895_2_, p_150895_3_);
-
 		p_150895_3_.add (new ItemStack (this, 1, 1));
 	}
 
