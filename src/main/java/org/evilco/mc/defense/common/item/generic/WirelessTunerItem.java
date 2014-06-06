@@ -31,6 +31,7 @@ import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetw
 import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkPermissionException;
 import org.evilco.mc.defense.api.network.surveillance.exception.SurveillanceNetworkUnsupportedEntityException;
 import org.evilco.mc.defense.common.DefenseNames;
+import org.evilco.mc.defense.common.entity.generic.SecurityBotEntity;
 import org.evilco.mc.defense.common.gui.creative.DefenseCreativeTab;
 import org.evilco.mc.defense.common.item.DefenseItem;
 import org.evilco.mc.defense.common.util.Location;
@@ -248,7 +249,7 @@ public class WirelessTunerItem extends Item {
 		}
 
 		// check sneak - click
-		if (par2EntityPlayer.isSneaking ()) {
+		if (par2EntityPlayer.isSneaking () && (par3EntityLivingBase instanceof SecurityBotEntity)) {
 			// kill entity
 			par3EntityLivingBase.setDead ();
 
