@@ -353,7 +353,7 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 		if (this.getRNG ().nextFloat () <= 0.33)
 			this.entityDropItem (this.getPickedResult (null), 0.0f);
 		else
-			this.entityDropItem (SecurityBotItem.getBroken (this.getPickedResult (null)));
+			this.entityDropItem (SecurityBotItem.getBroken (this.getPickedResult (null)), 0.0f);
 	}
 
 	/**
