@@ -419,16 +419,24 @@ public class CommonModificationProxy implements IModificationProxy {
 		);
 
 		// wireless tuner + expert chipset + iron block + lens -> camera
-		GameRegistry.addRecipe (
-			new ItemStack (DefenseItem.SENSOR_CAMERA, 1),
-			"XXX",
-			"YZU",
-			"XXX",
-			'X', Blocks.iron_block,
-			'Y', DefenseItem.GENERIC_WIRELESS_TUNER,
-			'Z', new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2),
-			'U', new ItemStack (DefenseItem.GENERIC_LENS, 1, OreDictionary.WILDCARD_VALUE)
-		);
+		GameRegistry.addRecipe (new LensRecipe (
+			3,
+			3,
+			new ItemStack[] {
+				new ItemStack (Blocks.iron_block, 1),
+				new ItemStack (Blocks.iron_block, 1),
+				new ItemStack (Blocks.iron_block, 1),
+
+				new ItemStack (DefenseItem.GENERIC_WIRELESS_TUNER, 1),
+				new ItemStack (DefenseItem.GENERIC_CHIPSET, 1, 2),
+				new ItemStack (DefenseItem.GENERIC_LENS, 1, OreDictionary.WILDCARD_VALUE),
+
+				new ItemStack (Blocks.iron_block, 1),
+				new ItemStack (Blocks.iron_block, 1),
+				new ItemStack (Blocks.iron_block, 1),
+			},
+			new ItemStack (DefenseItem.SENSOR_CAMERA, 1)
+		));
 
 		// wireless tuner + intelligence chipset + iron block -> defense station
 		GameRegistry.addRecipe (
