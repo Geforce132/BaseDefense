@@ -337,12 +337,12 @@ public class SecurityBotEntity extends EntityCreature implements IRangedAttackMo
 		super.onUpdate ();
 
 		// check whether bot is in water
-		if (this.isInWater ()) {
-			// spawn explosion particle
-			this.spawnExplosionParticle ();
+		if (this.isInWater () && !this.worldObj.isRemote) {
+			// spawn explosion
+			this.worldObj.createExplosion (this, this.posX, this.posY, this.posZ, 3, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
 
-			// kill entity
-			if (!this.worldObj.isRemote) this.attackEntityFrom (DamageSource.generic, this.getMaxHealth ());
+			// kill
+			this.setDead ();
 
 			// skip further execution
 			return;
