@@ -501,10 +501,11 @@ public class CommonModificationProxy implements IModificationProxy {
 		// iron ingot -> wrench
 		GameRegistry.addRecipe (
 			new ItemStack (DefenseItem.GENERIC_WRENCH, 1),
-			" XX",
-			"XXX",
-			"XX ",
-			'X', Items.iron_ingot
+			"  Y",
+			" X ",
+			"Y  ",
+			'X', Items.iron_ingot,
+			'Y', Blocks.iron_block
 		);
 
 		// wrench + iron ingot -> toolkit
