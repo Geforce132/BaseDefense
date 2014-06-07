@@ -27,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import org.evilco.mc.defense.DefenseModification;
 import org.evilco.mc.defense.IModificationProxy;
@@ -185,6 +186,10 @@ public class CommonModificationProxy implements IModificationProxy {
 	 * Registers all modification recipes.
 	 */
 	public void registerRecipes () {
+		// register custom recipes
+		RecipeSorter.register ("lens", LensRecipe.class, RecipeSorter.Category.SHAPED, "");
+		RecipeSorter.register ("securityBot", SecurityBotRecipe.class, RecipeSorter.Category.SHAPELESS, "");
+
 		// sand + paper -> sandpaper
 		GameRegistry.addShapelessRecipe (
 			new ItemStack (DefenseItem.GENERIC_SANDPAPER, 1),
