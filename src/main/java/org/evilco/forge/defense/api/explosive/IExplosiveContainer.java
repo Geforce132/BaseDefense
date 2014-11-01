@@ -28,6 +28,7 @@ public interface IExplosiveContainer {
 	 * @param x The X-Coordinate.
 	 * @param y The Y-Coordinate.
 	 * @param z The Z-Coordinate.
+	 * @param fuse The fuse time in ticks (0 for instant explosion).
 	 */
-	public void spawnExplositve (World world, double x, double y, double z);
+	public void spawnExplosive (World world, double x, double y, double z, short fuse);
 }
