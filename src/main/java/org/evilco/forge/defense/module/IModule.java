@@ -31,6 +31,11 @@ public interface IModule {
 	public void registerBlockEntities ();
 
 	/**
+	 * Registers modification crafting recipes.
+	 */
+	public void registerCraftingRecipes ();
+
+	/**
 	 * Registers modification items.
 	 */
 	public void registerItems ();

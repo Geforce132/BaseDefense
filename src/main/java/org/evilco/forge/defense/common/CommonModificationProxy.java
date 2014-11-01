@@ -83,6 +83,8 @@ public class CommonModificationProxy implements IModificationProxy {
 		this.registerBlockEntities ();
 		this.registerItems ();
 		this.registerBlocks ();
+
+		this.registerCraftingRecipes ();
 	}
 
 	/**
@@ -110,6 +112,14 @@ public class CommonModificationProxy implements IModificationProxy {
 	protected final void registerBlocks () {
 		// call modules
 		for (IModule module : this.activeModules) module.registerBlocks ();
+	}
+
+	/**
+	 * Registers modification crafting recipes.
+	 */
+	protected final void registerCraftingRecipes () {
+		// call modules
+		for (IModule module : this.getActiveModules ()) module.registerCraftingRecipes ();
 	}
 
 	/**
