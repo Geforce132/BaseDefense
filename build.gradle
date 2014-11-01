@@ -1,0 +1,117 @@
+/*
+ * Copyright 2014 Johannes Donath <johannesd@evil-co.com>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * 	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Build-Script Configuration & Dependencies
+ */
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+		maven {
+			name = "sonatype"
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+	}
+}
+
+// Turn gradle into a proper build tool
+// GOD DAMNIT ADD THIS SCOPE ALREADY!
+configurations {
+	provided
+	compile.extendsFrom provided
+}
+
+/**
+ * Gradle Plugins
+ */
+apply plugin: 'forge'
+
+/**
+ * Artifact Configuration
+ */
+version = "1.0.0-SNAPSHOT"
+group = "org.evilco.forge" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "defense"
+
+// Add Bamboo Build-Number
+if (System.getenv ()['bamboo.buildNumber']) version += '-bamboo' + System.getenv ()['bamboo.buildNumber'];
+
+/**
+ * Configure Minecraft
+ */
+minecraft {
+	version = "1.7.10-10.13.2.1232"
+	runDir = "target"
+}
+
+/**
+ * Configure Dependency Repositories
+ */
+repositories {
+	maven {
+		name = "codechicken"
+		url = "http://chickenbones.net/maven"
+	}
+
+	ivy {
+		name "CoFHCore"
+		artifactPattern "http://addons.cursecdn.com/files/2212/895/[module]-[revision].[ext]"
+	}
+}
+
+/**
+ * Configure Dependencies
+ */
+dependencies {
+	provided "org.projectlombok:lombok:1.14.8"
+	compile 'codechicken:NotEnoughItems:1.7.10-1.0.3.64:dev'
+	compile name: 'CoFHCore', version: '[1.7.10]3.0.0B6-dev-32', ext: 'jar'
+}
+
+/**
+ * Configure Resources
+ */
+processResources {
+	// this will ensure that this task is redone when the versions change.
+	inputs.property "version", project.version
+	inputs.property "mcversion", project.minecraft.version
+
+	// replace stuff in mcmod.info, nothing else
+	from(sourceSets.main.resources.srcDirs) {
+		include 'mcmod.info'
+
+		// replace version and mcversion
+		expand 'version':project.version, 'mcversion':project.minecraft.version
+	}
+
+	// copy everything else, thats not the mcmod.info
+	from(sourceSets.main.resources.srcDirs) {
+		exclude 'mcmod.info'
+	}
+}
+
+/**
+ * Configure Wrapper
+ */
+task wrapper (type: Wrapper) {
+	gradleVersion = '2.1'
+}
