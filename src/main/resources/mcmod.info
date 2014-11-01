@@ -1,0 +1,19 @@
+[
+	{
+		"modid":		"Defense",
+		"name":			"Base Defense",
+		"description":		"Adds many different ways to protect buildings against mobs and other players.",
+		"version":		"${version}",
+		"mcversion":		"${mcversion}",
+		"url":			"http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2093078",
+		"updateUrl":		"",
+		"authorList":		["Akkarin"],
+		"credits":		"",
+		"logoFile":		"",
+		"screenshots":		[],
+		"dependencies":		[
+			"MinecraftForge",
+			"CoFHCore"
+		]
+	}
+]
