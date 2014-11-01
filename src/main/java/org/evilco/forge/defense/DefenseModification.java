@@ -46,7 +46,7 @@ public class DefenseModification {
 	 * Stores the active proxy instance.
 	 */
 	@SidedProxy (serverSide = "org.evilco.forge.defense.common.CommonModificationProxy", clientSide = "org.evilco.forge.defense.client.ClientModificationProxy")
-	private IModificationProxy proxy = null;
+	private static IModificationProxy proxy = null;
 
 	/**
 	 * Stores the logger.
@@ -71,7 +71,7 @@ public class DefenseModification {
 		configuration.save ();
 
 		// call proxy
-		this.proxy.preInitialize (configuration);
+		proxy.preInitialize (configuration);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class DefenseModification {
 	 */
 	@Mod.EventHandler
 	public void onInitialize (FMLInitializationEvent event) {
-		this.proxy.initialize ();
+		proxy.initialize ();
 	}
 
 	/**
@@ -92,6 +92,6 @@ public class DefenseModification {
 		// TODO: Handle soft dependencies here
 
 		// call proxy
-		this.proxy.postInitialize ();
+		proxy.postInitialize ();
 	}
 }
