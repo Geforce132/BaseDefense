@@ -26,12 +26,17 @@ public interface IModule {
 	public void registerBlocks ();
 
 	/**
+	 * Registers modification block entities.
+	 */
+	public void registerBlockEntities ();
+
+	/**
 	 * Registers modification items.
 	 */
 	public void registerItems ();
 
 	/**
-	 * Registers modification block entities.
+	 * Registers all modification renderers.
 	 */
-	public void registerBlockEntities ();
+	public void registerRenderers ();
 }

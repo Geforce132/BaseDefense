@@ -30,11 +30,17 @@ public abstract class AbstractModule implements IModule {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void registerBlockEntities () { }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void registerItems () { }
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerBlockEntities () { }
+	public void registerRenderers () { }
 }
