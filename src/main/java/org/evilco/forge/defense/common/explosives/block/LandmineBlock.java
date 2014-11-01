@@ -20,6 +20,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import org.evilco.forge.defense.api.explosive.IExplosiveContainer;
+import org.evilco.forge.defense.common.DefenseCreativeTab;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -37,6 +38,8 @@ public class LandmineBlock extends Block implements IExplosiveContainer, ITileEn
 	 */
 	protected LandmineBlock () {
 		super (Material.tnt);
+
+		this.setCreativeTab (DefenseCreativeTab.EXPLOSIVES);
 	}
 
 	/**
