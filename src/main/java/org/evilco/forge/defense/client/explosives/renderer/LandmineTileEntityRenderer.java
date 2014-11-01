@@ -53,6 +53,7 @@ public class LandmineTileEntityRenderer extends TileEntitySpecialRenderer {
 		GL11.glScalef (0.5f, 0.5f, 0.5f);
 
 		// bind texture
+		// TODO: Update design to be kinda invisible
 		Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("minecraft", "textures/blocks/iron_block.png"));
 
 		// render model
