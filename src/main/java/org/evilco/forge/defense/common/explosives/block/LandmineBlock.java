@@ -42,7 +42,7 @@ public class LandmineBlock extends Block implements IExplosiveContainer, ITileEn
 		super (Material.tnt);
 
 		this.setCreativeTab (DefenseCreativeTab.EXPLOSIVES);
-		this.setBlockBounds (0.35f, 0.0f, 0.35f, 0.65f, 0.1f, 0.65f);
+		this.setBlockBounds (0.25f, 0.0f, 0.25f, 0.75f, 0.1f, 0.75f);
 	}
 
 	/**
