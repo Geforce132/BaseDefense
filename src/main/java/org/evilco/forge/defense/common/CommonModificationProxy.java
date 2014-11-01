@@ -33,7 +33,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	 */
 	@Override
 	public void initialize () {
-		this.registerTileEntities ();
+		this.registerBlockEntities ();
 		this.registerItems ();
 		this.registerBlocks ();
 	}
@@ -55,7 +55,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	protected final void registerItems () { }
 
 	/**
-	 * Registers modification tile entities.
+	 * Registers modification block entities.
 	 */
-	protected final void registerTileEntities () { }
+	protected final void registerBlockEntities () { }
 }
