@@ -15,15 +15,18 @@
 package org.evilco.forge.defense.module;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import org.evilco.forge.defense.DefenseModification;
 import org.evilco.forge.defense.client.explosives.renderer.LandmineTileEntityRenderer;
 import org.evilco.forge.defense.common.explosives.block.ChemicalExplosiveBlock;
 import org.evilco.forge.defense.common.explosives.block.ExplosivesBlock;
 import org.evilco.forge.defense.common.explosives.block.LandmineBlock;
 import org.evilco.forge.defense.common.explosives.block.entity.LandmineBlockEntity;
+import org.evilco.forge.defense.common.explosives.entity.PrimedChemicalExplosiveEntity;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -69,6 +72,15 @@ public class ExplosivesModule extends AbstractModule {
 			'Y', Items.gunpowder,
 			'Z', Blocks.tnt
 		);
+	}
+
+	@Override
+	public void registerEntities () {
+		super.registerEntities ();
+
+		int primedChemicalExplosiveID = EntityRegistry.findGlobalUniqueEntityId ();
+		EntityRegistry.registerGlobalEntityID (PrimedChemicalExplosiveEntity.class, PrimedChemicalExplosiveEntity.NAME, primedChemicalExplosiveID);
+		EntityRegistry.registerModEntity (PrimedChemicalExplosiveEntity.class, PrimedChemicalExplosiveEntity.NAME, primedChemicalExplosiveID, DefenseModification.getInstance (), 0, 60, true);
 	}
 
 	/**
