@@ -22,5 +22,6 @@ public class ExplosivesBlock {
 	protected ExplosivesBlock () { }
 
 	// Blocks
+	public static final ChemicalExplosiveBlock CHEMICAL_EXPLOSIVE = new ChemicalExplosiveBlock ();
 	public static final LandmineBlock LANDMINE = new LandmineBlock ();
 }
