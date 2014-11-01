@@ -14,6 +14,8 @@
  */
 package org.evilco.forge.defense;
 
+import net.minecraftforge.common.config.Configuration;
+
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
@@ -22,8 +24,9 @@ public interface IModificationProxy {
 
 	/**
 	 * Callback for {@link cpw.mods.fml.common.event.FMLPreInitializationEvent}.
+	 * @param configuration The modification configuration.
 	 */
-	public void preInitialize ();
+	public void preInitialize (Configuration configuration);
 
 	/**
 	 * Callback for {@link cpw.mods.fml.common.event.FMLInitializationEvent}.

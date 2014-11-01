@@ -20,6 +20,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import lombok.Getter;
+import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -62,8 +63,15 @@ public class DefenseModification {
 		// store logger
 		this.logger = event.getModLog ();
 
+		// load configuration
+		Configuration configuration = new Configuration (event.getSuggestedConfigurationFile ());
+
+		// load & save configuration
+		configuration.load ();
+		configuration.save ();
+
 		// call proxy
-		this.proxy.preInitialize ();
+		this.proxy.preInitialize (configuration);
 	}
 
 	/**
