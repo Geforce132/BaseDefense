@@ -14,7 +14,6 @@
  */
 package org.evilco.forge.defense.common.explosives.block.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
