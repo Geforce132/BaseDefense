@@ -22,6 +22,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.evilco.forge.defense.api.explosive.IExplosiveContainer;
 import org.evilco.forge.defense.common.DefenseCreativeTab;
+import org.evilco.forge.defense.common.explosives.ExplosivesString;
 import org.evilco.forge.defense.common.explosives.block.entity.LandmineBlockEntity;
 
 /**
@@ -41,6 +42,7 @@ public class LandmineBlock extends Block implements IExplosiveContainer, ITileEn
 	protected LandmineBlock () {
 		super (Material.tnt);
 
+		this.setBlockName (ExplosivesString.BLOCK_NAME_LANDMINE);
 		this.setCreativeTab (DefenseCreativeTab.EXPLOSIVES);
 		this.setBlockBounds (0.25f, 0.0f, 0.25f, 0.75f, 0.1f, 0.75f);
 	}

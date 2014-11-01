@@ -21,6 +21,10 @@ package org.evilco.forge.defense.common.explosives;
 public class ExplosivesString {
 	private ExplosivesString () { }
 
+	// BLOCK NAME START
+	public static final String BLOCK_NAME_LANDMINE = "defense.explosives.landmine";
+	// BLOCK NAME END
+
 	// CREATIVE TAB START
 	public static final String CREATIVE_TAB_EXPLOSIVES = "defense.explosives";
 	// CREATIVE TAB STOP
