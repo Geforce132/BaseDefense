@@ -20,6 +20,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import org.evilco.forge.defense.client.explosives.renderer.LandmineTileEntityRenderer;
+import org.evilco.forge.defense.common.explosives.block.ChemicalExplosiveBlock;
 import org.evilco.forge.defense.common.explosives.block.ExplosivesBlock;
 import org.evilco.forge.defense.common.explosives.block.LandmineBlock;
 import org.evilco.forge.defense.common.explosives.block.entity.LandmineBlockEntity;
@@ -38,6 +39,7 @@ public class ExplosivesModule extends AbstractModule {
 		super.registerBlocks ();
 
 		GameRegistry.registerBlock (ExplosivesBlock.LANDMINE, LandmineBlock.NAME);
+		GameRegistry.registerBlock (ExplosivesBlock.CHEMICAL_EXPLOSIVE, ChemicalExplosiveBlock.NAME);
 	}
 
 	/**
