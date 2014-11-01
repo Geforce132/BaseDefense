@@ -29,7 +29,7 @@ import org.evilco.forge.defense.common.explosives.block.entity.LandmineBlockEnti
  * @author Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
  */
-public class LandmineBlock extends Block implements IExplosiveContainer, ITileEntityProvider {
+public class LandmineBlock extends Block implements ITileEntityProvider {
 
 	/**
 	 * Defines the block name.
@@ -69,16 +69,5 @@ public class LandmineBlock extends Block implements IExplosiveContainer, ITileEn
 	@Override
 	public boolean shouldSideBeRendered (IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_) {
 		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void spawnExplositve (World world, double x, double y, double z) {
-		// cancel on client side
-		if (world.isRemote) return;
-
-		// TODO: Spawn some explosives!
 	}
 }
