@@ -14,7 +14,13 @@
  */
 package org.evilco.forge.defense.common;
 
+import lombok.Getter;
+import net.minecraftforge.common.config.Configuration;
 import org.evilco.forge.defense.IModificationProxy;
+import org.evilco.forge.defense.module.IModule;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -23,10 +29,45 @@ import org.evilco.forge.defense.IModificationProxy;
 public class CommonModificationProxy implements IModificationProxy {
 
 	/**
+	 * Stores a list of active modules.
+	 */
+	private List<IModule> activeModules = new ArrayList<IModule> ();
+
+	/**
+	 * Defines whether explosives are enabled.
+	 */
+	private boolean moduleExplosivesEnabled = true;
+
+	/**
+	 * Defines whether the network module is enabled.
+	 */
+	@Getter
+	private boolean moduleNetworkEnabled = true;
+
+	/**
+	 * Enables a module.
+	 * @param module The module.
+	 */
+	protected void enableModule (IModule module) {
+		this.activeModules.add (module);
+	}
+
+	/**
+	 * Loads all modification modules.
+	 */
+	protected void loadModules () { }
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void preInitialize () { }
+	public void preInitialize (Configuration configuration) {
+		// read configuration options
+		this.readConfiguration (configuration);
+
+		// enable modules
+		this.loadModules ();
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -45,17 +86,35 @@ public class CommonModificationProxy implements IModificationProxy {
 	public void postInitialize () { }
 
 	/**
+	 * Reads the modification configuration.
+	 * @param configuration The configuration.
+	 */
+	protected void readConfiguration (Configuration configuration) {
+		this.moduleExplosivesEnabled = configuration.getBoolean ("explosives", "module", this.moduleExplosivesEnabled, "Enables explosives.");
+		this.moduleNetworkEnabled = configuration.getBoolean ("network", "module", this.moduleNetworkEnabled, "Enables the security network.");
+	}
+
+	/**
 	 * Registers modification blocks.
 	 */
-	protected final void registerBlocks () { }
+	protected final void registerBlocks () {
+		// call modules
+		for (IModule module : this.activeModules) module.registerBlocks ();
+	}
 
 	/**
 	 * Registers modification items.
 	 */
-	protected final void registerItems () { }
+	protected final void registerItems () {
+		// call modules
+		for (IModule module : this.activeModules) module.registerItems ();
+	}
 
 	/**
 	 * Registers modification block entities.
 	 */
-	protected final void registerBlockEntities () { }
+	protected final void registerBlockEntities () {
+		// call modules
+		for (IModule module : this.activeModules) module.registerBlockEntities ();
+	}
 }
