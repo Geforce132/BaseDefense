@@ -16,6 +16,9 @@ package org.evilco.forge.defense.module;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import org.evilco.forge.defense.client.explosives.renderer.LandmineTileEntityRenderer;
 import org.evilco.forge.defense.common.explosives.block.ExplosivesBlock;
 import org.evilco.forge.defense.common.explosives.block.LandmineBlock;
@@ -45,6 +48,25 @@ public class ExplosivesModule extends AbstractModule {
 		super.registerBlockEntities ();
 
 		GameRegistry.registerTileEntity (LandmineBlockEntity.class, LandmineBlockEntity.NAME);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerCraftingRecipes () {
+		super.registerCraftingRecipes ();
+
+		GameRegistry.addShapedRecipe (
+			new ItemStack (ExplosivesBlock.LANDMINE, 4),
+			"YWY",
+			"XZX",
+			"YXY",
+			'W', Blocks.wooden_pressure_plate,
+			'X', Items.iron_ingot,
+			'Y', Items.gunpowder,
+			'Z', Blocks.tnt
+		);
 	}
 
 	/**
