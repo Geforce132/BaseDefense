@@ -24,4 +24,8 @@ public class ExplosivesString {
 	// CREATIVE TAB START
 	public static final String CREATIVE_TAB_EXPLOSIVES = "defense.explosives";
 	// CREATIVE TAB STOP
+
+	// DAMAGE SOURCE START
+	public static final String DAMAGE_SOURCE_LANDMINE = "defense.explosives.landmine";
+	// DAMAGE SOURCE END
 }
