@@ -16,7 +16,9 @@ package org.evilco.forge.defense.common;
 
 import lombok.Getter;
 import net.minecraftforge.common.config.Configuration;
+import org.evilco.forge.defense.DefenseModification;
 import org.evilco.forge.defense.IModificationProxy;
+import org.evilco.forge.defense.module.ExplosivesModule;
 import org.evilco.forge.defense.module.IModule;
 
 import java.util.ArrayList;
@@ -55,7 +57,9 @@ public class CommonModificationProxy implements IModificationProxy {
 	/**
 	 * Loads all modification modules.
 	 */
-	protected void loadModules () { }
+	protected void loadModules () {
+		if (this.moduleExplosivesEnabled) this.enableModule (new ExplosivesModule ());
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -92,6 +96,10 @@ public class CommonModificationProxy implements IModificationProxy {
 	protected void readConfiguration (Configuration configuration) {
 		this.moduleExplosivesEnabled = configuration.getBoolean ("explosives", "module", this.moduleExplosivesEnabled, "Enables explosives.");
 		this.moduleNetworkEnabled = configuration.getBoolean ("network", "module", this.moduleNetworkEnabled, "Enables the security network.");
+
+		// log
+		DefenseModification.getInstance ().getLogger ().info ("Explosives enabled: " + this.moduleExplosivesEnabled);
+		DefenseModification.getInstance ().getLogger ().info ("Network enabled: " + this.moduleNetworkEnabled);
 	}
 
 	/**
