@@ -30,6 +30,11 @@ import java.util.List;
 public class PrimedChemicalExplosiveEntity extends PrimedExplosiveEntity {
 
 	/**
+	 * Defines the entity name.
+	 */
+	public static final String NAME = "primed_chemical_explosive";
+
+	/**
 	 * Defines the amount of particles spawned within the explosion range.
 	 */
 	public static final int PARTICLE_COUNT = 150;
