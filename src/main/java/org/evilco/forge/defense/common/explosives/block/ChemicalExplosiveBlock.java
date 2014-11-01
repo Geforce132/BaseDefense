@@ -16,6 +16,8 @@ package org.evilco.forge.defense.common.explosives.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -38,6 +40,16 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 	 * Defines the block name.
 	 */
 	public static final String NAME = "explosive_chemical";
+
+	/**
+	 * Stores the top and bottom icon.
+	 */
+	private IIcon iconTop = null;
+
+	/**
+	 * Stores the side icon.
+	 */
+	private IIcon iconSide = null;
 
 	/**
 	 * Constructs a new ChemicalExplosiveBlock instance.
@@ -68,6 +80,22 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 	 * {@inheritDoc}
 	 */
 	@Override
+	public IIcon getIcon (int p_149691_1_, int p_149691_2_) {
+		switch (p_149691_1_) {
+			case 0:
+			case 1:
+				return this.iconTop;
+			default:
+				return this.iconSide;
+		}
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void onNeighborBlockChange (World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block p_149695_5_) {
 		super.onNeighborBlockChange (p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, p_149695_5_);
 
@@ -79,6 +107,17 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 			// blow up
 			this.spawnExplosive (p_149695_1_, ((double) p_149695_2_), ((double) p_149695_3_), ((double) p_149695_4_), FUSE);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerBlockIcons (IIconRegister p_149651_1_) {
+		super.registerBlockIcons (p_149651_1_);
+
+		this.iconTop = p_149651_1_.registerIcon ("defense:explosives/chemical_top");
+		this.iconSide = p_149651_1_.registerIcon ("defense:explosives/chemical_side");
 	}
 
 	/**
