@@ -57,5 +57,7 @@ public class LandmineBlock extends Block implements IExplosiveContainer, ITileEn
 	public void spawnExplositve (World world, double x, double y, double z) {
 		// cancel on client side
 		if (world.isRemote) return;
+
+		// TODO: Spawn some explosives!
 	}
 }
