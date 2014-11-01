@@ -14,6 +14,7 @@
  */
 package org.evilco.forge.defense.common;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import net.minecraftforge.common.config.Configuration;
 import org.evilco.forge.defense.DefenseModification;
@@ -33,6 +34,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	/**
 	 * Stores a list of active modules.
 	 */
+	@Getter (AccessLevel.PROTECTED)
 	private List<IModule> activeModules = new ArrayList<IModule> ();
 
 	/**
