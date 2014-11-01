@@ -49,6 +49,8 @@ public class LandmineTileEntityRenderer extends TileEntitySpecialRenderer {
 		// push matrix and translate
 		GL11.glPushMatrix ();
 		GL11.glTranslated (p_147500_2_, p_147500_4_, p_147500_6_);
+		GL11.glTranslatef (0.5f, 0.0f, 0.5f);
+		GL11.glScalef (0.5f, 0.5f, 0.5f);
 
 		// bind texture
 		Minecraft.getMinecraft ().renderEngine.bindTexture (new ResourceLocation ("minecraft", "textures/blocks/iron_block.png"));
