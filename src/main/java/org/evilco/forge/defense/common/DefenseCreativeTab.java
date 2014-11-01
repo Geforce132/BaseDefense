@@ -22,6 +22,6 @@ import org.evilco.forge.defense.common.explosives.ExplosivesCreativeTab;
  */
 public class DefenseCreativeTab {
 	private DefenseCreativeTab () { }
-	
+
 	public static final ExplosivesCreativeTab EXPLOSIVES = new ExplosivesCreativeTab ();
 }
