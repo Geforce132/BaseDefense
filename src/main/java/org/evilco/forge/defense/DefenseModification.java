@@ -21,7 +21,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import lombok.Getter;
 import org.apache.logging.log4j.Logger;
-import org.evilco.forge.defense.common.CommonModificationProxy;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
