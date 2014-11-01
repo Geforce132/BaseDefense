@@ -15,10 +15,24 @@
 package org.evilco.forge.defense;
 
 import cpw.mods.fml.common.Mod;
+import lombok.Getter;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
  */
-@Mod (modid = "Defense", useMetadata = true, canBeDeactivated = false)
-public class DefenseModification {}
+@Mod (modid = DefenseModification.MOD_ID, useMetadata = true, canBeDeactivated = false)
+public class DefenseModification {
+
+	/**
+	 * Defines the modification identifier.
+	 */
+	public static final String MOD_ID = "Defense";
+
+	/**
+	 * Stores the modification instance
+	 */
+	@Mod.Instance (MOD_ID)
+	@Getter
+	private static DefenseModification instance = null;
+}
