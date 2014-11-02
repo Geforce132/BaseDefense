@@ -17,6 +17,7 @@ package org.evilco.forge.defense.common.explosives.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -45,6 +46,21 @@ public class LandmineBlock extends Block implements ITileEntityProvider {
 		this.setBlockName (ExplosivesString.BLOCK_NAME_LANDMINE);
 		this.setCreativeTab (DefenseCreativeTab.EXPLOSIVES);
 		this.setBlockBounds (0.25f, 0.0f, 0.25f, 0.75f, 0.1f, 0.75f);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean canPlaceBlockAt (World p_149742_1_, int p_149742_2_, int p_149742_3_, int p_149742_4_) {
+		// check position
+		if (p_149742_3_ == 0) return false;
+
+		// get block
+		Block block = p_149742_1_.getBlock (p_149742_2_, (p_149742_3_ - 1), p_149742_4_);
+
+		// check position
+		return (p_149742_3_ >= 1 && (Blocks.grass.equals (block) || Blocks.dirt.equals (block) || Blocks.gravel.equals (block) || Blocks.netherrack.equals (block)));
 	}
 
 	/**
