@@ -17,6 +17,7 @@ package org.evilco.forge.defense.common.explosives.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -91,8 +92,6 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 				return this.iconSide;
 		}
 	}
-
-
 
 	/**
 	 * {@inheritDoc}
