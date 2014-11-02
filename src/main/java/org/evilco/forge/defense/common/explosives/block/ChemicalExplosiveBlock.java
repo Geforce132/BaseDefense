@@ -133,5 +133,8 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 
 		// spawn in world
 		world.spawnEntityInWorld (chemicalExplosiveEntity);
+
+		// play sound
+		world.playSoundAtEntity (chemicalExplosiveEntity, "game.tnt.primed", 1.0f, 1.0f);
 	}
 }
