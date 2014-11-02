@@ -15,6 +15,7 @@
 package org.evilco.forge.defense.module;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -22,6 +23,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import org.evilco.forge.defense.DefenseModification;
 import org.evilco.forge.defense.client.explosives.renderer.LandmineTileEntityRenderer;
+import org.evilco.forge.defense.client.explosives.renderer.PrimedExplosiveEntityRenderer;
 import org.evilco.forge.defense.common.explosives.block.ChemicalExplosiveBlock;
 import org.evilco.forge.defense.common.explosives.block.ExplosivesBlock;
 import org.evilco.forge.defense.common.explosives.block.LandmineBlock;
@@ -80,7 +82,7 @@ public class ExplosivesModule extends AbstractModule {
 
 		int primedChemicalExplosiveID = EntityRegistry.findGlobalUniqueEntityId ();
 		EntityRegistry.registerGlobalEntityID (PrimedChemicalExplosiveEntity.class, PrimedChemicalExplosiveEntity.NAME, primedChemicalExplosiveID);
-		EntityRegistry.registerModEntity (PrimedChemicalExplosiveEntity.class, PrimedChemicalExplosiveEntity.NAME, primedChemicalExplosiveID, DefenseModification.getInstance (), 0, 60, true);
+		EntityRegistry.registerModEntity (PrimedChemicalExplosiveEntity.class, PrimedChemicalExplosiveEntity.NAME, primedChemicalExplosiveID, DefenseModification.getInstance (), 50, 5, true);
 	}
 
 	/**
@@ -90,6 +92,10 @@ public class ExplosivesModule extends AbstractModule {
 	public void registerRenderers () {
 		super.registerRenderers ();
 
+		// register Tile Entity renderers
 		ClientRegistry.bindTileEntitySpecialRenderer (LandmineBlockEntity.class, new LandmineTileEntityRenderer ());
+
+		// register entity renderers
+		RenderingRegistry.registerEntityRenderingHandler (PrimedChemicalExplosiveEntity.class, new PrimedExplosiveEntityRenderer (ExplosivesBlock.CHEMICAL_EXPLOSIVE));
 	}
 }
