@@ -15,6 +15,8 @@
 package org.evilco.forge.defense.module;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import lombok.Getter;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidRegistry;
 import org.evilco.forge.defense.common.shadow.ShadowBlock;
 import org.evilco.forge.defense.common.shadow.ShadowFluids;
@@ -25,6 +27,22 @@ import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
  */
 public class ShadowModule extends AbstractModule {
+
+	/**
+	 * Stores the shadow resistance potion ID.
+	 */
+	@Getter
+	private int potionShadowResistanceID = 128;
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void loadConfiguration (Configuration configuration) {
+		super.loadConfiguration (configuration);
+
+		this.potionShadowResistanceID = configuration.getInt ("shadowResistance", "potionID", this.potionShadowResistanceID, 0, 256, "");
+	}
 
 	/**
 	 * {@inheritDoc}
