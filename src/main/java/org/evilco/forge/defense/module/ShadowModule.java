@@ -15,7 +15,9 @@
 package org.evilco.forge.defense.module;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import org.evilco.forge.defense.common.shadow.ShadowBlock;
+import org.evilco.forge.defense.common.shadow.ShadowFluids;
 import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
 
 /**
@@ -32,5 +34,15 @@ public class ShadowModule extends AbstractModule {
 		super.registerBlocks ();
 
 		GameRegistry.registerBlock (ShadowBlock.SHADOW_MATTER, ShadowMatterBlock.NAME);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerFluids () {
+		super.registerFluids ();
+
+		FluidRegistry.registerFluid (ShadowFluids.SHADOW);
 	}
 }
