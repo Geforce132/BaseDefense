@@ -89,6 +89,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	@Override
 	public void initialize () {
 		this.registerBlockEntities ();
+		this.registerFluids ();
 		this.registerItems ();
 		this.registerBlocks ();
 		this.registerEntities ();
@@ -139,6 +140,14 @@ public class CommonModificationProxy implements IModificationProxy {
 	protected final void registerEntities () {
 		// call modules
 		for (IModule module : this.getActiveModules ()) module.registerEntities ();
+	}
+
+	/**
+	 * Registers modification fluids.
+	 */
+	protected final void registerFluids () {
+		// call modules
+		for (IModule module : this.getActiveModules ()) module.registerFluids ();
 	}
 
 	/**

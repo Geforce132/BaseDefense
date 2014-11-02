@@ -41,6 +41,11 @@ public interface IModule {
 	public void registerEntities ();
 
 	/**
+	 * Registers modification fluids.
+	 */
+	public void registerFluids ();
+
+	/**
 	 * Registers modification items.
 	 */
 	public void registerItems ();

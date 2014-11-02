@@ -48,6 +48,12 @@ public abstract class AbstractModule implements IModule {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void registerFluids () { }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void registerItems () { }
 
 	/**
