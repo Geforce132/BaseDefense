@@ -47,6 +47,14 @@ public class PrimedChemicalExplosiveEntity extends PrimedExplosiveEntity {
 	/**
 	 * Constructs a new PrimedChemicalExplosiveEntity instance.
 	 * @param p_i1582_1_ The world.
+	 */
+	public PrimedChemicalExplosiveEntity (World p_i1582_1_) {
+		this (p_i1582_1_, ((short) 160));
+	}
+
+	/**
+	 * Constructs a new PrimedChemicalExplosiveEntity instance.
+	 * @param p_i1582_1_ The world.
 	 * @param fuse The fuse.
 	 */
 	public PrimedChemicalExplosiveEntity (World p_i1582_1_, short fuse) {
