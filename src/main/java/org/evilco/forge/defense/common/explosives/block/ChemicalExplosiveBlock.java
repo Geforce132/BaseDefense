@@ -23,6 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.evilco.forge.defense.api.explosive.IExplosiveContainer;
 import org.evilco.forge.defense.common.DefenseCreativeTab;
+import org.evilco.forge.defense.common.explosives.ExplosivesString;
 import org.evilco.forge.defense.common.explosives.entity.PrimedChemicalExplosiveEntity;
 
 /**
@@ -57,6 +58,7 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 	protected ChemicalExplosiveBlock () {
 		super (Material.tnt);
 
+		this.setBlockName (ExplosivesString.BLOCK_NAME_CHEMICAL_EXPLOSIVE);
 		this.setCreativeTab (DefenseCreativeTab.EXPLOSIVES);
 	}
 

@@ -22,6 +22,7 @@ public class ExplosivesString {
 	private ExplosivesString () { }
 
 	// BLOCK NAME START
+	public static final String BLOCK_NAME_CHEMICAL_EXPLOSIVE = "defense.explosives.chemical_explosive";
 	public static final String BLOCK_NAME_LANDMINE = "defense.explosives.landmine";
 	// BLOCK NAME END
 
