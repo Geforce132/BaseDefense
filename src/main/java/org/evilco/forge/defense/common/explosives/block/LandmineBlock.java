@@ -19,6 +19,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.evilco.forge.defense.api.explosive.IExplosiveContainer;
@@ -52,6 +53,14 @@ public class LandmineBlock extends Block implements ITileEntityProvider {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public boolean canDropFromExplosion (Explosion p_149659_1_) {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public boolean canPlaceBlockAt (World p_149742_1_, int p_149742_2_, int p_149742_3_, int p_149742_4_) {
 		// check position
 		if (p_149742_3_ == 0) return false;
@@ -77,6 +86,23 @@ public class LandmineBlock extends Block implements ITileEntityProvider {
 	@Override
 	public boolean isOpaqueCube () {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onBlockDestroyedByExplosion (World p_149723_1_, int p_149723_2_, int p_149723_3_, int p_149723_4_, Explosion p_149723_5_) {
+		super.onBlockDestroyedByExplosion (p_149723_1_, p_149723_2_, p_149723_3_, p_149723_4_, p_149723_5_);
+
+		// get entity
+		TileEntity tileEntity = p_149723_1_.getTileEntity (p_149723_2_, p_149723_3_, p_149723_4_);
+
+		// check instance
+		if (!(tileEntity instanceof LandmineBlockEntity)) return;
+
+		// blow up
+		((LandmineBlockEntity) tileEntity).explode ();
 	}
 
 	/**
