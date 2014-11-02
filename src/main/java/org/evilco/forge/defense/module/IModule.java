@@ -51,6 +51,11 @@ public interface IModule {
 	public void registerItems ();
 
 	/**
+	 * Registers modification potions.
+	 */
+	public void registerPotions ();
+
+	/**
 	 * Registers all modification renderers.
 	 */
 	public void registerRenderers ();
