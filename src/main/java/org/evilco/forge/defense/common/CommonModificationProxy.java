@@ -147,6 +147,7 @@ public class CommonModificationProxy implements IModificationProxy {
 		this.registerBlocks ();
 		this.registerEntities ();
 
+		this.registerDimensions ();
 		this.registerCraftingRecipes ();
 	}
 
@@ -185,6 +186,14 @@ public class CommonModificationProxy implements IModificationProxy {
 	protected final void registerCraftingRecipes () {
 		// call modules
 		for (IModule module : this.getActiveModules ()) module.registerCraftingRecipes ();
+	}
+
+	/**
+	 * Registers modification dimensions.
+	 */
+	protected final void registerDimensions () {
+		// call modules
+		for (IModule module : this.getActiveModules ()) module.registerDimensions ();
 	}
 
 	/**

@@ -50,6 +50,12 @@ public abstract class AbstractModule implements IModule {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void registerDimensions () { }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void registerEntities () { }
 
 	/**

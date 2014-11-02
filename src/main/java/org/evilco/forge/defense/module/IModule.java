@@ -44,6 +44,11 @@ public interface IModule {
 	public void registerCraftingRecipes ();
 
 	/**
+	 * Registers modification dimensions.
+	 */
+	public void registerDimensions ();
+
+	/**
 	 * Registers modification entities.
 	 */
 	public void registerEntities ();
