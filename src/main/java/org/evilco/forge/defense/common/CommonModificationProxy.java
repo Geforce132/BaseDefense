@@ -21,6 +21,7 @@ import org.evilco.forge.defense.DefenseModification;
 import org.evilco.forge.defense.IModificationProxy;
 import org.evilco.forge.defense.module.ExplosivesModule;
 import org.evilco.forge.defense.module.IModule;
+import org.evilco.forge.defense.module.ShadowModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,12 @@ public class CommonModificationProxy implements IModificationProxy {
 	private boolean moduleNetworkEnabled = true;
 
 	/**
+	 * Defines whether the shadow module is enabled.
+	 */
+	@Getter
+	private boolean moduleShadowEnabled = true;
+
+	/**
 	 * Enables a module.
 	 * @param module The module.
 	 */
@@ -61,6 +68,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	 */
 	protected void loadModules () {
 		if (this.moduleExplosivesEnabled) this.enableModule (new ExplosivesModule ());
+		if (this.moduleShadowEnabled) this.enableModule (new ShadowModule ());
 	}
 
 	/**
@@ -101,10 +109,12 @@ public class CommonModificationProxy implements IModificationProxy {
 	protected void readConfiguration (Configuration configuration) {
 		this.moduleExplosivesEnabled = configuration.getBoolean ("explosives", "module", this.moduleExplosivesEnabled, "Enables explosives.");
 		this.moduleNetworkEnabled = configuration.getBoolean ("network", "module", this.moduleNetworkEnabled, "Enables the security network.");
+		this.moduleShadowEnabled = configuration.getBoolean ("shadow", "module", this.moduleShadowEnabled, "Enables the shadow realm.");
 
 		// log
 		DefenseModification.getInstance ().getLogger ().info ("Explosives enabled: " + this.moduleExplosivesEnabled);
 		DefenseModification.getInstance ().getLogger ().info ("Network enabled: " + this.moduleNetworkEnabled);
+		DefenseModification.getInstance ().getLogger ().info ("Shadow enabled: " + this.moduleShadowEnabled);
 	}
 
 	/**
