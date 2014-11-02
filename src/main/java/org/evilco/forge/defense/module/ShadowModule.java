@@ -45,11 +45,4 @@ public class ShadowModule extends AbstractModule {
 
 		FluidRegistry.registerFluid (ShadowFluids.SHADOW);
 	}
-
-	@Override
-	public void registerPotions () {
-		super.registerPotions ();
-
-
-	}
 }

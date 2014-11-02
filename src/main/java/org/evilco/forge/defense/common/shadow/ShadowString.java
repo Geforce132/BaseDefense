@@ -32,8 +32,4 @@ public class ShadowString {
 	// FLUID NAME START
 	public static final String FLUID_NAME_SHADOW = "defense.shadow";
 	// FLUID NAME END
-
-	// POTION NAME START
-	public static final String POTION_NAME_SHADOW_RESISTANCE = "defense.shadow.resistance";
-	// POTION NAME END
 }
