@@ -83,16 +83,16 @@ public abstract class PrimedExplosiveEntity extends Entity {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
-		this.motionY -= 0.03999999910593033D;
+		this.motionY -= 0.03999999910593033d;
 		this.moveEntity (this.motionX, this.motionY, this.motionZ);
-		this.motionX *= 0.9800000190734863D;
-		this.motionY *= 0.9800000190734863D;
-		this.motionZ *= 0.9800000190734863D;
+		this.motionX *= 0.9800000190734863d;
+		this.motionY *= 0.9800000190734863d;
+		this.motionZ *= 0.9800000190734863d;
 
 		if (this.onGround) {
-			this.motionX *= 0.699999988079071D;
-			this.motionZ *= 0.699999988079071D;
-			this.motionY *= -0.5D;
+			this.motionX *= 0.699999988079071d;
+			this.motionZ *= 0.699999988079071d;
+			this.motionY *= -0.5d;
 		}
 
 		// decrease fuse and go kaboom
