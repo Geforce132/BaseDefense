@@ -14,11 +14,19 @@
  */
 package org.evilco.forge.defense.module;
 
+import net.minecraftforge.common.config.Configuration;
+
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
  */
 public abstract class AbstractModule implements IModule {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void loadConfiguration (Configuration configuration) { }
 
 	/**
 	 * {@inheritDoc}

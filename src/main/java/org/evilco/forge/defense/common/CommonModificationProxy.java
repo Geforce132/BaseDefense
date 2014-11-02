@@ -130,6 +130,9 @@ public class CommonModificationProxy implements IModificationProxy {
 
 		// apply dirty fixes
 		this.applyDirtyFixes ();
+
+		// load configuration
+		for (IModule module : this.getActiveModules ()) module.loadConfiguration (configuration);
 	}
 
 	/**
