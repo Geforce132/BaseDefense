@@ -14,26 +14,23 @@
  */
 package org.evilco.forge.defense.common.shadow;
 
+import org.evilco.forge.defense.common.shadow.potion.ShadowResistancePotion;
+import org.evilco.forge.defense.module.ShadowModule;
+
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
  */
-public class ShadowString {
-	private ShadowString () { }
+public class ShadowPotion {
+	private ShadowPotion () { }
 
-	// BLOCK NAME START
-	public static final String BLOCK_NAME_SHADOW_MATTER = "defense.shadow.matter";
-	// BLOCK NAME END
+	public static ShadowResistancePotion SHADOW_RESISTANCE = null;
 
-	// CREATIVE TAB START
-	public static final String CREATIVE_TAB_SHADOW = "defense.shadow";
-	// CREATIVE TAB END
-
-	// FLUID NAME START
-	public static final String FLUID_NAME_SHADOW = "defense.shadow";
-	// FLUID NAME END
-
-	// POTION NAME START
-	public static final String POTION_NAME_SHADOW_RESISTANCE = "defense.shadow.resistance";
-	// POTION NAME END
+	/**
+	 * Initializes the container.
+	 * @param module The module.
+	 */
+	public static void initialize (ShadowModule module) {
+		SHADOW_RESISTANCE = new ShadowResistancePotion (module.getPotionShadowResistanceID ());
+	}
 }
