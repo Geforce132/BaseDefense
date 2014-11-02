@@ -66,12 +66,14 @@ public class DefenseModification {
 		// load configuration
 		Configuration configuration = new Configuration (event.getSuggestedConfigurationFile ());
 
-		// load & save configuration
+		// load configuration
 		configuration.load ();
-		configuration.save ();
 
 		// call proxy
 		proxy.preInitialize (configuration);
+
+		// save new configuration
+		configuration.save ();
 	}
 
 	/**
