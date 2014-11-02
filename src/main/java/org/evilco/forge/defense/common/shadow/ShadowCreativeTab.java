@@ -12,18 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.evilco.forge.defense.common;
+package org.evilco.forge.defense.common.shadow;
 
-import org.evilco.forge.defense.common.explosives.ExplosivesCreativeTab;
-import org.evilco.forge.defense.common.shadow.ShadowCreativeTab;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
  */
-public class DefenseCreativeTab {
-	private DefenseCreativeTab () { }
+public class ShadowCreativeTab extends CreativeTabs {
 
-	public static final ExplosivesCreativeTab EXPLOSIVES = new ExplosivesCreativeTab ();
-	public static final ShadowCreativeTab SHADOW = new ShadowCreativeTab ();
+	/**
+	 * Constructs a new ShadowCreativeTab instance.
+	 */
+	public ShadowCreativeTab () {
+		super (ShadowString.CREATIVE_TAB_SHADOW);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Item getTabIconItem () {
+		return Item.getItemFromBlock (ShadowBlock.SHADOW_MATTER);
+	}
 }

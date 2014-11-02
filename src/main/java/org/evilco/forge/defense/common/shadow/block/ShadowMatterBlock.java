@@ -12,18 +12,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.evilco.forge.defense.common;
+package org.evilco.forge.defense.common.shadow.block;
 
-import org.evilco.forge.defense.common.explosives.ExplosivesCreativeTab;
-import org.evilco.forge.defense.common.shadow.ShadowCreativeTab;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import org.evilco.forge.defense.common.DefenseCreativeTab;
+import org.evilco.forge.defense.common.shadow.ShadowString;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
  */
-public class DefenseCreativeTab {
-	private DefenseCreativeTab () { }
+public class ShadowMatterBlock extends Block {
 
-	public static final ExplosivesCreativeTab EXPLOSIVES = new ExplosivesCreativeTab ();
-	public static final ShadowCreativeTab SHADOW = new ShadowCreativeTab ();
+	/**
+	 * Defines the block name.
+	 */
+	public static final String NAME = "shadow_matter";
+
+	/**
+	 * Constructs a new ShadowMatterBlock instance.
+	 */
+	public ShadowMatterBlock () {
+		super (Material.rock);
+
+		this.setBlockName (ShadowString.BLOCK_NAME_SHADOW_MATTER);
+		this.setBlockTextureName ("defense:shadow/matter");
+		this.setCreativeTab (DefenseCreativeTab.SHADOW);
+	}
 }

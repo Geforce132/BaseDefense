@@ -12,18 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.evilco.forge.defense.common;
+package org.evilco.forge.defense.common.shadow;
 
-import org.evilco.forge.defense.common.explosives.ExplosivesCreativeTab;
-import org.evilco.forge.defense.common.shadow.ShadowCreativeTab;
+import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
  * @copyright Copyright (C) 2014 Evil-Co <http://www.evil-co.com>
  */
-public class DefenseCreativeTab {
-	private DefenseCreativeTab () { }
+public class ShadowBlock {
+	private ShadowBlock () { }
 
-	public static final ExplosivesCreativeTab EXPLOSIVES = new ExplosivesCreativeTab ();
-	public static final ShadowCreativeTab SHADOW = new ShadowCreativeTab ();
+	public static final ShadowMatterBlock SHADOW_MATTER = new ShadowMatterBlock ();
 }
