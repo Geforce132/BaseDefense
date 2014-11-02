@@ -34,6 +34,24 @@ public class LandmineBlockEntity extends TileEntity {
 	public static final String NAME = "explosives_landmine";
 
 	/**
+	 * Blows up the mine.
+	 */
+	public void explode () {
+		// remove block
+		this.worldObj.setBlock (this.xCoord, this.yCoord, this.zCoord, Blocks.air);
+
+		// spawn explosion
+		this.worldObj.newExplosion (null, this.xCoord, this.yCoord, this.zCoord, 2.5f, true, true);
+
+		// damage all entities in radius
+		List<Entity> damageEntities = this.worldObj.getEntitiesWithinAABBExcludingEntity (null, this.getDamageBounds ());
+
+		for (Entity entity : damageEntities) {
+			entity.attackEntityFrom (ExplosivesDamageSource.LANDMINE, 24.0f);
+		}
+	}
+
+	/**
 	 * Returns the damage bounds.
 	 * @return The bounds.
 	 */
@@ -63,19 +81,6 @@ public class LandmineBlockEntity extends TileEntity {
 		List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity (null, this.getDetectionBounds ());
 
 		// explode if needed
-		if (entities.size () > 0) {
-			// remove block
-			this.worldObj.setBlock (this.xCoord, this.yCoord, this.zCoord, Blocks.air);
-
-			// spawn explosion
-			this.worldObj.newExplosion (null, this.xCoord, this.yCoord, this.zCoord, 2.5f, true, true);
-
-			// damage all entities in radius
-			List<Entity> damageEntities = this.worldObj.getEntitiesWithinAABBExcludingEntity (null, this.getDamageBounds ());
-
-			for (Entity entity : damageEntities) {
-				entity.attackEntityFrom (ExplosivesDamageSource.LANDMINE, 24.0f);
-			}
-		}
+		if (entities.size () > 0) this.explode ();
 	}
 }
