@@ -96,7 +96,10 @@ public abstract class PrimedExplosiveEntity extends Entity {
 		}
 
 		// decrease fuse and go kaboom
-		if (this.fuse-- < 0) this.explode ();
+		if (this.fuse-- < 0)
+			this.explode ();
+		else
+			this.worldObj.spawnParticle ("smoke", this.posX, this.posY + 0.5d, this.posZ, 0.0d, 0.0d, 0.0d);
 	}
 
 	/**
