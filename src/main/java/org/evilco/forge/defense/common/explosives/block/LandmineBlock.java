@@ -83,6 +83,23 @@ public class LandmineBlock extends Block implements ITileEntityProvider {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void onNeighborBlockChange (World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block p_149695_5_) {
+		super.onNeighborBlockChange (p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, p_149695_5_);
+
+		// drop block if position invalid
+		if (!this.canPlaceBlockAt (p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_)) {
+			// break block
+			p_149695_1_.setBlockToAir (p_149695_2_, p_149695_3_, p_149695_4_);
+
+			// drop
+			this.dropBlockAsItem (p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, 1, 0);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public boolean shouldSideBeRendered (IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_) {
 		return false;
 	}
