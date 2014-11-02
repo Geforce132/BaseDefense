@@ -64,6 +64,7 @@ public class ExplosivesModule extends AbstractModule {
 	public void registerCraftingRecipes () {
 		super.registerCraftingRecipes ();
 
+		// Pressure plate + iron ingot + gunpowder + tnt = landmine
 		GameRegistry.addShapedRecipe (
 			new ItemStack (ExplosivesBlock.LANDMINE, 4),
 			"YWY",
