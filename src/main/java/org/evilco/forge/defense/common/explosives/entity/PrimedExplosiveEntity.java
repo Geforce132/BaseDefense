@@ -47,6 +47,14 @@ public abstract class PrimedExplosiveEntity extends Entity {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public boolean canBeCollidedWith () {
+		return !this.isDead;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public float getShadowSize () {
 		return 0.0f;
 	}
