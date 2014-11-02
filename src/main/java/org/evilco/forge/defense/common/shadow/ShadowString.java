@@ -28,4 +28,8 @@ public class ShadowString {
 	// CREATIVE TAB START
 	public static final String CREATIVE_TAB_SHADOW = "defense.shadow";
 	// CREATIVE TAB END
+
+	// FLUID NAME START
+	public static final String FLUID_NAME_SHADOW = "defense.shadow";
+	// FLUID NAME END
 }
