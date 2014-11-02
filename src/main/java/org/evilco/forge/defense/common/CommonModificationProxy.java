@@ -14,8 +14,10 @@
  */
 package org.evilco.forge.defense.common;
 
+import com.google.common.base.Preconditions;
 import lombok.AccessLevel;
 import lombok.Getter;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.common.config.Configuration;
 import org.evilco.forge.defense.DefenseModification;
 import org.evilco.forge.defense.IModificationProxy;
@@ -23,6 +25,8 @@ import org.evilco.forge.defense.module.ExplosivesModule;
 import org.evilco.forge.defense.module.IModule;
 import org.evilco.forge.defense.module.ShadowModule;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +60,48 @@ public class CommonModificationProxy implements IModificationProxy {
 	private boolean moduleShadowEnabled = true;
 
 	/**
+	 * Applies dirty fixes.
+	 */
+	protected void applyDirtyFixes () {
+		// get potion field
+		Field potionField = null;
+
+		try { potionField = Potion.class.getDeclaredField ("potionTypes"); } catch (NoSuchFieldException ignore) { }
+		if (potionField == null) try { potionField = Potion.class.getDeclaredField ("field_76425_a"); } catch (NoSuchFieldException ignore) { }
+
+		// ensure we got a field
+		Preconditions.checkNotNull (potionField, "potionField");
+
+		// make accessible
+		potionField.setAccessible (true);
+
+		try {
+			Field modifierField = Field.class.getDeclaredField ("modifiers");
+			modifierField.setAccessible (true);
+			modifierField.setInt (potionField, (potionField.getModifiers () & ~Modifier.FINAL));
+		} catch (Exception ignore) { }
+
+		// resize potion field
+		try {
+			Potion[] potionTypes = ((Potion[]) potionField.get (null));
+
+			// verify size
+			if (potionTypes.length < 256) {
+				// create new array
+				final Potion[] newPotionTypes = new Potion[256];
+
+				// copy array elements
+				System.arraycopy (potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+
+				// update field
+				potionField.set (null, newPotionTypes);
+			}
+		} catch (Exception ex) {
+			DefenseModification.getInstance ().getLogger ().error (ex);
+		}
+	}
+
+	/**
 	 * Enables a module.
 	 * @param module The module.
 	 */
@@ -81,6 +127,9 @@ public class CommonModificationProxy implements IModificationProxy {
 
 		// enable modules
 		this.loadModules ();
+
+		// apply dirty fixes
+		this.applyDirtyFixes ();
 	}
 
 	/**
