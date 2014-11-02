@@ -105,7 +105,7 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 			p_149695_1_.setBlockToAir (p_149695_2_, p_149695_3_, p_149695_4_);
 
 			// blow up
-			this.spawnExplosive (p_149695_1_, ((double) p_149695_2_), ((double) p_149695_3_), ((double) p_149695_4_), FUSE);
+			this.spawnExplosive (p_149695_1_, ((double) p_149695_2_ + 0.5d), ((double) p_149695_3_ + 0.5d), ((double) p_149695_4_ + 0.5d), FUSE);
 		}
 	}
 
