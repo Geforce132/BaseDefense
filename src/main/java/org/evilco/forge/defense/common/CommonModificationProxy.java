@@ -63,38 +63,38 @@ public class CommonModificationProxy implements IModificationProxy {
 	 * Applies dirty fixes.
 	 */
 	protected void applyDirtyFixes () {
-		// get potion field
-		Field potionField = null;
-
-		try { potionField = Potion.class.getDeclaredField ("potionTypes"); } catch (NoSuchFieldException ignore) { }
-		if (potionField == null) try { potionField = Potion.class.getDeclaredField ("field_76425_a"); } catch (NoSuchFieldException ignore) { }
-
-		// ensure we got a field
-		Preconditions.checkNotNull (potionField, "potionField");
-
-		// make accessible
-		potionField.setAccessible (true);
-
 		try {
-			Field modifierField = Field.class.getDeclaredField ("modifiers");
-			modifierField.setAccessible (true);
-			modifierField.setInt (potionField, (potionField.getModifiers () & ~Modifier.FINAL));
-		} catch (Exception ignore) { }
+			// find fields to modify
+			Field field = null;
 
-		// resize potion field
-		try {
-			Potion[] potionTypes = ((Potion[]) potionField.get (null));
+			try {
+				field = Potion.class.getDeclaredField ("field_76425_a");
+			} catch (NoSuchFieldException ex) { }
 
-			// verify size
+			// try to find named field
+			if (field == null) field = Potion.class.getDeclaredField ("potionTypes");
+
+			// allow accessing final fields
+			Field modifiers = Field.class.getDeclaredField ("modifiers");
+			modifiers.setAccessible (true);
+			modifiers.setInt (field, field.getModifiers () & ~Modifier.FINAL);
+
+			// get data
+			Potion[] potionTypes = ((Potion[]) field.get (null));
+
+			// get length
 			if (potionTypes.length < 256) {
+				// create copy
+				Potion[] oldPotionTypes = potionTypes;
+
 				// create new array
-				final Potion[] newPotionTypes = new Potion[256];
+				potionTypes = new Potion[256];
 
-				// copy array elements
-				System.arraycopy (potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+				// copy data
+				System.arraycopy (oldPotionTypes, 0, potionTypes, 0, oldPotionTypes.length);
 
-				// update field
-				potionField.set (null, newPotionTypes);
+				// store new type
+				field.set (null, potionTypes);
 			}
 		} catch (Exception ex) {
 			DefenseModification.getInstance ().getLogger ().error (ex);
