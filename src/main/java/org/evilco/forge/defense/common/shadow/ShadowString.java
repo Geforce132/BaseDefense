@@ -29,6 +29,10 @@ public class ShadowString {
 	public static final String CREATIVE_TAB_SHADOW = "defense.shadow";
 	// CREATIVE TAB END
 
+	// DIMENSION NAME START
+	public static final String DIMENSION_NAME_SHADOW = "defense.shadow";
+	// DIMENSION NAME STOP
+
 	// FLUID NAME START
 	public static final String FLUID_NAME_SHADOW = "defense.shadow";
 	// FLUID NAME END
