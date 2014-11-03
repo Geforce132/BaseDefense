@@ -16,12 +16,14 @@ package org.evilco.forge.defense.module;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import lombok.Getter;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidRegistry;
 import org.evilco.forge.defense.common.shadow.ShadowBlock;
 import org.evilco.forge.defense.common.shadow.ShadowFluids;
 import org.evilco.forge.defense.common.shadow.ShadowPotion;
 import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
+import org.evilco.forge.defense.common.shadow.dimension.ShadowWorldProvider;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -53,6 +55,18 @@ public class ShadowModule extends AbstractModule {
 		super.registerBlocks ();
 
 		GameRegistry.registerBlock (ShadowBlock.SHADOW_MATTER, ShadowMatterBlock.NAME);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerDimensions () {
+		super.registerDimensions ();
+
+		// register shadow realm
+		DimensionManager.registerProviderType (ShadowWorldProvider.DIMENSION_ID, ShadowWorldProvider.class, false);
+		DimensionManager.registerDimension (ShadowWorldProvider.DIMENSION_ID, ShadowWorldProvider.DIMENSION_ID);
 	}
 
 	/**
