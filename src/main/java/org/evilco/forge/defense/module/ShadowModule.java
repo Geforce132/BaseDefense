@@ -62,7 +62,7 @@ public class ShadowModule extends AbstractModule {
 	 */
 	@Override
 	public void registerDimensions (Configuration configuration) {
-		super.registerDimensions ();
+		super.registerDimensions (configuration);
 
 		// find dimension IDs
 		int shadowDimensionID = configuration.getInt ("shadowID", "dimension", DimensionManager.getNextFreeDimId (), 0, 1024, "");
