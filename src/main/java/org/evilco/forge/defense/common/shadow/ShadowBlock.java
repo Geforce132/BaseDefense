@@ -14,6 +14,7 @@
  */
 package org.evilco.forge.defense.common.shadow;
 
+import org.evilco.forge.defense.common.shadow.block.ShadowFluidBlock;
 import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
 
 /**
@@ -23,5 +24,6 @@ import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
 public class ShadowBlock {
 	private ShadowBlock () { }
 
+	public static final ShadowFluidBlock SHADOW_FLUID = new ShadowFluidBlock ();
 	public static final ShadowMatterBlock SHADOW_MATTER = new ShadowMatterBlock ();
 }
