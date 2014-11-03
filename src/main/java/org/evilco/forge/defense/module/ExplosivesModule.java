@@ -66,10 +66,15 @@ public class ExplosivesModule extends AbstractModule {
 
 		// Pressure plate + iron ingot + gunpowder + tnt = landmine
 		GameRegistry.addShapedRecipe (
+			// Output
 			new ItemStack (ExplosivesBlock.LANDMINE, 4),
+
+			// Recipe
 			"YWY",
 			"XZX",
 			"YXY",
+
+			// Materials
 			'W', Blocks.wooden_pressure_plate,
 			'X', Items.iron_ingot,
 			'Y', Items.gunpowder,
