@@ -82,6 +82,9 @@ public class ExplosivesModule extends AbstractModule {
 		);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void registerEntities () {
 		super.registerEntities ();
