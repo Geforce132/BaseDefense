@@ -133,4 +133,12 @@ public class ShadowWorldProvider extends WorldProvider {
 	public boolean isSurfaceWorld () {
 		return false;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean shouldMapSpin (String entity, double x, double y, double z) {
+		return true;
+	}
 }
