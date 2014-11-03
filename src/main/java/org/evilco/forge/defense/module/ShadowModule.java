@@ -22,6 +22,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import org.evilco.forge.defense.common.shadow.ShadowBlock;
 import org.evilco.forge.defense.common.shadow.ShadowFluids;
 import org.evilco.forge.defense.common.shadow.ShadowPotion;
+import org.evilco.forge.defense.common.shadow.block.ShadowFluidBlock;
 import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
 import org.evilco.forge.defense.common.shadow.dimension.ShadowWorldProvider;
 
@@ -55,6 +56,7 @@ public class ShadowModule extends AbstractModule {
 		super.registerBlocks ();
 
 		GameRegistry.registerBlock (ShadowBlock.SHADOW_MATTER, ShadowMatterBlock.NAME);
+		GameRegistry.registerBlock (ShadowBlock.SHADOW_FLUID, ShadowFluidBlock.NAME);
 	}
 
 	/**
