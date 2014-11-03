@@ -42,6 +42,11 @@ public class CommonModificationProxy implements IModificationProxy {
 	private List<IModule> activeModules = new ArrayList<IModule> ();
 
 	/**
+	 * Stores the configuration instance.
+	 */
+	private Configuration configuration;
+
+	/**
 	 * Defines whether explosives are enabled.
 	 */
 	private boolean moduleExplosivesEnabled = true;
@@ -132,6 +137,9 @@ public class CommonModificationProxy implements IModificationProxy {
 
 		// load configuration
 		for (IModule module : this.getActiveModules ()) module.loadConfiguration (configuration);
+
+		// store configuration
+		this.configuration = configuration;
 	}
 
 	/**
@@ -154,7 +162,10 @@ public class CommonModificationProxy implements IModificationProxy {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void postInitialize () { }
+	public void postInitialize () {
+		// save new configuration
+		this.configuration.save ();
+	}
 
 	/**
 	 * Reads the modification configuration.
@@ -192,7 +203,7 @@ public class CommonModificationProxy implements IModificationProxy {
 	 */
 	protected final void registerDimensions () {
 		// call modules
-		for (IModule module : this.getActiveModules ()) module.registerDimensions ();
+		for (IModule module : this.getActiveModules ()) module.registerDimensions (this.configuration);
 	}
 
 	/**

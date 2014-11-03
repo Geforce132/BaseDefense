@@ -46,7 +46,7 @@ public interface IModule {
 	/**
 	 * Registers modification dimensions.
 	 */
-	public void registerDimensions ();
+	public void registerDimensions (Configuration configuration);
 
 	/**
 	 * Registers modification entities.

@@ -71,9 +71,6 @@ public class DefenseModification {
 
 		// call proxy
 		proxy.preInitialize (configuration);
-
-		// save new configuration
-		configuration.save ();
 	}
 
 	/**
