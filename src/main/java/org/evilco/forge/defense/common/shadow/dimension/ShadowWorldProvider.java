@@ -29,8 +29,9 @@ public class ShadowWorldProvider extends WorldProvider {
 
 	/**
 	 * Defines the default dimension ID.
+	 * @todo This seems to be bad coding style
 	 */
-	public static final int DIMENSION_ID = -42;
+	public static int DIMENSION_ID = -42;
 
 	/**
 	 * Constructs a new ShadowWorldProvider instance.

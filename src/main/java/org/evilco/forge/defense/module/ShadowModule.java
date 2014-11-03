@@ -67,6 +67,10 @@ public class ShadowModule extends AbstractModule {
 		// find dimension IDs
 		int shadowDimensionID = configuration.getInt ("shadowID", "dimension", DimensionManager.getNextFreeDimId (), 0, 1024, "");
 
+		// update provider
+		// TODO: Fix this bullshit
+		ShadowWorldProvider.DIMENSION_ID = shadowDimensionID;
+
 		// register shadow realm
 		DimensionManager.registerProviderType (shadowDimensionID, ShadowWorldProvider.class, false);
 		DimensionManager.registerDimension (shadowDimensionID, ShadowWorldProvider.DIMENSION_ID);
