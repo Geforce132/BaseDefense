@@ -61,12 +61,15 @@ public class ShadowModule extends AbstractModule {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerDimensions () {
+	public void registerDimensions (Configuration configuration) {
 		super.registerDimensions ();
 
+		// find dimension IDs
+		int shadowDimensionID = configuration.getInt ("shadowID", "dimension", DimensionManager.getNextFreeDimId (), 0, 1024, "");
+
 		// register shadow realm
-		DimensionManager.registerProviderType (ShadowWorldProvider.DIMENSION_ID, ShadowWorldProvider.class, false);
-		DimensionManager.registerDimension (ShadowWorldProvider.DIMENSION_ID, ShadowWorldProvider.DIMENSION_ID);
+		DimensionManager.registerProviderType (shadowDimensionID, ShadowWorldProvider.class, false);
+		DimensionManager.registerDimension (shadowDimensionID, ShadowWorldProvider.DIMENSION_ID);
 	}
 
 	/**
