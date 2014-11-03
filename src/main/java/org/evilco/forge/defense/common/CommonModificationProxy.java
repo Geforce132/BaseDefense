@@ -14,7 +14,6 @@
  */
 package org.evilco.forge.defense.common;
 
-import com.google.common.base.Preconditions;
 import lombok.AccessLevel;
 import lombok.Getter;
 import net.minecraft.potion.Potion;
