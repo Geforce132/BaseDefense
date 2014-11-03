@@ -22,7 +22,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import org.evilco.forge.defense.api.explosive.IExplosiveContainer;
 import org.evilco.forge.defense.common.DefenseCreativeTab;
 import org.evilco.forge.defense.common.explosives.ExplosivesString;
 import org.evilco.forge.defense.common.explosives.block.entity.LandmineBlockEntity;

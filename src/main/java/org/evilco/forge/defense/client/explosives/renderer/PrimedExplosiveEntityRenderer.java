@@ -19,9 +19,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
-import org.evilco.forge.defense.common.explosives.block.ExplosivesBlock;
 import org.evilco.forge.defense.common.explosives.entity.PrimedExplosiveEntity;
 import org.lwjgl.opengl.GL11;
 

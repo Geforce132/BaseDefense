@@ -20,7 +20,6 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import org.evilco.forge.defense.common.shadow.ShadowString;
-import org.evilco.forge.defense.common.shadow.biome.ShadowBiomeGenerator;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
