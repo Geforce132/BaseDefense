@@ -307,7 +307,7 @@ public class ShadowChunkProvider implements IChunkProvider {
 								if ((d15 += d16) > 0.0d)
 									blocks[j3 += short1] = ShadowBlock.SHADOW_MATTER;
 								else if (k2 * 8 + l2 < b0)
-									blocks[j3 += short1] = Blocks.water; // TODO: Use shadow matter
+									blocks[j3 += short1] = ShadowBlock.SHADOW_FLUID;
 								else
 									blocks[j3 += short1] = null;
 							}
@@ -400,8 +400,7 @@ public class ShadowChunkProvider implements IChunkProvider {
 			generatorZ = (z + this.random.nextInt (16) + 8);
 
 			// generate a nice little lake
-			// TODO: Replace water against dark water
-			(new WorldGenLakes (Blocks.water)).generate (this.world, this.random, generatorX, generatorY, generatorZ);
+			(new WorldGenLakes (ShadowBlock.SHADOW_FLUID)).generate (this.world, this.random, generatorX, generatorY, generatorZ);
 		}
 
 		// populate lava lakes
