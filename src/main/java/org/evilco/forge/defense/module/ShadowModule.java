@@ -24,8 +24,10 @@ import org.evilco.forge.defense.common.shadow.ShadowFluids;
 import org.evilco.forge.defense.common.shadow.ShadowPotion;
 import org.evilco.forge.defense.common.shadow.block.ShadowFluidBlock;
 import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
+import org.evilco.forge.defense.common.shadow.block.SoulBlock;
 import org.evilco.forge.defense.common.shadow.dimension.ShadowWorldProvider;
 import org.evilco.forge.defense.common.shadow.item.ShadowMatterItemBlock;
+import org.evilco.forge.defense.common.shadow.item.SoulItemBlock;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -58,6 +60,7 @@ public class ShadowModule extends AbstractModule {
 
 		GameRegistry.registerBlock (ShadowBlock.SHADOW_MATTER, ShadowMatterItemBlock.class, ShadowMatterBlock.NAME);
 		GameRegistry.registerBlock (ShadowBlock.SHADOW_FLUID, ShadowFluidBlock.NAME);
+		GameRegistry.registerBlock (ShadowBlock.SOUL, SoulItemBlock.class, SoulBlock.NAME);
 	}
 
 	/**

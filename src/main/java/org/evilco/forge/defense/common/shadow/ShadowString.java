@@ -23,6 +23,7 @@ public class ShadowString {
 
 	// BLOCK NAME START
 	public static final String BLOCK_NAME_SHADOW_MATTER = "defense.shadow.matter";
+	public static final String BLOCK_NAME_SOUL = "defense.shadow.soulBlock";
 	// BLOCK NAME END
 
 	// CREATIVE TAB START
