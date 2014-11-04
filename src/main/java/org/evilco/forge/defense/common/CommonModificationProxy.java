@@ -239,10 +239,22 @@ public class CommonModificationProxy implements IModificationProxy {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerTacos () { }
+
+	/**
 	 * Registers modification block entities.
 	 */
 	protected final void registerBlockEntities () {
 		// call modules
 		for (IModule module : this.activeModules) module.registerBlockEntities ();
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void unregisterTacos () { }
 }

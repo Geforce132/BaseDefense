@@ -49,6 +49,12 @@ public class DefenseModification {
 	private static IModificationProxy proxy = null;
 
 	/**
+	 * Stores the taco state.
+	 */
+	@Getter
+	private boolean tacos = true;
+
+	/**
 	 * Stores the logger.
 	 */
 	@Getter
@@ -63,14 +69,19 @@ public class DefenseModification {
 		// store logger
 		this.logger = event.getModLog ();
 
-		// do some serious work
-		this.getLogger ().info ("Adding tacos to the game ...");
-
 		// load configuration
 		Configuration configuration = new Configuration (event.getSuggestedConfigurationFile ());
+		this.tacos = configuration.getBoolean ("tacos", "module", this.tacos, "Enables tacos.");
 
 		// load configuration
 		configuration.load ();
+
+		// do some serious work
+		this.getLogger ().info ("Adding tacos to the game ...");
+		if (this.tacos)
+			proxy.registerTacos ();
+		else
+			this.getLogger ().info ("Tacos are currently disabled ... WHY?!?!");
 
 		// call proxy
 		proxy.preInitialize (configuration);
@@ -97,6 +108,12 @@ public class DefenseModification {
 		proxy.postInitialize ();
 
 		// some more serious work
-		this.getLogger ().info ("Removing tacos from the game ...");
+		if (this.tacos) {
+			// log
+			this.getLogger ().info ("Removing tacos from the game ...");
+
+			// unregister
+			proxy.unregisterTacos ();
+		}
 	}
 }

@@ -37,4 +37,14 @@ public interface IModificationProxy {
 	 * Callback for {@link cpw.mods.fml.common.event.FMLPostInitializationEvent}.
 	 */
 	public void postInitialize ();
+
+	/**
+	 * Takes care of the tacos.
+	 */
+	public void registerTacos ();
+
+	/**
+	 * Takes care of the tacos.
+	 */
+	public void unregisterTacos ();
 }
