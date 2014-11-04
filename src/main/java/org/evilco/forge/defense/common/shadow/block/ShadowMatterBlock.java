@@ -60,6 +60,8 @@ public class ShadowMatterBlock extends Block {
 
 		this.setBlockName (ShadowString.BLOCK_NAME_SHADOW_MATTER);
 		this.setCreativeTab (DefenseCreativeTab.SHADOW);
+		this.setHardness (1.5f);
+		this.setHarvestLevel ("pickaxe", 0);
 	}
 
 	/**

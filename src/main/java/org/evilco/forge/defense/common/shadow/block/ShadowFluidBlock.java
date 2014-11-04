@@ -48,6 +48,9 @@ public class ShadowFluidBlock extends BlockFluidClassic {
 	 */
 	public ShadowFluidBlock () {
 		super (ShadowFluids.SHADOW, Material.water);
+
+		// set block properties
+		this.setHardness (100.0f);
 	}
 
 	/**
