@@ -16,8 +16,15 @@ package org.evilco.forge.defense.common.shadow.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import org.evilco.forge.defense.common.DefenseCreativeTab;
 import org.evilco.forge.defense.common.shadow.ShadowString;
+
+import java.util.List;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -31,13 +38,66 @@ public class ShadowMatterBlock extends Block {
 	public static final String NAME = "shadow_matter";
 
 	/**
+	 * Stores the default texture.
+	 */
+	private IIcon iconDefault = null;
+
+	/**
+	 * Stores the brick texture.
+	 */
+	private IIcon iconBrick = null;
+
+	/**
+	 * Stores the fancy brick texture.
+	 */
+	private IIcon iconBrickFancy = null;
+
+	/**
 	 * Constructs a new ShadowMatterBlock instance.
 	 */
 	public ShadowMatterBlock () {
 		super (Material.rock);
 
 		this.setBlockName (ShadowString.BLOCK_NAME_SHADOW_MATTER);
-		this.setBlockTextureName ("defense:shadow/matter");
 		this.setCreativeTab (DefenseCreativeTab.SHADOW);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void getSubBlocks (Item p_149666_1_, CreativeTabs p_149666_2_, List p_149666_3_) {
+		super.getSubBlocks (p_149666_1_, p_149666_2_, p_149666_3_);
+
+		p_149666_3_.add (new ItemStack (p_149666_1_, 1, 1)); // brick
+		p_149666_3_.add (new ItemStack (p_149666_1_, 1, 2)); // fancy brick
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IIcon getIcon (int p_149691_1_, int p_149691_2_) {
+		switch (p_149691_2_) {
+			case 0:
+			default:
+				return this.iconDefault;
+			case 1:
+				return this.iconBrick;
+			case 2:
+				return this.iconBrickFancy;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerBlockIcons (IIconRegister p_149651_1_) {
+		super.registerBlockIcons (p_149651_1_);
+
+		this.iconDefault = p_149651_1_.registerIcon ("defense:shadow/matter");
+		this.iconBrick = p_149651_1_.registerIcon ("defense:shadow/shadowBrick");
+		this.iconBrickFancy = p_149651_1_.registerIcon ("defense:shadow/shadowFancyBrick");
 	}
 }
