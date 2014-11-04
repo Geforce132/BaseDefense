@@ -63,6 +63,9 @@ public class DefenseModification {
 		// store logger
 		this.logger = event.getModLog ();
 
+		// do some serious work
+		this.getLogger ().info ("Adding tacos to the game ...");
+
 		// load configuration
 		Configuration configuration = new Configuration (event.getSuggestedConfigurationFile ());
 
@@ -92,5 +95,8 @@ public class DefenseModification {
 
 		// call proxy
 		proxy.postInitialize ();
+
+		// some more serious work
+		this.getLogger ().info ("Removing tacos from the game ...");
 	}
 }
