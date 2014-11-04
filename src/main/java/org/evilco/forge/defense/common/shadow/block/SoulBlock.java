@@ -73,6 +73,15 @@ public class SoulBlock extends Block {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public int damageDropped (int p_149692_1_) {
+		if (p_149692_1_ == 1) return 0;
+		return p_149692_1_;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void getSubBlocks (Item p_149666_1_, CreativeTabs p_149666_2_, List p_149666_3_) {
 		super.getSubBlocks (p_149666_1_, p_149666_2_, p_149666_3_);
 
