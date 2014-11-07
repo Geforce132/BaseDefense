@@ -16,18 +16,22 @@ package org.evilco.forge.defense.module;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import lombok.Getter;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidRegistry;
 import org.evilco.forge.defense.common.shadow.ShadowBlock;
 import org.evilco.forge.defense.common.shadow.ShadowFluids;
 import org.evilco.forge.defense.common.shadow.ShadowPotion;
+import org.evilco.forge.defense.common.shadow.biome.ShadowBiomeGen;
 import org.evilco.forge.defense.common.shadow.block.ShadowFluidBlock;
 import org.evilco.forge.defense.common.shadow.block.ShadowMatterBlock;
 import org.evilco.forge.defense.common.shadow.block.SoulBlock;
 import org.evilco.forge.defense.common.shadow.dimension.ShadowWorldProvider;
 import org.evilco.forge.defense.common.shadow.item.ShadowMatterItemBlock;
 import org.evilco.forge.defense.common.shadow.item.SoulItemBlock;
+import org.evilco.forge.defense.utility.IdentifierUtility;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -72,10 +76,15 @@ public class ShadowModule extends AbstractModule {
 
 		// find dimension IDs
 		int shadowDimensionID = configuration.getInt ("shadowID", "dimension", DimensionManager.getNextFreeDimId (), 0, 1024, "");
+		int shadowBiomeID = configuration.getInt ("shadowID", "biome", IdentifierUtility.getNextAvailableBiomeID (), 0, BiomeGenBase.getBiomeGenArray ().length, "");
 
 		// update provider
 		// TODO: Fix this bullshit
 		ShadowWorldProvider.DIMENSION_ID = shadowDimensionID;
+		ShadowBiomeGen.BIOME_ID = shadowBiomeID;
+
+		// register biome
+		BiomeDictionary.registerBiomeType (ShadowBiomeGen.getInstance (), new BiomeDictionary.Type[] { BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SPOOKY });
 
 		// register shadow realm
 		DimensionManager.registerProviderType (shadowDimensionID, ShadowWorldProvider.class, false);
