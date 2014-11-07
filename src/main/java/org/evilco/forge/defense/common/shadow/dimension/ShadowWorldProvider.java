@@ -20,6 +20,7 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import org.evilco.forge.defense.common.shadow.ShadowString;
+import org.evilco.forge.defense.common.shadow.biome.ShadowBiomeGen;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -42,6 +43,8 @@ public class ShadowWorldProvider extends WorldProvider {
 		this.dimensionId = DIMENSION_ID;
 		this.hasNoSky = true;
 		this.isHellWorld = false;
+
+		this.worldChunkMgr = new ShadowWorldChunkManager (ShadowBiomeGen.getInstance ());
 	}
 
 	/**
