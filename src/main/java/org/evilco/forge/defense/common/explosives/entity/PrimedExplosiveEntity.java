@@ -125,4 +125,8 @@ public abstract class PrimedExplosiveEntity extends Entity {
 	protected void writeEntityToNBT (NBTTagCompound p_70014_1_) {
 		p_70014_1_.setShort ("Fuse", this.fuse);
 	}
+	
+	public short getFuse() {
+		return fuse;
+	}
 }

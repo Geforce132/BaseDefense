@@ -14,6 +14,8 @@
  */
 package org.evilco.forge.defense;
 
+import org.apache.logging.log4j.Logger;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -21,7 +23,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import lombok.Getter;
 import net.minecraftforge.common.config.Configuration;
-import org.apache.logging.log4j.Logger;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -39,8 +40,7 @@ public class DefenseModification {
 	 * Stores the modification instance
 	 */
 	@Mod.Instance (MOD_ID)
-	@Getter
-	private static DefenseModification instance = null;
+	public static DefenseModification instance = new DefenseModification();
 
 	/**
 	 * Stores the active proxy instance.
@@ -115,5 +115,9 @@ public class DefenseModification {
 			// unregister
 			proxy.unregisterTacos ();
 		}
+	}
+	
+	public Logger getLogger() {
+		return logger;
 	}
 }

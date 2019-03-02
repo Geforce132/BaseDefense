@@ -59,8 +59,10 @@ if (System.getenv ()['bamboo.buildNumber']) version += '-bamboo' + System.getenv
  * Configure Minecraft
  */
 minecraft {
-	version = "1.7.10-10.13.2.1232"
+	version = "1.7.10-10.13.4.1558-1.7.10"
 	runDir = "target"
+	assetDir = "eclipse/assets"
+    mappings = "stable_12"
 }
 
 /**

@@ -58,7 +58,7 @@ public class ShadowMatterBlock extends Block {
 	public ShadowMatterBlock () {
 		super (Material.rock);
 
-		this.setBlockName (ShadowString.BLOCK_NAME_SHADOW_MATTER);
+		this.setUnlocalizedName (ShadowString.BLOCK_NAME_SHADOW_MATTER);
 		this.setCreativeTab (DefenseCreativeTab.SHADOW);
 		this.setHardness (1.5f);
 		this.setHarvestLevel ("pickaxe", 0);
@@ -103,8 +103,8 @@ public class ShadowMatterBlock extends Block {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerBlockIcons (IIconRegister p_149651_1_) {
-		super.registerBlockIcons (p_149651_1_);
+	public void registerIcons (IIconRegister p_149651_1_) {
+		super.registerIcons (p_149651_1_);
 
 		this.iconDefault = p_149651_1_.registerIcon ("defense:shadow/matter");
 		this.iconBrick = p_149651_1_.registerIcon ("defense:shadow/shadowBrick");

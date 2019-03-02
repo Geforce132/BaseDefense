@@ -110,4 +110,8 @@ public class ShadowModule extends AbstractModule {
 
 		ShadowPotion.initialize (this);
 	}
+	
+	public int getPotionShadowResistanceID() {
+		return potionShadowResistanceID;
+	}
 }

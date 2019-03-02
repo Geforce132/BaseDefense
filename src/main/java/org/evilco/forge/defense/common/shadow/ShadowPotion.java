@@ -31,6 +31,6 @@ public class ShadowPotion {
 	 * @param module The module.
 	 */
 	public static void initialize (ShadowModule module) {
-		SHADOW_RESISTANCE = new ShadowResistancePotion (module.getPotionShadowResistanceID ());
+		SHADOW_RESISTANCE = new ShadowResistancePotion (module.getPotionShadowResistanceID());
 	}
 }

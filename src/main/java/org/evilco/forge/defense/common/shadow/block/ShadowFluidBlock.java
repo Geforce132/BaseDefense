@@ -83,8 +83,8 @@ public class ShadowFluidBlock extends BlockFluidClassic {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerBlockIcons (IIconRegister p_149651_1_) {
-		super.registerBlockIcons (p_149651_1_);
+	public void registerIcons (IIconRegister p_149651_1_) {
+		super.registerIcons (p_149651_1_);
 
 		this.iconFlowing = p_149651_1_.registerIcon ("defense:shadow/shadowFlowing");
 		this.iconStill = p_149651_1_.registerIcon ("defense:shadow/shadowStill");

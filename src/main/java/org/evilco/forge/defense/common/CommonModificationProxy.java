@@ -101,7 +101,7 @@ public class CommonModificationProxy implements IModificationProxy {
 				field.set (null, potionTypes);
 			}
 		} catch (Exception ex) {
-			DefenseModification.getInstance ().getLogger ().error (ex);
+			DefenseModification.instance.getLogger ().error (ex);
 		}
 	}
 
@@ -177,9 +177,9 @@ public class CommonModificationProxy implements IModificationProxy {
 		this.moduleShadowEnabled = configuration.getBoolean ("shadow", "module", this.moduleShadowEnabled, "Enables the shadow realm.");
 
 		// log
-		DefenseModification.getInstance ().getLogger ().info ("Explosives enabled: " + this.moduleExplosivesEnabled);
-		DefenseModification.getInstance ().getLogger ().info ("Network enabled: " + this.moduleNetworkEnabled);
-		DefenseModification.getInstance ().getLogger ().info ("Shadow enabled: " + this.moduleShadowEnabled);
+		DefenseModification.instance.getLogger ().info ("Explosives enabled: " + this.moduleExplosivesEnabled);
+		DefenseModification.instance.getLogger ().info ("Network enabled: " + this.moduleNetworkEnabled);
+		DefenseModification.instance.getLogger ().info ("Shadow enabled: " + this.moduleShadowEnabled);
 	}
 
 	/**
@@ -257,4 +257,8 @@ public class CommonModificationProxy implements IModificationProxy {
 	 */
 	@Override
 	public void unregisterTacos () { }
+	
+	public List<IModule> getActiveModules() {
+		return activeModules;
+	}
 }

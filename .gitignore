@@ -20,3 +20,11 @@ out/
 *.iws
 
 .gradle/
+/bin/
+*.eclipse.jdt.core.prefs
+*.cfg
+/libs/
+/logs/
+*.properties
+*.classpath
+*.project

@@ -43,7 +43,7 @@ public class LandmineBlock extends Block implements ITileEntityProvider {
 	protected LandmineBlock () {
 		super (Material.tnt);
 
-		this.setBlockName (ExplosivesString.BLOCK_NAME_LANDMINE);
+		this.setUnlocalizedName (ExplosivesString.BLOCK_NAME_LANDMINE);
 		this.setCreativeTab (DefenseCreativeTab.EXPLOSIVES);
 		this.setBlockBounds (0.25f, 0.0f, 0.25f, 0.75f, 0.1f, 0.75f);
 	}

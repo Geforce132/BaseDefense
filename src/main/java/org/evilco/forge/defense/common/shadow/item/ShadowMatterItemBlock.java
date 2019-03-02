@@ -49,6 +49,6 @@ public class ShadowMatterItemBlock extends ItemBlock {
 	 */
 	@Override
 	public String getUnlocalizedName (ItemStack p_77667_1_) {
-		return super.getUnlocalizedName (p_77667_1_) + "." + p_77667_1_.getItemDamage ();
+		return super.getUnlocalizedName (p_77667_1_) + "." + p_77667_1_.getMetadata ();
 	}
 }

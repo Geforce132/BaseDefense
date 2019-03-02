@@ -91,7 +91,7 @@ public class ExplosivesModule extends AbstractModule {
 
 		int primedChemicalExplosiveID = EntityRegistry.findGlobalUniqueEntityId ();
 		EntityRegistry.registerGlobalEntityID (PrimedChemicalExplosiveEntity.class, PrimedChemicalExplosiveEntity.NAME, primedChemicalExplosiveID);
-		EntityRegistry.registerModEntity (PrimedChemicalExplosiveEntity.class, PrimedChemicalExplosiveEntity.NAME, primedChemicalExplosiveID, DefenseModification.getInstance (), 50, 5, true);
+		EntityRegistry.registerModEntity (PrimedChemicalExplosiveEntity.class, PrimedChemicalExplosiveEntity.NAME, primedChemicalExplosiveID, DefenseModification.instance, 50, 5, true);
 	}
 
 	/**

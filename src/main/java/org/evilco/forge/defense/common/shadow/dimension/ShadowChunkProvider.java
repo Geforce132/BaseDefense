@@ -14,6 +14,11 @@
  */
 package org.evilco.forge.defense.common.shadow.dimension;
 
+import java.util.List;
+import java.util.Random;
+
+import org.evilco.forge.defense.common.shadow.ShadowBlock;
+
 import cpw.mods.fml.common.eventhandler.Event;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,16 +33,16 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.MapGenBase;
+import net.minecraft.world.gen.MapGenCaves;
+import net.minecraft.world.gen.NoiseGenerator;
+import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import org.evilco.forge.defense.common.shadow.ShadowBlock;
-
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author Johannes Donath <johannesd@evil-co.com>
@@ -156,7 +161,7 @@ public class ShadowChunkProvider implements IChunkProvider {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ChunkPosition func_147416_a (World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_) {
+	public ChunkPosition findClosestStructure(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_) {
 		return null;
 	}
 
@@ -191,11 +196,11 @@ public class ShadowChunkProvider implements IChunkProvider {
 				for (int l1 = -b0; l1 <= b0; ++l1) {
 					for (int i2 = -b0; i2 <= b0; ++i2) {
 						BiomeGenBase biomegenbase1 = this.biomesForGeneration[(j1 + l1 + 2 + (k1 + i2 + 2) * 10)];
-						float f3 = biomegenbase1.rootHeight;
-						float f4 = biomegenbase1.heightVariation;
+						float f3 = biomegenbase1.minHeight;
+						float f4 = biomegenbase1.maxHeight;
 
 						float f5 = (this.parabolicField[(l1 + 2 + (i2 + 2) * 5)] / (f3 + 2.0f));
-						if (biomegenbase1.rootHeight > biomegenbase.rootHeight) f5 /= 2.0f;
+						if (biomegenbase1.maxHeight > biomegenbase.minHeight) f5 /= 2.0f;
 
 						f += f4 * f5;
 						f1 += f3 * f5;
@@ -448,7 +453,7 @@ public class ShadowChunkProvider implements IChunkProvider {
 		this.replaceBlocksForBiome (p_73154_1_, p_73154_2_, blocks, metadata, this.biomesForGeneration);
 
 		// apply generators
-		this.generatorCave.func_151539_a (this, this.world, p_73154_1_, p_73154_2_, blocks);
+		this.generatorCave.generate (this, this.world, p_73154_1_, p_73154_2_, blocks);
 		// TODO: Add ravines
 		// TODO: Add shadow specific features
 

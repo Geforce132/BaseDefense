@@ -58,7 +58,7 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 	protected ChemicalExplosiveBlock () {
 		super (Material.tnt);
 
-		this.setBlockName (ExplosivesString.BLOCK_NAME_CHEMICAL_EXPLOSIVE);
+		this.setUnlocalizedName (ExplosivesString.BLOCK_NAME_CHEMICAL_EXPLOSIVE);
 		this.setCreativeTab (DefenseCreativeTab.EXPLOSIVES);
 	}
 
@@ -113,8 +113,8 @@ public class ChemicalExplosiveBlock extends Block implements IExplosiveContainer
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerBlockIcons (IIconRegister p_149651_1_) {
-		super.registerBlockIcons (p_149651_1_);
+	public void registerIcons (IIconRegister p_149651_1_) {
+		super.registerIcons (p_149651_1_);
 
 		this.iconTop = p_149651_1_.registerIcon ("defense:explosives/chemical_top");
 		this.iconSide = p_149651_1_.registerIcon ("defense:explosives/chemical_side");

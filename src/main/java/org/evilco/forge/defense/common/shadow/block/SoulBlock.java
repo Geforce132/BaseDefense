@@ -63,7 +63,7 @@ public class SoulBlock extends Block {
 	public SoulBlock () {
 		super (Material.rock);
 
-		this.setBlockName (ShadowString.BLOCK_NAME_SOUL);
+		this.setUnlocalizedName (ShadowString.BLOCK_NAME_SOUL);
 		this.setCreativeTab (DefenseCreativeTab.SHADOW);
 		this.setHardness (1.5f);
 		this.setHarvestLevel ("pickaxe", 0);
@@ -112,8 +112,8 @@ public class SoulBlock extends Block {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerBlockIcons (IIconRegister p_149651_1_) {
-		super.registerBlockIcons (p_149651_1_);
+	public void registerIcons (IIconRegister p_149651_1_) {
+		super.registerIcons (p_149651_1_);
 
 		this.iconRegular = p_149651_1_.registerIcon ("defense:shadow/soulStone");
 		this.iconSmooth = p_149651_1_.registerIcon ("defense:shadow/soulSmoothStone");
